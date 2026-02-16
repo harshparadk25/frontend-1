@@ -1,79 +1,85 @@
 import Logo from "../../assets/Images/static.jpg";
 import nirf from "../../assets/Images/nirf-logo.png";
 
-function Stat({ num, label }) {
-  return (
-    <div>
-      <h5 className="text-4xl font-medium text-[#002147]">{num}</h5>
-      <p className="text-xl text-[#002147]">{label}</p>
-    </div>
-  );
-}
-
 export default function StatsSection({ statsData, excellenceData }) {
-
   const stats = statsData?.stats || [];
-  const excellenceTitle = excellenceData?.title || "High on Excellence Since 1993";
+  const excellenceTitle = excellenceData?.title || "Rankings & Quality Accreditations";
   const excellenceItems = excellenceData?.items || [];
 
   return (
-    <section className="bg-[#062b4c] pb-20">
-
+    <section className="bg-[#062b4c] pb-[70px] max-[576px]:pb-5">
+      {/* Hero Second - Background Image */}
       <div
-        className="relative h-[560px] bg-cover bg-top flex items-center ml-28"
+        className="relative h-[568px] bg-cover bg-top flex items-center ml-auto top-[-70px] max-w-[calc(100%-105.5px)] rounded-none
+          max-[991px]:max-w-full
+          max-[576px]:h-auto max-[576px]:max-h-full max-[576px]:top-0 max-[576px]:py-10"
         style={{ backgroundImage: `url(${Logo})` }}
       >
-
-        <div className="absolute left-[3%] bg-[#0CC2FE] p-10 grid grid-cols-2 gap-10">
+        {/* Stats Box */}
+        <div
+          className="absolute left-[3%] top-1/2 -translate-y-1/2 bg-[#0CC2FE] p-[50px] max-w-[503px] text-white grid grid-cols-2 gap-10
+            max-[576px]:relative max-[576px]:left-0 max-[576px]:top-0 max-[576px]:translate-y-0 max-[576px]:mx-auto max-[576px]:max-w-full max-[576px]:grid-cols-1 max-[576px]:gap-6 max-[576px]:p-[30px] max-[576px]:text-center"
+        >
           {stats.map((stat, i) => (
-            <Stat key={i} num={stat.value} label={stat.label} />
+            <div
+              key={i}
+              className={`${
+                i % 2 === 0 && i + 1 < stats.length
+                  ? "border-r border-white/70 max-[576px]:border-r-0"
+                  : ""
+              }`}
+            >
+              <h5 className="text-[38px] font-medium text-[#002147] mb-0! max-[576px]:text-[26px]">
+                {stat.value}
+              </h5>
+              <p className="text-[24px] text-[#002147] leading-[26px] mb-0! max-[576px]:text-[16px] max-[576px]:leading-5">
+                {stat.label}
+              </p>
+            </div>
           ))}
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 pt-10 text-white">
-
-        <h2 className="text-[54px] font-medium">
+      {/* Rankings & Accreditations */}
+      <div className="max-w-[1140px] mx-auto px-4 text-white">
+        <h2 className="text-left text-[54px] font-medium mb-4 max-[991px]:text-[48px] max-[576px]:text-[30px] max-[576px]:text-center max-[576px]:pt-[30px]">
           {excellenceTitle}
         </h2>
+        <div className="w-[384px] h-[2px] bg-[#FF7373] max-[576px]:w-[200px] max-[576px]:mx-auto max-[576px]:mb-5" />
 
-        <div className="w-96 h-[2px] bg-[#FF7373] my-6" />
-
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-4 gap-[30px] py-[18px] max-[576px]:grid-cols-1 max-[576px]:text-center max-[576px]:gap-[10px] max-[576px]:py-[15px]">
           {excellenceItems.map((item, i) => {
-            // Last item gets the NIRF logo treatment
             if (i === excellenceItems.length - 1) {
               return (
-                <div key={i} className="flex gap-4 items-center">
+                <div key={i} className="flex gap-[10px] text-white max-[576px]:flex-col max-[576px]:text-center">
                   <div>
-                    <p>{item.question}</p>
-                    <p>{item.answer}</p>
+                    <p className="text-[20px] mb-0! font-normal leading-[22px]">
+                      {item.question}
+                    </p>
+                    <hr className="my-2" />
+                    <p className="text-[20px] mb-0! font-normal leading-[22px]">
+                      {item.answer}
+                    </p>
                   </div>
-                  <img src={nirf} className="h-12" alt="NIRF" />
+                  <div>
+                    <img src={nirf} alt="NIRF Logo" className="max-[576px]:h-9 max-[576px]:mx-auto max-[576px]:block" />
+                  </div>
                 </div>
               );
             }
             return (
-              <Info
-                key={i}
-                title={item.question}
-                desc={item.answer}
-              />
+              <div key={i}>
+                <h4 className="text-[34px] mb-[5px] font-medium max-[576px]:text-[24px]">
+                  {item.question}
+                </h4>
+                <p className="text-[23px] opacity-90 leading-[26px] max-[576px]:text-[16px]">
+                  {item.answer}
+                </p>
+              </div>
             );
           })}
         </div>
-
       </div>
-
     </section>
-  );
-}
-
-function Info({ title, desc }) {
-  return (
-    <div>
-      <h4 className="text-3xl">{title}</h4>
-      <p className="whitespace-pre-line">{desc}</p>
-    </div>
   );
 }
