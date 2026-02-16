@@ -1,68 +1,107 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function ActivitiesSlider() {
+const slides = [
+  [
+    "https://ipsacademy.edu.in/media/2025/04/9-3-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/10-1-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/14-2-1-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/3-6-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
+  ],
+  [
+    "https://ipsacademy.edu.in/media/2025/04/9-3-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/10-1-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/14-2-1-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/3-6-768x454.jpg",
+    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
+  ],
+];
 
-  const [active, setActive] = useState(null);
+const EventSlider = () => {
 
-  const cards = Array.from({ length: 6 });
+  const [index, setIndex] = useState(0);
+
+  const prev = () =>
+    setIndex(prev => (prev === 0 ? slides.length - 1 : prev - 1));
+
+  const next = () =>
+    setIndex(prev => (prev === slides.length - 1 ? 0 : prev + 1));
+
+  // Auto slide every 3 seconds (safe version)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex(prev => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section className="py-[100px] px-[5px] md:py-[50px]">
+    <div className="py-12 md:py-20 px-4">
 
-      <div className="max-w-6xl mx-auto px-4">
+      {/* Heading */}
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-start">
 
-        {/* HEADING */}
-        <div className="grid md:grid-cols-2 gap-6 items-start">
-
-          <div>
-            <h2 className="text-3xl font-semibold text-[#002147]">
-              365 Days to <br /> Become Your Best
-            </h2>
-            <div className="w-24 h-[2px] bg-[#002147] mt-2"></div>
-          </div>
-
-          <p className="md:text-left text-center md:pt-0 pt-3">
-            Life at IPS Academy is a melting pot of diverse cultures,
-            events, learning opportunities and peer activities that
-            enhance your experience on campus.
-          </p>
-
+        <div>
+          <h2 className="text-2xl md:text-4xl font-semibold">
+            A calendar full of celebrations
+          </h2>
+          <div className="w-20 h-[3px] bg-red-400 mt-3"></div>
         </div>
 
-        {/* PAGINATION */}
-        <div className="flex justify-end items-center mt-[-31px] mb-[45px] md:mt-[-31px] md:mb-[45px]">
+        <p className="text-gray-600">
+          Life at IPS Academy is a melting pot of diverse cultures, a plethora
+          of events, learning opportunities and peer activities that enhance
+          your experience on campus.
+        </p>
 
-          <div className="flex gap-2">
+      </div>
 
-            <button className="border border-[#FF7373] text-[#FF7373] rounded-full w-[30px] h-[30px] flex items-center justify-center">
-              <ChevronLeft size={16} />
-            </button>
+      {/* Carousel */}
+      <div className="max-w-6xl mx-auto mt-10 relative">
 
-            <button className="border border-[#FF7373] text-[#FF7373] rounded-full w-[30px] h-[30px] flex items-center justify-center">
-              <ChevronRight size={16} />
-            </button>
+        {/* Controls */}
+        <button
+          onClick={prev}
+          className="absolute right-14 -top-10 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50"
+        >
+          ‹
+        </button>
 
-          </div>
+        <button
+          onClick={next}
+          className="absolute right-4 -top-10 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50"
+        >
+          ›
+        </button>
 
-        </div>
+        {/* Grid */}
+        <div className="grid md:grid-cols-3 gap-6">
 
-        {/* GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mt-[40px]">
-
-          {cards.map((_, i) => (
-            <div
-              key={i}
-              onClick={() => setActive(i)}
-              className={`h-[320px] bg-[#D9D9D9] cursor-pointer
-              ${active === i ? "border-2 border-blue-500 bg-[#f0f6ff]" : ""}`}
-            />
+          {slides[index].map((img, i) => (
+            <div key={i} className="cursor-pointer">
+              <img
+                src={img}
+                alt={`event-${i}`}
+                className="
+                  w-full h-[320px] object-cover
+                  border-2 border-[#ff7373]
+                  shadow-md
+                  transition duration-300
+                  hover:-translate-y-2 hover:scale-105 hover:shadow-xl
+                "
+              />
+            </div>
           ))}
 
         </div>
 
       </div>
 
-    </section>
+    </div>
   );
-}
+};
+
+export default EventSlider;

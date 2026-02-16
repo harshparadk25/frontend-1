@@ -5,11 +5,13 @@ import logo from "../../assets/logos/logo.png";
 export default function Navbar(){
 
   const [menuOpen,setMenuOpen]=useState(false);
-  const [dropdownOpen,setDropdownOpen]=useState(false);
+  const [collegesOpen,setCollegesOpen]=useState(false);
+  const [studentOpen,setStudentOpen]=useState(false);
 
   const closeAll=()=>{
     setMenuOpen(false);
-    setDropdownOpen(false);
+    setCollegesOpen(false);
+    setStudentOpen(false);
   }
 
   const linkClass=({isActive}) =>
@@ -28,7 +30,7 @@ export default function Navbar(){
       <img src={logo} className="h-[60px] lg:h-[72px] object-contain"/>
     </div>
 
-    {/* RIGHT SIDE (push menu right) */}
+    {/* RIGHT SIDE */}
     <div className="flex-1 flex justify-end">
 
       {/* HAMBURGER */}
@@ -50,22 +52,20 @@ export default function Navbar(){
           border-t lg:border-none
           ${menuOpen?"flex":"hidden lg:flex"}`}>
 
-
-      <NavLink to="/home" className={linkClass} onClick={closeAll}>Home</NavLink>
+      <NavLink to="/" className={linkClass} onClick={closeAll}>Home</NavLink>
 
       <NavLink to="/about" className={linkClass} onClick={closeAll}>
         About Us
       </NavLink>
 
-      {/* DROPDOWN */}
+      {/* COLLEGES DROPDOWN */}
       <div
         className="relative"
-        onMouseEnter={()=>setDropdownOpen(true)}
-        onMouseLeave={()=>setDropdownOpen(false)}
+        onMouseEnter={()=>setCollegesOpen(true)}
+        onMouseLeave={()=>setCollegesOpen(false)}
       >
-
         <button
-          onClick={()=>setDropdownOpen(!dropdownOpen)}
+          onClick={()=>setCollegesOpen(!collegesOpen)}
           className="py-2 text-gray-900 hover:text-red-500"
         >
           Colleges ▾
@@ -74,7 +74,7 @@ export default function Navbar(){
         <div className={`lg:absolute lg:top-full lg:left-0
           bg-white shadow-md border lg:min-w-[180px]
           flex flex-col
-          ${dropdownOpen?"block":"hidden"}`}>
+          ${collegesOpen?"block":"hidden"}`}>
 
           {[
             ["IBMR","/ibmr"],
@@ -98,16 +98,47 @@ export default function Navbar(){
           ))}
 
         </div>
-
       </div>
 
       <NavLink to="/placements" className={linkClass} onClick={closeAll}>
         Placements
       </NavLink>
 
-      <NavLink to="/activities" className={linkClass} onClick={closeAll}>
-        Student Life
-      </NavLink>
+      {/* STUDENT LIFE DROPDOWN (NEW) */}
+      <div
+        className="relative"
+        onMouseEnter={()=>setStudentOpen(true)}
+        onMouseLeave={()=>setStudentOpen(false)}
+      >
+        <button
+          onClick={()=>setStudentOpen(!studentOpen)}
+          className="py-2 text-gray-900 hover:text-red-500"
+        >
+          Student Life ▾
+        </button>
+
+        <div className={`lg:absolute lg:top-full lg:left-0
+          bg-white shadow-md border lg:min-w-[200px]
+          flex flex-col
+          ${studentOpen?"block":"hidden"}`}>
+
+          <NavLink to="/activities" onClick={closeAll}
+            className="px-4 py-2 hover:bg-red-500 hover:text-white">
+            Cultural Activities
+          </NavLink>
+
+          <NavLink to="/events" onClick={closeAll}
+            className="px-4 py-2 hover:bg-red-500 hover:text-white">
+            Event Celebration
+          </NavLink>
+
+          <NavLink to="/workshop" onClick={closeAll}
+            className="px-4 py-2 hover:bg-red-500 hover:text-white">
+            Workshops
+          </NavLink>
+
+        </div>
+      </div>
 
       <NavLink to="/facilities" className={linkClass} onClick={closeAll}>
         Facilities

@@ -1,11 +1,17 @@
+// src/components/Activities/Activities.jsx
+
 import ActivitiesHero from "../components/activity/ActivitiesHero";
 import ActivitiesSlider from "../components/activity/ActivitiesSlider";
 
-export default function ActivitiesPage() {
+const StudentLife = () => {
   return (
-    <div className="w-full overflow-hidden">
+    <div>
+
       <ActivitiesHero />
       <ActivitiesSlider />
+
     </div>
   );
-}
+};
+
+export default StudentLife;

@@ -22,7 +22,7 @@ export default function Hero({ data }) {
       />
 
       {/* Bottom-left overlay box */}
-      <div className="absolute bottom-0 left-0 bg-[#E9E9E9] w-[70%] max-w-4xl px-10 py-12">
+      <div className="absolute bottom-0 left-0 bg-[#E9E9E9] w-[70%] max-w-xl px-10 py-12">
 
         <h1 className="text-[#0B2C4D] text-4xl md:text-5xl leading-tight font-medium max-w-3xl">
           {description}
