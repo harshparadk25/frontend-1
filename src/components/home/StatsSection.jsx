@@ -23,11 +23,10 @@ export default function StatsSection({ statsData, excellenceData }) {
           {stats.map((stat, i) => (
             <div
               key={i}
-              className={`${
-                i % 2 === 0 && i + 1 < stats.length
+              className={`${i % 2 === 0 && i + 1 < stats.length
                   ? "border-r border-white/70 max-[576px]:border-r-0"
                   : ""
-              }`}
+                }`}
             >
               <h5 className="text-[38px] font-medium text-[#002147] mb-0! max-[576px]:text-[26px]">
                 {stat.value}
@@ -47,24 +46,38 @@ export default function StatsSection({ statsData, excellenceData }) {
         </h2>
         <div className="w-[384px] h-[2px] bg-[#FF7373] max-[576px]:w-[200px] max-[576px]:mx-auto max-[576px]:mb-5" />
 
-        <div className="grid grid-cols-4 gap-[30px] py-[18px] max-[576px]:grid-cols-1 max-[576px]:text-center max-[576px]:gap-[10px] max-[576px]:py-[15px]">
+        <div
+  className={`grid gap-[30px] py-[18px]
+  max-[576px]:grid-cols-1 max-[576px]:text-center max-[576px]:gap-[10px] max-[576px]:py-[15px]`}
+  style={{ gridTemplateColumns: `repeat(${excellenceItems.length}, minmax(0, 1fr))` }}
+>
+
           {excellenceItems.map((item, i) => {
             if (i === excellenceItems.length - 1) {
               return (
-                <div key={i} className="flex gap-[10px] text-white max-[576px]:flex-col max-[576px]:text-center">
-                  <div>
-                    <p className="text-[20px] mb-0! font-normal leading-[22px]">
-                      {item.question}
-                    </p>
-                    <hr className="my-2" />
-                    <p className="text-[20px] mb-0! font-normal leading-[22px]">
-                      {item.answer}
-                    </p>
-                  </div>
-                  <div>
-                    <img src={nirf} alt="NIRF Logo" className="max-[576px]:h-9 max-[576px]:mx-auto max-[576px]:block" />
-                  </div>
-                </div>
+                <div key={i} className="flex items-start w-full text-white max-[576px]:flex-col max-[576px]:items-center max-[576px]:text-center">
+
+  {/* TEXT */}
+  <div className="pr-6 gap-2">
+    <p className="text-[20px] mb-0 font-normal leading-[22px]">
+      {item.question}
+    </p>
+    <hr className="my-2 opacity-60" />
+    <p className="text-[20px] mb-0 font-normal leading-[22px]">
+      {item.answer}
+    </p>
+  </div>
+
+  {/* LOGO (forced to right edge like screenshot) */}
+  <img
+    src={nirf}
+    alt="NIRF Logo"
+    className="h-[64px] w-auto ml-auto max-[576px]:ml-0 max-[576px]:mt-3 max-[576px]:h-[44px]"
+  />
+
+</div>
+
+
               );
             }
             return (

@@ -82,13 +82,15 @@ export default function CoursesAccordion() {
   const [expanded, setExpanded] = useState({});
 
   return (
-    <div className="bg-[#F0EEEF] pt-[180px] pb-[60px] px-5 -mt-[13%] max-[991px]:-mt-[24%] max-[576px]:pt-[30px] max-[576px]:pb-[30px] max-[576px]:px-5 max-[576px]:mt-0!">
-      <section className="max-w-[1140px] mx-auto px-4">
+    <div className="bg-[#F0EEEF]  pt-[180px] pb-[60px] px-2 -mt-[13%] max-[991px]:-mt-[24%] max-[576px]:pt-[30px] max-[576px]:pb-[30px] max-[576px]:px-5 max-[576px]:mt-0!">
+      <section className="max-w-[1300px] mx-auto px-3">
+
+
         {/* Header Row */}
-        <div className="grid grid-cols-12 items-center">
+        <div className="grid grid-cols-12 items-center gap-1 mt-15">
           <div className="col-span-12 lg:col-span-7">
             <div className="max-[576px]:text-center">
-              <h2 className="text-[60px] text-[#002147] mb-4 font-medium leading-[60px] max-[991px]:text-[48px] max-[576px]:text-[32px] max-[576px]:leading-[38px]">
+              <h2 className="text-[50px] text-[#002147] mb-4 font-medium leading-[60px] max-[991px]:text-[48px] max-[576px]:text-[32px] max-[576px]:leading-[38px]">
                 Innovative Courses<br />
                 Tailored for the Industry
               </h2>
@@ -104,59 +106,70 @@ export default function CoursesAccordion() {
         </div>
 
         {/* Accordion */}
-        <div className="py-12 px-[5px] max-[576px]:py-5 max-[576px]:px-0">
-          {courses.map((c, i) => {
-            const isOpen = open === i;
-            const isExpanded = expanded[i];
+<div className="py-12 max-w-[1420px]  px-4 max-[676px]:py-6">
 
-            return (
-              <div key={i} className="border-b-[0.5px] border-b-white border-t-0 border-x-0">
-                {/* Accordion Header */}
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className={`
-                    w-full flex justify-between items-center text-left
-                    text-[28px] leading-[34px] font-medium
-                    px-[35px] py-5 rounded-none! transition-all duration-300
-                    max-[991px]:text-[24px] max-[991px]:p-[27px]
-                    max-[576px]:text-[20px] max-[576px]:px-5 max-[576px]:py-[15px]
-                    ${isOpen ? "bg-[#FF7373] text-white shadow-none!" : "bg-[#F0EEEF] text-[#002147]"}
-                  `}
-                >
-                  <span>{c.title}</span>
-                  <ChevronRight
-                    size={26}
-                    className={`shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-90 text-white" : ""
-                    }`}
-                  />
-                </button>
+  {courses.map((c, i) => {
+    const isOpen = open === i;
+    const isExpanded = expanded[i];
 
-                {/* Accordion Body */}
-                <div
-                  className={`
-                    overflow-hidden transition-all duration-500 ease-in-out
-                    ${isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}
-                  `}
-                >
-                  <div className="bg-white px-[35px] py-5 text-[#555] max-[991px]:p-[27px] max-[576px]:px-5 max-[576px]:py-[15px]">
-                    <p className={`text-[16px] text-[#605654] font-normal mb-0! pt-0! ${isExpanded ? "" : "line-clamp-3"}`}>
-                      {c.desc}
-                    </p>
-                    <button
-                      onClick={() =>
-                        setExpanded((prev) => ({ ...prev, [i]: !prev[i] }))
-                      }
-                      className="mt-2 bg-transparent border-none p-0 font-medium text-[#FF7373] cursor-pointer text-left underline"
-                    >
-                      {isExpanded ? "Read Less" : "Read More"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+    return (
+      <div key={i} className="border-b-[3px] border-white">
+
+
+        {/* HEADER */}
+        <button
+          onClick={() => setOpen(isOpen ? null : i)}
+          className={`w-full flex justify-between items-center text-left
+          px-9 py-6 transition-all duration-300
+          max-[576px]:px-5 max-[576px]:py-4
+          
+          ${isOpen
+            ? "bg-[#F26D6D] text-white"
+            : "bg-[#EDEBED] text-[#0B2A4A]"
+          }`}
+        >
+          <span className="text-[28px] leading-[34px] font-medium max-[991px]:text-[24px] max-[576px]:text-[20px]">
+            {c.title}
+          </span>
+
+          {/* ARROW CIRCLE */}
+          <div className={`w-9 h-9 flex items-center justify-center rounded-full border transition-all
+            ${isOpen ? "border-white" : "border-[#F26D6D]"}`}>
+            <ChevronRight
+              size={20}
+              className={`transition-transform duration-300
+                ${isOpen ? "rotate-90 text-white" : "text-[#F26D6D]"}`}
+            />
+          </div>
+        </button>
+
+        {/* BODY */}
+        <div
+          className={`overflow-hidden transition-all duration-500
+          ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+        >
+          <div className="bg-[#F6F4F5] px-9 py-6 text-[#605654] max-[576px]:px-5">
+
+            <p className={`text-[16px] leading-[26px] ${isExpanded ? "" : "line-clamp-3"}`}>
+              {c.desc}
+            </p>
+
+            <button
+              onClick={() =>
+                setExpanded(prev => ({ ...prev, [i]: !prev[i] }))
+              }
+              className="mt-3 text-[#F26D6D] underline font-medium"
+            >
+              {isExpanded ? "Read Less" : "Read More"}
+            </button>
+
+          </div>
         </div>
+
+      </div>
+    );
+  })}
+</div>
       </section>
     </div>
   );
