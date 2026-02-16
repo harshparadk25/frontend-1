@@ -37,7 +37,7 @@ export default function Footer() {
 
 <footer className="bg-[#002147] text-white pt-14 pb-10 text-[14px]">
 
-  <div className="max-w-[1500px] mx-auto px-10">
+  <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-10">
 
     {/* ================= TOP COLLEGE GRID ================= */}
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-x-8 gap-y-10">
@@ -64,18 +64,22 @@ export default function Footer() {
 
 
    {/* LOGO + RIGHT CONTENT */}
-<div className="flex flex-col lg:flex-row items-start justify-between mt-12 gap-10">
+<div className="flex flex-col lg:flex-row items-center lg:items-start justify-between mt-12 gap-10">
 
-  {/* LOGO LEFT */}
-  <img src={logo} className="h-[90px] object-contain"/>
+  {/* LOGO */}
+  <img
+    src={logo}
+    className="h-[80px] lg:h-[90px] object-contain mx-auto lg:mx-0"
+    alt="IPS Logo"
+  />
 
-  {/* RIGHT SIDE (NAV + DIVIDER + CONTACT TOGETHER) */}
-  <div className="flex-1 flex flex-col items-center ml-84">
+  {/* RIGHT SIDE */}
+  <div className="flex-1 flex flex-col items-center lg:items-end w-full">
 
     {/* NAV */}
-    <ul className="flex flex-wrap justify-center gap-10 text-[16px]">
+    <ul className="flex flex-wrap justify-center lg:justify-end gap-6 sm:gap-8 md:gap-10 text-[15px] sm:text-[16px]">
       {navLinks.map((n,i)=>(
-        <li key={i} className="flex items-center gap-3">
+        <li key={i}>
           <a href="#" className="hover:text-[#00BFFF] transition">
             {n}
           </a>
@@ -83,13 +87,13 @@ export default function Footer() {
       ))}
     </ul>
 
-    {/* SMALL DIVIDER JUST BELOW NAV */}
+    {/* DIVIDER */}
     <div className="w-full border-t border-[#0F3D72] mt-4 mb-4"></div>
 
-    {/* CONTACT ROW JUST BELOW */}
-    <div className="w-full grid md:grid-cols-3 text-center">
+    {/* CONTACT */}
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center lg:text-right">
 
-      <div className="flex gap-3 justify-center md:justify-start">
+      <div className="flex gap-3 justify-center lg:justify-end">
         <span className="text-[#FF6B6B]">📍</span>
         <p>
           IPS Academy, AB Road,<br/>
@@ -97,7 +101,7 @@ export default function Footer() {
         </p>
       </div>
 
-      <div className="flex gap-3 justify-center">
+      <div className="flex gap-3 justify-center lg:justify-end">
         <span className="text-[#FF6B6B]">📞</span>
         <p>
           +91 92294 98055<br/>
@@ -105,7 +109,7 @@ export default function Footer() {
         </p>
       </div>
 
-      <div className="flex gap-3 justify-center md:justify-end">
+      <div className="flex gap-3 justify-center lg:justify-end">
         <span className="text-[#FF6B6B]">✉️</span>
         <a href="mailto:info@ipsacademy.org" className="hover:underline">
           info@ipsacademy.org
