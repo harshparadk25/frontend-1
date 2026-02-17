@@ -3,7 +3,7 @@ import activitiesImg from "../../assets/Images/activities.jpg";
 
 const Hero = () => {
   return (
-    <div className="w-full relative h-[60vh] md:h-[75vh] overflow-hidden">
+    <div className="w-full relative h-[60vh] md:h-[75vh] sm:h-[55vh] min-h-[420px] overflow-hidden">
       
       <img
         src={activitiesImg}
@@ -18,26 +18,28 @@ const Hero = () => {
                 px-6 sm:px-8 lg:px-10 
                 py-8 sm:py-10 lg:py-12">
 
-  <h1 className="text-[#0B2C4D] 
+        <h1 className="text-[#0B2C4D] 
                  text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
+                 xs:text-xl
                  leading-tight font-medium">
-    Events <br /> 365 days of celebration
-  </h1>
+          Events <br /> 365 days of celebration
+        </h1>
 
-  {/* CTA button */}
-  <button
-    className="mt-6 flex items-center gap-3 
+        {/* CTA button */}
+        <button
+          className="mt-6 sm:mt-5 flex items-center gap-3 
                border border-[#0B2C4D] 
                text-[#0B2C4D] 
-               px-6 py-3
+               px-6 sm:px-5 py-3 sm:py-2.5
                font-medium
+               text-base sm:text-sm
                hover:bg-[#0B2C4D] hover:text-white 
                transition duration-300"
-  >
-    Explore Now
-  </button>
+        >
+          Explore Now
+        </button>
 
-</div>
+      </div>
 
     </div>
   );

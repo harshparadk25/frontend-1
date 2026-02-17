@@ -1,45 +1,64 @@
+import { resolveImageUrl } from "../../services/api";
 import placementImg from "../../assets/Images/placement.jpg";
 
-export default function Hero() {
+export default function Hero({ data }) {
+  const heroImage = data?.images?.[0]
+    ? resolveImageUrl(data.images[0])
+    : placementImg;
+  const description = data?.description || "Your Launchpad for\nSuccess";
+  const ctaText = data?.cta_text || "Explore Now";
+  const ctaLink = data?.cta_link || "";
+
+  // Split description by newline to render with <br />
+  const descLines = description.split("\n");
+
   return (
-    <section className="relative w-full h-[420px] md:h-[1020px]">
+    <section className="relative mb-10 w-full h-[320px] sm:h-[420px] md:h-[700px] lg:h-[820px]">
 
       <img
-        src={placementImg}
+        src={heroImage}
         alt="hero"
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="absolute bottom-0 left-0 
+      <div
+        className="absolute bottom-0 left-0 transform translate-y-1/4
                 bg-[#E9E9E9] 
                 w-full sm:w-[80%] lg:w-[70%] 
                 max-w-2xl 
-                px-6 sm:px-8 lg:px-10 
-                py-8 sm:py-10 lg:py-12">
+                px-4 sm:px-6 lg:px-10 
+                py-6 sm:py-8 lg:py-12"
+      >
+        <h1
+          className="text-[#0B2C4D] 
+                 text-xl sm:text-2xl md:text-4xl lg:text-5xl 
+                 leading-tight font-medium"
+        >
+          {descLines.map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < descLines.length - 1 && <br />}
+            </span>
+          ))}
+        </h1>
 
-  <h1 className="text-[#0B2C4D] 
-                 text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
-                 leading-tight font-medium">
-    Your Launchpad for
-    <br />
-    Success
-  </h1>
-
-  {/* CTA button */}
-  <button
-    className="mt-6 flex items-center gap-3 
+        {/* CTA button */}
+        {ctaText && (
+          <button
+            onClick={() => ctaLink && (window.location.href = ctaLink)}
+            className="mt-4 sm:mt-6 flex items-center gap-3 
                border border-[#0B2C4D] 
                text-[#0B2C4D] 
-               px-6 py-3
+               px-5 sm:px-6 py-2.5 sm:py-3
+               text-sm sm:text-base
                font-medium
                hover:bg-[#0B2C4D] hover:text-white 
                transition duration-300"
-  >
-    Explore Now
-  </button>
-
-</div>
-
+          >
+            {ctaText}
+          </button>
+        )}
+      </div>
     </section>
   );
 }

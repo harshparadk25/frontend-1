@@ -43,45 +43,45 @@ const facilities = [
 
 export default function Facilities() {
   return (
-    <section id="facilities" className="bg-black py-16 text-white">
+    <section id="facilities" className="bg-black py-12 sm:py-14 md:py-16 text-white">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h2 className="text-3xl md:text-5xl font-medium">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
           Facilities
         </h2>
 
-        <div className="w-32 h-[2px] bg-white mt-3 mb-6"></div>
+        <div className="w-24 sm:w-32 h-[2px] bg-white mt-3 mb-6 mx-auto md:mx-0"></div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-10">
-          <h5 className="text-2xl font-medium">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 sm:mb-10 text-center md:text-left">
+          <h5 className="text-xl sm:text-2xl font-medium">
             60 acres of excellence. <br />
             Limitless success for you.
           </h5>
 
-          <p className="text-gray-400">
+          <p className="text-gray-400 text-sm sm:text-base">
             IBMR is more than a campus. It is a thriving community to explore,
             learn and grow with like-minded peers.
           </p>
         </div>
 
         {/* CARDS */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
 
           {facilities.map((f, i) => (
             <div key={i} className="bg-gray-200 text-black">
 
-              <div className="bg-yellow-600 text-center font-semibold py-2 uppercase tracking-wide">
+              <div className="bg-yellow-600 text-center font-semibold py-2 uppercase tracking-wide text-sm sm:text-base">
                 {f.title}
               </div>
 
               <img
                 src={f.img}
                 alt={f.title}
-                className="w-full h-56 object-cover"
+                className="w-full h-48 sm:h-52 md:h-56 object-cover"
               />
 
-              <div className="p-4 text-sm font-medium text-center">
+              <div className="p-4 text-xs sm:text-sm font-medium text-center">
                 {f.desc}
               </div>
 

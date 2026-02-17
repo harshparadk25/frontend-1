@@ -44,32 +44,32 @@ your heart while delighting your tastebuds.`,
 
 export default function FacilityBlocks() {
   return (
-    <section className="py-[80px]">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-[80px] sm:py-[60px] xs:py-[40px]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-5">
 
         {blocks.map((b, i) => (
           <div
             key={i}
-            className="grid lg:grid-cols-2 gap-10 items-center mb-[30px]"
+            className="grid lg:grid-cols-2 gap-10 sm:gap-8 gap-y-8 items-center mb-[30px] sm:mb-[40px]"
           >
 
             {/* TEXT */}
             <div className={b.reverse ? "lg:order-2 lg:pl-10" : ""}>
 
               <div
-                className="px-4 py-1 text-[#002147] text-xl font-medium w-fit mb-2"
+                className="px-4 py-1 text-[#002147] text-xl sm:text-lg text-base font-medium w-fit mb-2"
                 style={{ backgroundColor: b.color }}
               >
                 {b.badge}
               </div>
 
-              <h2 className="text-3xl text-[#002147] font-semibold whitespace-pre-line">
+              <h2 className="text-3xl sm:text-2xl text-xl text-[#002147] font-semibold whitespace-pre-line leading-snug">
                 {b.title}
               </h2>
 
               <div className="w-24 h-[2px] bg-[#002147] mt-2"></div>
 
-              <p className="text-[#3A3A3A] mt-5 mb-2">
+              <p className="text-[#3A3A3A] mt-5 mb-2 text-base sm:text-[15px] leading-relaxed">
                 {b.text}
               </p>
 
@@ -82,10 +82,10 @@ export default function FacilityBlocks() {
                 <img
                   src={b.img}
                   alt={b.badge}
-                  className="w-full h-[456px] object-cover"
+                  className="w-full h-[456px] lg:h-[456px] md:h-[380px] sm:h-[300px] h-[240px] object-cover"
                 />
               ) : (
-                <div className="w-full h-[456px] bg-[#D9D9D9]"></div>
+                <div className="w-full h-[456px] lg:h-[456px] md:h-[380px] sm:h-[300px] h-[240px] bg-[#D9D9D9]"></div>
               )}
 
             </div>

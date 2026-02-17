@@ -40,15 +40,15 @@ export default function Incubation() {
   ];
 
   return (
-    <section className="bg-[#F0EEEF] py-20">
+    <section className="bg-[#F0EEEF] py-12 sm:py-16 md:py-20">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* TOP TEXT */}
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
 
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-[#002147] leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl md:text-6xl font-semibold text-[#002147] leading-tight">
               An infrastructure designed to make
               <br />
               <span className="inline-block border-b-2 border-[#FF7373] pb-1">
@@ -58,7 +58,7 @@ export default function Incubation() {
             </h2>
           </div>
 
-          <p className="text-[#3A3A3A] text-base md:text-lg">
+          <p className="text-[#3A3A3A] text-sm sm:text-base md:text-lg leading-relaxed">
             Bring your ideas and make them successful growth stories at the IPS Academy Incubation Centre.
             Our multidisciplinary hub brings together students, faculty, and alumni from all departments
             to build solutions that matter.
@@ -68,23 +68,23 @@ export default function Incubation() {
 
 
         {/* FEATURE CARDS */}
-        <div className="grid md:grid-cols-2 gap-6 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-10">
 
-          <div className="bg-[#0CC2FE] text-[#002147] p-8 md:p-10">
-            <h3 className="text-2xl md:text-[32px] font-medium mb-3 leading-tight">
+          <div className="bg-[#0CC2FE] text-[#002147] p-6 sm:p-8 md:p-10">
+            <h3 className="text-xl sm:text-2xl md:text-[32px] font-medium mb-3 leading-tight">
               Vibrant Entrepreneurial Ecosystem
             </h3>
-            <p className="leading-[22px]">
+            <p className="leading-[22px] text-sm sm:text-base">
               The Incubation Centre reflects IPS Academy’s commitment to holistic, future-oriented
               education - shaping graduates who think boldly, act responsibly and create meaningful impact.
             </p>
           </div>
 
-          <div className="bg-[#FF7373] text-[#002147] p-8 md:p-10">
-            <h3 className="text-2xl md:text-[32px] font-medium mb-3 leading-tight">
+          <div className="bg-[#FF7373] text-[#002147] p-6 sm:p-8 md:p-10">
+            <h3 className="text-xl sm:text-2xl md:text-[32px] font-medium mb-3 leading-tight">
               A Collaboration Across Disciplines
             </h3>
-            <p className="leading-[22px]">
+            <p className="leading-[22px] text-sm sm:text-base">
               Diverse minds from multiple disciplines and skillsets come together to build bold,
               relevant and real-world-ready ventures at the IPSA Incubation Centre.
             </p>
@@ -94,7 +94,7 @@ export default function Incubation() {
 
 
         {/* ICON GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mt-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 mt-10 sm:mt-12 md:mt-14">
 
           {features.map((f, i) => (
             <div key={i} className="mt-2">
@@ -102,15 +102,15 @@ export default function Incubation() {
               <img
                 src={f.icon}
                 alt={f.title}
-                className="w-14 mb-4 
+                className="w-12 sm:w-14 mb-3 sm:mb-4 
                 [filter:brightness(0)_saturate(100%)_invert(15%)_sepia(35%)_saturate(900%)_hue-rotate(190deg)_brightness(85%)_contrast(110%)]"
               />
 
-              <p className="text-xl md:text-2xl font-medium text-[#002147]">
+              <p className="text-lg sm:text-xl md:text-2xl font-medium text-[#002147]">
                 {f.title}
               </p>
 
-              <span className="block text-[#002147] text-sm md:text-base mt-1">
+              <span className="block text-[#002147] text-sm sm:text-sm md:text-base mt-1 leading-relaxed">
                 {f.desc}
               </span>
 

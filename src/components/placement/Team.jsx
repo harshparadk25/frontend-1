@@ -1,42 +1,54 @@
 import { useState } from "react";
+import { resolveImageUrl } from "../../services/api";
 
 import rajeev from "../../assets/Images/Rajeev-Shukla.webp";
 import nihit from "../../assets/Images/Nihit Agrawal.png";
 import rajani from "../../assets/Images/Rajani-Sharma.webp";
 import pratik from "../../assets/Images/Pratik-Hardiya.webp";
 
-export default function Team() {
+const defaultExperts = [
+  {
+    img: rajeev,
+    name: "Mr. Rajeev Shukla",
+    role: "Director",
+    desc:
+      "A senior leader with more than three decades in placements, training and corporate relations. Distinguished HR leader with strong industry network and interests in Career Coaching, Mind Power Performance and Endurance Psychology.\n\nEmail ID: director.cmg@ipsacademy.org, campus@ipsacademy.org\nContact Number: 9826040161"
+  },
+  {
+    img: nihit,
+    name: "Dr. Nihit Jaiswal",
+    role: "General Manager",
+    desc:
+      "Ph.D. in Management, MBA Marketing, Microsoft Certified Educator with expertise in Campus Recruitment, Corporate Affairs, Talent Management and Diversity. 15+ years experience in campus placement."
+  },
+  {
+    img: rajani,
+    name: "Ms. Rajani Sharma",
+    role: "Assistant General Manager",
+    desc:
+      "Ph.D Scholar in Computer Science, MCA from IGNOU, Microsoft Certified Technology Specialist. 24 years experience in Corporate Relations, Placements and Academia."
+  },
+  {
+    img: pratik,
+    name: "Mr. Pratik Hardiya",
+    role: "Manager",
+    desc:
+      "MBA Marketing & Finance from DAVV. 10+ years experience in campus placements with strengths in Corporate Relations, Networking and Client Management."
+  }
+];
 
-  const experts = [
-    {
-      img: rajeev,
-      name: "Mr. Rajeev Shukla",
-      role: "Director",
-      desc:
-        "A senior leader with more than three decades in placements, training and corporate relations. Distinguished HR leader with strong industry network and interests in Career Coaching, Mind Power Performance and Endurance Psychology.\n\nEmail ID: director.cmg@ipsacademy.org, campus@ipsacademy.org\nContact Number: 9826040161"
-    },
-    {
-      img: nihit,
-      name: "Dr. Nihit Jaiswal",
-      role: "General Manager",
-      desc:
-        "Ph.D. in Management, MBA Marketing, Microsoft Certified Educator with expertise in Campus Recruitment, Corporate Affairs, Talent Management and Diversity. 15+ years experience in campus placement."
-    },
-    {
-      img: rajani,
-      name: "Ms. Rajani Sharma",
-      role: "Assistant General Manager",
-      desc:
-        "Ph.D Scholar in Computer Science, MCA from IGNOU, Microsoft Certified Technology Specialist. 24 years experience in Corporate Relations, Placements and Academia."
-    },
-    {
-      img: pratik,
-      name: "Mr. Pratik Hardiya",
-      role: "Manager",
-      desc:
-        "MBA Marketing & Finance from DAVV. 10+ years experience in campus placements with strengths in Corporate Relations, Networking and Client Management."
-    }
-  ];
+export default function Team({ data }) {
+
+  const sectionTitle = data?.title || "The Placement Team";
+
+  const experts = data?.members?.length
+    ? data.members.map((m) => ({
+        img: m.image ? resolveImageUrl(m.image) : "",
+        name: m.name,
+        role: m.title,
+        desc: m.description,
+      }))
+    : defaultExperts;
 
   const [index, setIndex] = useState(0);
 
@@ -49,30 +61,30 @@ export default function Team() {
   const expert = experts[index];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 sm:py-16 md:py-20 bg-white">
 
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
 
         {/* LEFT TITLE */}
         <div>
-          <p className="text-lg font-medium text-[#002147]">
-            The Placement Team
+          <p className="text-base sm:text-lg font-medium text-[#002147]">
+            {sectionTitle}
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-semibold text-[#002147] mt-2">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-[#002147] mt-2 leading-tight">
             With You at Every Step
           </h2>
 
-          <div className="h-[2px] w-40 bg-[#FF7373] mt-4"/>
+          <div className="h-[2px] w-32 sm:w-40 bg-[#FF7373] mt-3 sm:mt-4"/>
         </div>
 
 
         {/* RIGHT CAROUSEL */}
         <div className="lg:col-span-2 relative">
 
-          <div className="bg-white shadow-[8px_8px_30px_2px_#00000026] p-6">
+          <div className="bg-white shadow-[8px_8px_30px_2px_#00000026] p-4 sm:p-6">
 
-            <div className="grid md:grid-cols-2 gap-6 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
 
               <img
                 src={expert.img}
@@ -81,15 +93,15 @@ export default function Team() {
               />
 
               <div>
-                <div className="text-2xl font-medium text-[#002147]">
+                <div className="text-xl sm:text-2xl font-medium text-[#002147]">
                   {expert.name}
                 </div>
 
-                <div className="text-[#fb7272] mb-2">
+                <div className="text-[#fb7272] mb-2 text-sm sm:text-base">
                   {expert.role}
                 </div>
 
-                <p className="text-[#3A3A3A] whitespace-pre-line">
+                <p className="text-[#3A3A3A] whitespace-pre-line text-sm sm:text-base leading-relaxed">
                   {expert.desc}
                 </p>
               </div>
@@ -102,9 +114,10 @@ export default function Team() {
           {/* CONTROLS */}
           <button
             onClick={prev}
-            className="absolute -left-6 top-1/2 -translate-y-1/2 
+            className="absolute left-2 sm:-left-6 top-1/2 -translate-y-1/2 
                        w-8 h-8 rounded-full border border-[#FF7373] 
                        text-[#FF7373] flex items-center justify-center
+                       bg-white sm:bg-transparent
                        hover:bg-[#FF7373] hover:text-white transition"
           >
             ‹
@@ -112,9 +125,10 @@ export default function Team() {
 
           <button
             onClick={next}
-            className="absolute -right-6 top-1/2 -translate-y-1/2 
+            className="absolute right-2 sm:-right-6 top-1/2 -translate-y-1/2 
                        w-8 h-8 rounded-full border border-[#FF7373] 
                        text-[#FF7373] flex items-center justify-center
+                       bg-white sm:bg-transparent
                        hover:bg-[#FF7373] hover:text-white transition"
           >
             ›

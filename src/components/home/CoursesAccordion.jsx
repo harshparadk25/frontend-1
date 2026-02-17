@@ -82,23 +82,23 @@ export default function CoursesAccordion() {
   const [expanded, setExpanded] = useState({});
 
   return (
-    <div className="bg-[#F0EEEF]  pt-[180px] pb-[60px] px-2 -mt-[13%] max-[991px]:-mt-[24%] max-[576px]:pt-[30px] max-[576px]:pb-[30px] max-[576px]:px-5 max-[576px]:mt-0!">
-      <section className="max-w-[1300px] mx-auto px-3">
-
+    <div className="bg-[#F0EEEF] pt-[180px] pb-[60px] px-2 -mt-[13%] max-[991px]:-mt-[24%] max-[768px]:pt-[120px] max-[768px]:-mt-[10%] max-[576px]:pt-[30px] max-[576px]:pb-[30px] max-[576px]:px-5 max-[576px]:mt-0!">
+      <section className="max-w-[1300px] mx-auto px-3 max-[576px]:px-2">
 
         {/* Header Row */}
-        <div className="grid grid-cols-12 items-center gap-1 mt-15">
+        <div className="grid grid-cols-12 items-center gap-1 mt-15 max-[768px]:mt-10">
           <div className="col-span-12 lg:col-span-7">
             <div className="max-[576px]:text-center">
-              <h2 className="text-[50px] text-[#002147] mb-4 font-medium leading-[60px] max-[991px]:text-[48px] max-[576px]:text-[32px] max-[576px]:leading-[38px]">
+              <h2 className="text-[50px] text-[#002147] mb-4 font-medium leading-[60px] max-[1200px]:text-[44px] max-[991px]:text-[40px] max-[768px]:text-[36px] max-[576px]:text-[32px] max-[576px]:leading-[38px]">
                 Innovative Courses<br />
                 Tailored for the Industry
               </h2>
-              <div className="w-[340px] h-[2px] bg-[#FF7373] max-[576px]:w-auto max-[576px]:mx-auto" />
+              <div className="w-[340px] h-[2px] bg-[#FF7373] max-[768px]:w-[260px] max-[576px]:w-auto max-[576px]:mx-auto" />
             </div>
           </div>
+
           <div className="col-span-12 lg:col-span-5">
-            <p className="text-[16px] text-[#605654] font-normal mb-0! pt-8 max-[991px]:pt-5 max-[576px]:pt-5">
+            <p className="text-[16px] text-[#605654] font-normal mb-0! pt-8 max-[991px]:pt-5 max-[768px]:pt-4 max-[576px]:pt-5 max-[768px]:text-[15px]">
               Choose your next from a diverse range of courses designed to shape
               you for an evolving future.
             </p>
@@ -106,70 +106,80 @@ export default function CoursesAccordion() {
         </div>
 
         {/* Accordion */}
-<div className="py-12 max-w-[1420px]  px-4 max-[676px]:py-6">
+        <div className="py-12 max-w-[1420px] px-4 max-[991px]:px-2 max-[768px]:py-8 max-[676px]:py-6 max-[576px]:px-0">
 
-  {courses.map((c, i) => {
-    const isOpen = open === i;
-    const isExpanded = expanded[i];
+          {courses.map((c, i) => {
+            const isOpen = open === i;
+            const isExpanded = expanded[i];
 
-    return (
-      <div key={i} className="border-b-[3px] border-white">
+            return (
+              <div key={i} className="border-b-[3px] border-white">
 
+                {/* HEADER */}
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className={`w-full flex justify-between items-center text-left
+                  px-9 py-6 transition-all duration-300
+                  max-[991px]:px-7
+                  max-[768px]:px-6
+                  max-[576px]:px-5 max-[576px]:py-4
+                  
+                  ${isOpen
+                    ? "bg-[#F26D6D] text-white"
+                    : "bg-[#EDEBED] text-[#0B2A4A]"
+                  }`}
+                >
+                  <span className="text-[28px] leading-[34px] font-medium 
+                  max-[1200px]:text-[26px]
+                  max-[991px]:text-[24px] 
+                  max-[768px]:text-[22px]
+                  max-[576px]:text-[20px]
+                  max-[420px]:text-[18px]">
+                    {c.title}
+                  </span>
 
-        {/* HEADER */}
-        <button
-          onClick={() => setOpen(isOpen ? null : i)}
-          className={`w-full flex justify-between items-center text-left
-          px-9 py-6 transition-all duration-300
-          max-[576px]:px-5 max-[576px]:py-4
-          
-          ${isOpen
-            ? "bg-[#F26D6D] text-white"
-            : "bg-[#EDEBED] text-[#0B2A4A]"
-          }`}
-        >
-          <span className="text-[28px] leading-[34px] font-medium max-[991px]:text-[24px] max-[576px]:text-[20px]">
-            {c.title}
-          </span>
+                  {/* ARROW CIRCLE */}
+                  <div className={`w-9 h-9 flex items-center justify-center rounded-full border transition-all
+                    max-[576px]:w-8 max-[576px]:h-8
+                    ${isOpen ? "border-white" : "border-[#F26D6D]"}`}>
+                    <ChevronRight
+                      size={20}
+                      className={`transition-transform duration-300
+                        ${isOpen ? "rotate-90 text-white" : "text-[#F26D6D]"}`}
+                    />
+                  </div>
+                </button>
 
-          {/* ARROW CIRCLE */}
-          <div className={`w-9 h-9 flex items-center justify-center rounded-full border transition-all
-            ${isOpen ? "border-white" : "border-[#F26D6D]"}`}>
-            <ChevronRight
-              size={20}
-              className={`transition-transform duration-300
-                ${isOpen ? "rotate-90 text-white" : "text-[#F26D6D]"}`}
-            />
-          </div>
-        </button>
+                {/* BODY */}
+                <div
+                  className={`overflow-hidden transition-all duration-500
+                  ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+                >
+                  <div className="bg-[#F6F4F5] px-9 py-6 text-[#605654] 
+                  max-[991px]:px-7
+                  max-[768px]:px-6
+                  max-[576px]:px-5">
 
-        {/* BODY */}
-        <div
-          className={`overflow-hidden transition-all duration-500
-          ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
-        >
-          <div className="bg-[#F6F4F5] px-9 py-6 text-[#605654] max-[576px]:px-5">
+                    <p className={`text-[16px] leading-[26px] max-[768px]:text-[15px] ${isExpanded ? "" : "line-clamp-3"}`}>
+                      {c.desc}
+                    </p>
 
-            <p className={`text-[16px] leading-[26px] ${isExpanded ? "" : "line-clamp-3"}`}>
-              {c.desc}
-            </p>
+                    <button
+                      onClick={() =>
+                        setExpanded(prev => ({ ...prev, [i]: !prev[i] }))
+                      }
+                      className="mt-3 text-[#F26D6D] underline font-medium max-[576px]:text-[14px]"
+                    >
+                      {isExpanded ? "Read Less" : "Read More"}
+                    </button>
 
-            <button
-              onClick={() =>
-                setExpanded(prev => ({ ...prev, [i]: !prev[i] }))
-              }
-              className="mt-3 text-[#F26D6D] underline font-medium"
-            >
-              {isExpanded ? "Read Less" : "Read More"}
-            </button>
+                  </div>
+                </div>
 
-          </div>
+              </div>
+            );
+          })}
         </div>
-
-      </div>
-    );
-  })}
-</div>
       </section>
     </div>
   );

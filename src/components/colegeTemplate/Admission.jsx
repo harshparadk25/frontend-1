@@ -23,32 +23,32 @@ const steps = [
 
 export default function Admission() {
   return (
-    <section id="admission" className="bg-[#f8f9fc] py-16">
+    <section id="admission" className="bg-[#f8f9fc] py-12 sm:py-14 md:py-16">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h2 className="text-[#002147] text-3xl md:text-5xl font-medium">
+        <h2 className="text-[#002147] text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
           Admission Procedure
         </h2>
 
-        <div className="w-32 h-[2px] bg-[#002147] mt-3 mb-4"></div>
+        <div className="w-24 sm:w-32 h-[2px] bg-[#002147] mt-3 mb-4 mx-auto md:mx-0"></div>
 
-        <p className="text-gray-600 mb-10">
+        <p className="text-gray-600 mb-8 sm:mb-10 text-center md:text-left">
           Follow these simple steps to begin your journey with us.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
 
           {steps.map((s) => (
             <div
               key={s.num}
-              className="bg-white p-6 rounded-xl text-center shadow hover:-translate-y-1 transition"
+              className="bg-white p-5 sm:p-6 rounded-xl text-center shadow hover:-translate-y-1 transition"
             >
               <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center font-bold mb-3">
                 {s.num}
               </div>
 
-              <h6 className="font-semibold mb-2">{s.title}</h6>
+              <h6 className="font-semibold mb-2 text-base sm:text-lg">{s.title}</h6>
               <p className="text-gray-600 text-sm">{s.desc}</p>
             </div>
           ))}

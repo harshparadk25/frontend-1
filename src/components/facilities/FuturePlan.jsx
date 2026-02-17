@@ -37,22 +37,22 @@ export default function FuturePlan() {
   ];
 
   return (
-    <section className="bg-[#F0EEEF] py-12">
+    <section className="bg-[#F0EEEF] py-12 sm:py-10 xs:py-8">
 
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-5">
 
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 items-start">
 
           {/* LEFT */}
           <div>
 
             {/* badge */}
-            <div className="bg-[#0CC2FE] text-[#002147] px-4 py-1 text-2xl w-fit mb-2">
+            <div className="bg-[#0CC2FE] text-[#002147] px-4 py-1 text-2xl sm:text-xl text-lg w-fit mb-2">
               NCC
             </div>
 
             {/* title */}
-            <h2 className="text-3xl font-semibold text-[#002147]">
+            <h2 className="text-3xl sm:text-2xl text-xl font-semibold text-[#002147]">
               Empower Your Future
             </h2>
 
@@ -61,7 +61,7 @@ export default function FuturePlan() {
             {/* image */}
             <img
               src={img4}
-              className="pt-12 w-full"
+              className="pt-12 sm:pt-8 w-full"
             />
 
           </div>
@@ -69,7 +69,7 @@ export default function FuturePlan() {
           {/* RIGHT */}
           <div className="lg:pl-5">
 
-            <p className="text-[#3A3A3A] mb-4">
+            <p className="text-[#3A3A3A] mb-4 text-base sm:text-[15px] leading-relaxed">
               NCC is more than an extracurricular opportunity. It is your pathway to an empowered and
                         inspiring future. As a unique platform for self-transformation, NCC offers you rigor, dynamism
                         and challenges to grow as a leader, nation-builder and changemaker. Become a cadet and prepare
@@ -77,12 +77,12 @@ export default function FuturePlan() {
             </p>
 
             {/* ICON GRID */}
-            <div className="grid md:grid-cols-2 gap-y-6 gap-x-6 my-6">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-y-6 gap-x-6 my-6">
 
               {icons.map((item, i) => (
                 <div key={i} className="flex gap-3 items-center">
-                  <img src={item.img} />
-                  <span className="text-[#3A3A3A] text-[16px] font-medium">
+                  <img src={item.img} className="shrink-0" />
+                  <span className="text-[#3A3A3A] text-[16px] sm:text-[15px] font-medium">
                     {item.text}
                   </span>
                 </div>
@@ -91,14 +91,14 @@ export default function FuturePlan() {
             </div>
 
             {/* subtitle */}
-            <h3 className="text-[32px] text-[#002147] font-medium mb-6">
+            <h3 className="text-[32px] sm:text-[26px] text-[22px] text-[#002147] font-medium mb-6 sm:mb-4">
               Lead Change – One Initiative At a Time
             </h3>
 
             {/* list */}
             <ul>
               {initiatives.map((item, i) => (
-                <li key={i} className="mb-5 text-[#3A3A3A]">
+                <li key={i} className="mb-5 sm:mb-4 text-[#3A3A3A] text-base sm:text-[15px] leading-relaxed">
                   {item}
                 </li>
               ))}

@@ -33,26 +33,26 @@ export default function Recruiters() {
   ];
 
   return (
-    <section className="bg-[#F0EEEF] pt-28 pb-24">
+    <section className="bg-[#F0EEEF] pt-16 sm:pt-20 md:pt-28 pb-16 sm:pb-20 md:pb-24">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* TITLE */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#002147] leading-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[#002147] leading-tight">
           Proven Placement Record with <br /> 500+ Recruiters
         </h2>
 
-        <div className="h-[2px] w-64 bg-[#FF7373] mt-4 mb-10" />
+        <div className="h-[2px] w-40 sm:w-56 md:w-64 bg-[#FF7373] mt-3 sm:mt-4 mb-8 sm:mb-10" />
 
         {/* LOGO GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
 
           {logos.map((logo, i) => (
-            <div key={i} className="bg-white p-3 border border-[#F0EEEF] flex items-center justify-center">
+            <div key={i} className="bg-white p-2 sm:p-3 border border-[#F0EEEF] flex items-center justify-center">
               <img
                 src={logo}
                 alt="Recruiter"
-                className="h-[72px] w-full object-contain"
+                className="h-[48px] sm:h-[60px] md:h-[72px] w-full object-contain"
               />
             </div>
           ))}
@@ -61,23 +61,23 @@ export default function Recruiters() {
 
 
         {/* PLACEMENT HIGHLIGHTS */}
-        <div className="bg-[#FFCC4D] mt-14 p-8 md:p-12">
+        <div className="bg-[#FFCC4D] mt-10 sm:mt-12 md:mt-14 p-6 sm:p-8 md:p-12">
 
           {/* TOP ROW */}
-          <div className="grid lg:grid-cols-2 gap-6 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start lg:items-center">
 
-            <div className="text-[#002147] text-3xl md:text-4xl font-medium leading-tight">
+            <div className="text-[#002147] text-2xl sm:text-3xl md:text-4xl font-medium leading-tight">
               Placement Highlights <br />
               2024-2025
             </div>
 
-            <div className="flex flex-wrap items-center gap-8">
+            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-6 sm:gap-8">
 
               <div className="flex items-center gap-3">
-                <div className="text-4xl md:text-5xl font-semibold text-[#002147]">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#002147]">
                   1904
                 </div>
-                <div className="text-[#002147] font-medium">
+                <div className="text-[#002147] font-medium text-sm sm:text-base">
                   Students Placed
                 </div>
               </div>
@@ -85,10 +85,10 @@ export default function Recruiters() {
               <div className="hidden md:block w-[1px] h-14 bg-white" />
 
               <div className="flex items-center gap-3">
-                <div className="text-4xl md:text-5xl font-semibold text-[#002147]">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#002147]">
                   563
                 </div>
-                <div className="text-[#002147] font-medium leading-tight">
+                <div className="text-[#002147] font-medium leading-tight text-sm sm:text-base">
                   Companies in <br /> Closed Campus Drive
                 </div>
               </div>
@@ -99,27 +99,27 @@ export default function Recruiters() {
 
 
           {/* SECTORS */}
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
 
-            <div className="text-2xl md:text-3xl font-medium text-[#002147] mb-6">
+            <div className="text-xl sm:text-2xl md:text-3xl font-medium text-[#002147] mb-4 sm:mb-6">
               Sectors
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-y-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-3 sm:gap-y-4">
 
               {sectors1.map((s, i) => (
-                <div key={i} className="border-b border-[#0CC2FE] font-medium text-[#002147]">
-                  <span className="text-2xl md:text-3xl mr-1">{s.num}</span> {s.name}
+                <div key={i} className="border-b border-[#0CC2FE] font-medium text-[#002147] text-sm sm:text-base">
+                  <span className="text-xl sm:text-2xl md:text-3xl mr-1">{s.num}</span> {s.name}
                 </div>
               ))}
 
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-y-4 mt-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-3 sm:gap-y-4 mt-3 sm:mt-4">
 
               {sectors2.map((s, i) => (
-                <div key={i} className="border-b border-[#0CC2FE] font-medium text-[#002147]">
-                  <span className="text-2xl md:text-3xl mr-1">{s.num}</span> {s.name}
+                <div key={i} className="border-b border-[#0CC2FE] font-medium text-[#002147] text-sm sm:text-base">
+                  <span className="text-xl sm:text-2xl md:text-3xl mr-1">{s.num}</span> {s.name}
                 </div>
               ))}
 

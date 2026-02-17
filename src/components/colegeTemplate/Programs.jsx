@@ -1,24 +1,30 @@
 export default function Programs() {
   return (
-    <section id="courses" className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="courses" className="py-12 sm:py-14 md:py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h2 className="text-[#002147] text-3xl md:text-5xl font-medium">
+        <h2 className="text-[#002147] text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
           Programmes Offered
         </h2>
 
-        <div className="w-32 h-[2px] bg-[#002147] mt-3 mb-10"></div>
+        <div className="w-24 sm:w-32 h-[2px] bg-[#002147] mt-3 mb-8 sm:mb-10 mx-auto md:mx-0"></div>
 
         <div className="overflow-x-auto">
 
-          <table className="min-w-full border border-gray-300">
+          <table className="min-w-full border border-gray-300 text-sm sm:text-base">
 
             {/* HEADER */}
             <thead>
-              <tr className="text-left text-lg font-medium">
-                <th className="p-4 bg-cyan-400 text-[#002147]">Programme</th>
-                <th className="p-4 bg-red-400 text-[#002147]">Programme Details</th>
-                <th className="p-4 bg-yellow-300 text-[#002147]">Eligibility</th>
+              <tr className="text-left text-base sm:text-lg font-medium">
+                <th className="p-3 sm:p-4 bg-cyan-400 text-[#002147] whitespace-nowrap">
+                  Programme
+                </th>
+                <th className="p-3 sm:p-4 bg-red-400 text-[#002147] whitespace-nowrap">
+                  Programme Details
+                </th>
+                <th className="p-3 sm:p-4 bg-yellow-300 text-[#002147] whitespace-nowrap">
+                  Eligibility
+                </th>
               </tr>
             </thead>
 
@@ -26,11 +32,11 @@ export default function Programs() {
             <tbody className="text-gray-700">
 
               <tr className="border-t">
-                <td className="p-4 font-medium text-[#002147] whitespace-nowrap">
+                <td className="p-3 sm:p-4 font-medium text-[#002147] whitespace-nowrap">
                   MBA (Core)
                 </td>
 
-                <td className="p-4 bg-gray-100">
+                <td className="p-3 sm:p-4 bg-gray-100">
                   Build a strong foundation in business leadership with IBMR’s MBA (Core).
                   Master fundamentals, practical skills and critical thinking.
 
@@ -48,17 +54,17 @@ export default function Programs() {
                   <strong>Career Pathways:</strong> Leadership roles & entrepreneurship.
                 </td>
 
-                <td className="p-4 bg-gray-100">
+                <td className="p-3 sm:p-4 bg-gray-100">
                   Graduation with minimum 50% marks and CMAT score.
                 </td>
               </tr>
 
               <tr className="border-t">
-                <td className="p-4 font-medium text-[#002147] whitespace-nowrap">
+                <td className="p-3 sm:p-4 font-medium text-[#002147] whitespace-nowrap">
                   MBA (International Business)
                 </td>
 
-                <td className="p-4 bg-gray-100">
+                <td className="p-3 sm:p-4 bg-gray-100">
                   Expertise in international sales, trade, logistics and global markets.
 
                   <br /><br />
@@ -75,7 +81,7 @@ export default function Programs() {
                   <strong>Career Pathways:</strong> Global trade, MNC roles, supply chain.
                 </td>
 
-                <td className="p-4 bg-gray-100">
+                <td className="p-3 sm:p-4 bg-gray-100">
                   Graduation with minimum 50% marks and CMAT score.
                 </td>
               </tr>

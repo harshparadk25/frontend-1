@@ -29,7 +29,6 @@ const EventSlider = () => {
   const next = () =>
     setIndex(prev => (prev === slides.length - 1 ? 0 : prev + 1));
 
-  // Auto slide every 3 seconds (safe version)
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex(prev => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -39,19 +38,19 @@ const EventSlider = () => {
   }, []);
 
   return (
-    <div className="py-12 md:py-20 px-4">
+    <div className="py-12 md:py-20 px-4 sm:px-5">
 
       {/* Heading */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-start">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-4 items-start">
 
         <div>
-          <h2 className="text-2xl md:text-4xl font-semibold">
+          <h2 className="text-2xl md:text-4xl sm:text-3xl font-semibold leading-tight">
             A calendar full of celebrations
           </h2>
           <div className="w-20 h-[3px] bg-red-400 mt-3"></div>
         </div>
 
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-base sm:text-[15px]">
           Life at IPS Academy is a melting pot of diverse cultures, a plethora
           of events, learning opportunities and peer activities that enhance
           your experience on campus.
@@ -60,25 +59,25 @@ const EventSlider = () => {
       </div>
 
       {/* Carousel */}
-      <div className="max-w-6xl mx-auto mt-10 relative">
+      <div className="max-w-6xl mx-auto mt-10 sm:mt-8 relative">
 
         {/* Controls */}
         <button
           onClick={prev}
-          className="absolute right-14 -top-10 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50"
+          className="absolute right-14 sm:right-12 xs:right-10 -top-10 sm:-top-8 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
         >
           ‹
         </button>
 
         <button
           onClick={next}
-          className="absolute right-4 -top-10 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50"
+          className="absolute right-4 -top-10 sm:-top-8 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
         >
           ›
         </button>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-4">
 
           {slides[index].map((img, i) => (
             <div key={i} className="cursor-pointer">
@@ -86,7 +85,7 @@ const EventSlider = () => {
                 src={img}
                 alt={`event-${i}`}
                 className="
-                  w-full h-[320px] object-cover
+                  w-full h-[320px] sm:h-[260px] xs:h-[220px] object-cover
                   border-2 border-[#ff7373]
                   shadow-md
                   transition duration-300

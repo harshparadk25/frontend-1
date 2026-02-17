@@ -18,9 +18,12 @@ export default function Hero({ data }) {
 
       {/* HERO */}
       <section className="relative w-full h-[960px] 
+                          max-[1400px]:h-[820px]
+                          max-[1200px]:h-[720px]
                           max-[991px]:h-[60vh] 
+                          max-[768px]:h-[68vh]
                           max-[576px]:h-[65vh] 
-                          pb-28 overflow-visible">
+                          pb-28 max-[768px]:pb-24 max-[576px]:pb-20 overflow-visible">
 
         {/* Background */}
         <img
@@ -35,14 +38,18 @@ export default function Hero({ data }) {
                         w-[60%] max-w-lg
                         px-8 py-8
                         shadow-lg
+                        max-[1200px]:w-[65%]
                         max-[991px]:w-[75%] max-[991px]:px-6 max-[991px]:py-6 max-[991px]:-bottom-10
-                        max-[576px]:w-[90%] max-[576px]:px-5 max-[576px]:py-5 max-[576px]:-bottom-8">
+                        max-[768px]:w-[85%] max-[768px]:left-4 max-[768px]:-bottom-9
+                        max-[576px]:w-[90%] max-[576px]:px-5 max-[576px]:py-5 max-[576px]:left-1/2 max-[576px]:-translate-x-1/2 max-[576px]:-bottom-8">
 
           <h1 className="text-[#0B2C4D]
                          text-[3rem]
                          leading-tight
                          font-medium
+                         max-[1200px]:text-[2.6rem]
                          max-[991px]:text-[2.2rem]
+                         max-[768px]:text-[1.8rem]
                          max-[576px]:text-[1.3rem]">
             {description}
           </h1>
@@ -53,6 +60,7 @@ export default function Hero({ data }) {
                        border border-[#0B2C4D]
                        text-[#0B2C4D]
                        px-6 py-2.5
+                       max-[576px]:px-5 max-[576px]:py-2
                        transition-all duration-300
                        hover:-translate-y-1 hover:scale-105
                        hover:shadow-[0_10px_25px_rgba(0,0,0,0.25)]">
@@ -65,18 +73,19 @@ export default function Hero({ data }) {
         {/* VIDEO MODAL */}
         {showVideo && videoUrl && (
           <div
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-[999]"
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-[999] px-4"
             onClick={() => setShowVideo(false)}
           >
             <div
-              className="w-[90%] max-w-[900px] relative"
+              className="w-[90%] max-w-[900px] relative max-[576px]:w-full"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setShowVideo(false)}
                 className="absolute -top-3 -right-3 bg-[#002147] text-white
                            rounded-full w-[32px] h-[32px]
-                           flex items-center justify-center shadow-lg">
+                           flex items-center justify-center shadow-lg
+                           max-[576px]:w-[28px] max-[576px]:h-[28px]">
                 ✕
               </button>
 

@@ -37,7 +37,6 @@ export default function AboutIntro({ aboutData, ecosystemData, growthImage }) {
   const content = aboutData?.content ||
     "We are Central India's leading multidisciplinary institution, known for excellence in academics, infrastructure and industry connect.";
 
-  // Use ecosystem items from the API, or fallback to defaults
   const features = ecosystemData?.items
     ? ecosystemData.items.map((item, i) => ({
       icon: iconMap[i] || iconMap[0],
@@ -46,43 +45,52 @@ export default function AboutIntro({ aboutData, ecosystemData, growthImage }) {
     }))
     : defaultFeatures;
 
-  // Growth image from the API gallery section
   const growthImg = growthImage?.images?.[0]
     ? resolveImageUrl(growthImage.images[0])
     : studentFallback;
 
   return (
-    <section className="py-16">
+    <section className="py-16 sm:py-12">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 sm:px-4">
 
         {/* title */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <h2 className="text-4xl font-semibold text-[#002147]">{title}</h2>
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-5 items-start">
+          <h2 className="text-4xl sm:text-3xl xs:text-2xl font-semibold text-[#002147] leading-tight">
+            {title}
+          </h2>
 
-          <p className="text-gray-700">
+          <p className="text-gray-700 text-base sm:text-[15px]">
             {content}
           </p>
         </div>
 
         {/* feature section */}
-        <div className="grid md:grid-cols-2 gap-10 mt-10 items-start">
+        <div className="grid md:grid-cols-2 gap-10 sm:gap-8 mt-10 items-start">
 
           <img
             src={growthImg}
             alt={title}
-            className="w-full object-cover"
+            className="w-full object-cover rounded sm:max-h-[420px]"
           />
 
           <div>
             {features.map((f, i) => (
-              <div key={i} className="flex gap-6 py-6 border-b last:border-0">
+              <div key={i} className="flex gap-6 sm:gap-4 py-6 sm:py-4 border-b last:border-0">
 
-                <img src={f.icon} className="w-10 h-10 mt-1" alt={f.title} />
+                <img
+                  src={f.icon}
+                  className="w-10 h-10 sm:w-8 sm:h-8 mt-1 shrink-0"
+                  alt={f.title}
+                />
 
                 <div>
-                  <h6 className="text-xl font-medium text-[#002147]">{f.title}</h6>
-                  <p className="text-gray-600 mt-1">{f.text}</p>
+                  <h6 className="text-xl sm:text-lg font-medium text-[#002147] leading-snug">
+                    {f.title}
+                  </h6>
+                  <p className="text-gray-600 mt-1 text-sm sm:text-[13.5px]">
+                    {f.text}
+                  </p>
                 </div>
 
               </div>
