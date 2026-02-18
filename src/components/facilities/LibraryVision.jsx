@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import library from "../../assets/Images/library.jpg";
 
 import wifi from "../../assets/Images/wifi-signal.svg";
@@ -14,7 +15,12 @@ export default function LibraryVision() {
       <div className="w-full">
 
   {/* YELLOW CARD */}
-  <div className="
+  <motion.div
+    initial={{ opacity: 0, x: -30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.45, ease: "easeOut" }}
+    viewport={{ once: true, amount: 0.1 }}
+    className="
     bg-[#FFC73E]
     w-[92%] lg:w-[88%]        /* makes card slightly smaller */
     mr-auto                   /* keeps it aligned left */
@@ -70,7 +76,7 @@ export default function LibraryVision() {
       </div>
 
     </div>
-  </div>
+  </motion.div>
 
 </div>
 

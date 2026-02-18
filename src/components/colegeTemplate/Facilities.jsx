@@ -1,6 +1,20 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { motion } from "framer-motion";
 import { resolveImageUrl } from "../../services/api";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 15 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+  }),
+};
 
 export default function Facilities({ data }) {
   const title = data?.title || "Facilities";
@@ -13,9 +27,15 @@ export default function Facilities({ data }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left"
+        >
           {title}
-        </h2>
+        </motion.h2>
 
         <div className="w-24 sm:w-32 h-[2px] bg-white mt-3 mb-6 mx-auto md:mx-0"></div>
 
@@ -33,7 +53,15 @@ export default function Facilities({ data }) {
         <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
 
           {facilityItems.map((f, i) => (
-            <div key={i} className="bg-gray-200 text-black">
+            <motion.div
+              key={i}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              custom={i}
+              viewport={{ once: true, amount: 0.1 }}
+              className="bg-gray-200 text-black"
+            >
 
               <div className="bg-yellow-600 text-center font-semibold py-2 uppercase tracking-wide text-sm sm:text-base">
                 {f.name}
@@ -51,7 +79,7 @@ export default function Facilities({ data }) {
                 {f.description}
               </div>
 
-            </div>
+            </motion.div>
           ))}
 
         </div>

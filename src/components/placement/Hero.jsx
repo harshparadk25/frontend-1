@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { resolveImageUrl } from "../../services/api";
 import placementImg from "../../assets/Images/placement.jpg";
 
@@ -24,7 +25,10 @@ export default function Hero({ data }) {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
         className="absolute bottom-0 left-0 transform translate-y-1/4
                 bg-[#E9E9E9] 
                 w-full sm:w-[80%] lg:w-[50%] 
@@ -61,7 +65,7 @@ export default function Hero({ data }) {
             {ctaText}
           </button>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 }

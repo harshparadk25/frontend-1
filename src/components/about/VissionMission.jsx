@@ -1,5 +1,16 @@
+import { motion } from "framer-motion";
 import visionIcon from "../../assets/Images/vision.svg";
 import missionIcon from "../../assets/Images/mission.svg";
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
 
 export default function VisionMission({ data }) {
 
@@ -24,11 +35,22 @@ export default function VisionMission({ data }) {
 
         {/* Vision */}
         <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div className="flex justify-center items-center">
+          <motion.div
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="flex justify-center items-center"
+          >
           <img src={visionIcon} className="mx-auto md:mx-0 " alt="Vision" />
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            variants={slideRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             <h2 className="text-4xl md:text-[60px] text-[#002147] font-medium mb-4">
               {visionTitle}
             </h2>
@@ -36,7 +58,7 @@ export default function VisionMission({ data }) {
             <p>
               {visionText}
             </p>
-          </div>
+          </motion.div>
 
         </div>
 
@@ -45,7 +67,13 @@ export default function VisionMission({ data }) {
         {/* Mission */}
         <div className="grid md:grid-cols-2 gap-10 items-center">
 
-          <div className="order-2 md:order-1">
+          <motion.div
+            variants={slideRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="order-2 md:order-1"
+          >
             <h2 className="text-4xl md:text-[60px] text-[#002147] font-medium mb-4">
               {missionTitle}
             </h2>
@@ -53,9 +81,13 @@ export default function VisionMission({ data }) {
             <p>
               {missionText}
             </p>
-          </div>
+          </motion.div>
 
-          <img
+          <motion.img
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
             src={missionIcon}
             alt="Mission"
             className="order-1 md:order-2 mx-auto md:ml-auto h-24"

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
+import { motion } from "framer-motion";
 import heroFallback from "../../assets/Images/hero.jpg";
 
 export default function Hero({ data }) {
@@ -33,7 +34,11 @@ export default function Hero({ data }) {
         />
 
         {/* SMALLER OVERLAY BOX */}
-        <div className="absolute left-0 -bottom-12
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+          className="absolute left-0 -bottom-12
                         bg-[#E9E9E9]
                         max-w-[637px]
                         px-8 py-8
@@ -63,7 +68,7 @@ export default function Hero({ data }) {
             <Play size={18} fill="currentColor" />
             {ctaText}
           </button>
-        </div>
+        </motion.div>
 
         {/* VIDEO MODAL */}
         {showVideo && videoUrl && (

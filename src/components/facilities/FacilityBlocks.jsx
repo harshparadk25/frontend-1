@@ -1,5 +1,16 @@
+import { motion } from "framer-motion";
 import wellness from "../../assets/Images/image 22.png";
 import transport from "../../assets/Images/image 23.png";
+
+const slideFromSide = (fromLeft) => ({
+  hidden: { opacity: 0, x: fromLeft ? -30 : 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+});
+
+const scaleUp = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 
 const blocks = [
@@ -54,7 +65,13 @@ export default function FacilityBlocks() {
           >
 
             {/* TEXT */}
-            <div className={b.reverse ? "lg:order-2 lg:pl-10" : ""}>
+            <motion.div
+              variants={slideFromSide(!b.reverse)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              className={b.reverse ? "lg:order-2 lg:pl-10" : ""}
+            >
 
               <div
                 className="px-4 py-1 text-[#002147] text-xl sm:text-lg text-base font-medium w-fit mb-2"
@@ -73,10 +90,16 @@ export default function FacilityBlocks() {
                 {b.text}
               </p>
 
-            </div>
+            </motion.div>
 
             {/* IMAGE */}
-            <div className={b.reverse ? "lg:order-1" : ""}>
+            <motion.div
+              variants={scaleUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              className={b.reverse ? "lg:order-1" : ""}
+            >
 
               {b.img ? (
                 <img
@@ -88,7 +111,7 @@ export default function FacilityBlocks() {
                 <div className="w-full h-[456px] lg:h-[456px] md:h-[380px] sm:h-[300px] h-[240px] bg-[#D9D9D9]"></div>
               )}
 
-            </div>
+            </motion.div>
 
           </div>
         ))}

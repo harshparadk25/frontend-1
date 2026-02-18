@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import img4 from "../../assets/Images/img4.png";
 import developmentIcon from "../../assets/Images/development.svg";
 import soldierIcon from "../../assets/Images/soldier.svg";
@@ -24,6 +25,29 @@ export default function FuturePlan() {
     { img: goalIcon, text: "Vision and purpose" },
   ];
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
+  const slideLeft = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  };
+
+  const slideRight = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  };
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1, y: 0,
+      transition: { duration: 0.4, delay: i * 0.06, ease: "easeOut" },
+    }),
+  };
+
   const initiatives = [
     "Adult Education",
     "Tree Plantation",
@@ -44,7 +68,12 @@ export default function FuturePlan() {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 items-start">
 
           {/* LEFT */}
-          <div>
+          <motion.div
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
 
             {/* badge */}
             <div className="bg-[#0CC2FE] text-[#002147] px-4 py-1 text-2xl sm:text-xl text-lg w-fit mb-2 text-medium">
@@ -64,10 +93,16 @@ export default function FuturePlan() {
               className="pt-12 sm:pt-8 w-full"
             />
 
-          </div>
+          </motion.div>
 
           {/* RIGHT */}
-          <div className="lg:pl-5">
+          <motion.div
+            variants={slideRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="lg:pl-5"
+          >
 
             <p className="text-[#3A3A3A] mb-4 text-base sm:text-[15px] leading-relaxed">
               NCC is more than an extracurricular opportunity. It is your pathway to an empowered and
@@ -80,12 +115,20 @@ export default function FuturePlan() {
             <div className="grid md:grid-cols-2 grid-cols-1 gap-y-6 gap-x-6 my-6">
 
               {icons.map((item, i) => (
-                <div key={i} className="flex gap-3 items-center">
+                <motion.div
+                  key={i}
+                  variants={cardVariant}
+                  initial="hidden"
+                  whileInView="visible"
+                  custom={i}
+                  viewport={{ once: true, amount: 0.1 }}
+                  className="flex gap-3 items-center"
+                >
                   <img src={item.img} className="shrink-0" />
                   <span className="text-[#3A3A3A] text-[16px] sm:text-[15px] font-medium">
                     {item.text}
                   </span>
-                </div>
+                </motion.div>
               ))}
 
             </div>
@@ -104,7 +147,7 @@ export default function FuturePlan() {
               ))}
             </ul>
 
-          </div>
+          </motion.div>
 
         </div>
 

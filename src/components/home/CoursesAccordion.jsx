@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 export default function CoursesAccordion() {
 
@@ -87,7 +93,13 @@ export default function CoursesAccordion() {
 
 
         {/* Header Row */}
-        <div className="grid grid-cols-12 items-center gap-1 ">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-12 items-center gap-1 "
+        >
           <div className="col-span-12 lg:col-span-7">
             <div className="max-[576px]:text-center">
               <h2 className="text-[50px] text-[#002147] mb-4 font-medium leading-[60px] max-[991px]:text-[48px] max-[576px]:text-[32px] max-[576px]:leading-[38px]">
@@ -103,7 +115,7 @@ export default function CoursesAccordion() {
               you for an evolving future.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Accordion */}
 <div className="py-12 max-w-[1420px]  px-2 max-[676px]:py-6">

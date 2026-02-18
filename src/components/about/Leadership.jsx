@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import nishitJainFallback from "../../assets/Images/Nishit Jain.png";
 import achalFallback from "../../assets/Images/achal.png";
 import yogendraJainFallback from "../../assets/Images/Mr. Yogendra Jain.png";
@@ -5,6 +6,16 @@ import { resolveImageUrl } from "../../services/api";
 
 // Fallback images mapped by index
 const fallbackImages = [nishitJainFallback, achalFallback, yogendraJainFallback];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const slideFromSide = (fromLeft) => ({
+  hidden: { opacity: 0, x: fromLeft ? -30 : 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+});
 
 const defaultLeaders = [
   {
@@ -45,14 +56,27 @@ export default function Leadership({ data }) {
 
       <div className="max-w-6xl mx-auto px-3">
 
-        <h3 className="text-4xl md:text-[60px] font-medium text-[#002147]">
+        <motion.h3
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-4xl md:text-[60px] font-medium text-[#002147]"
+        >
           {title}
-        </h3>
+        </motion.h3>
 
         <div className="h-[2px] w-60 bg-[#FF7373] my-3 mb-7" />
 
         {leaders.map((l, i) => (
-          <div key={i} className="bg-[#F0EEEF] p-12 mb-8 mt-10">
+          <motion.div
+            key={i}
+            variants={slideFromSide(i % 2 === 0)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="bg-[#F0EEEF] p-12 mb-8 mt-10"
+          >
 
             <div className={`grid md:grid-cols-2 gap-8 items-center ${i === 1 ? 'md:[&>*:first-child]:order-2' : ''}`}>
 
@@ -66,7 +90,7 @@ export default function Leadership({ data }) {
 
             </div>
 
-          </div>
+          </motion.div>
         ))}
 
       </div>

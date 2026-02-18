@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { resolveImageUrl } from "../../services/api";
 
 import rajeev from "../../assets/Images/Rajeev-Shukla.webp";
@@ -58,6 +59,15 @@ export default function Team({ data }) {
   const next = () =>
     setIndex((index + 1) % experts.length);
 
+  // Auto-slide every 3 seconds
+  useEffect(() => {
+    if (experts.length <= 1) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % experts.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [experts.length]);
+
   const expert = experts[index];
 
   return (
@@ -66,7 +76,12 @@ export default function Team({ data }) {
       <div className="max-w-7xl mx-auto pt-4 sm:px-6 grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
 
         {/* LEFT TITLE */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <p className="text-base sm:text-lg font-medium text-[#002147]">
             {sectionTitle}
           </p>
@@ -78,11 +93,17 @@ export default function Team({ data }) {
           </h2>
 
           <div className="h-[2px] w-32 sm:w-40 bg-[#FF7373] mt-3 sm:mt-4"/>
-        </div>
+        </motion.div>
 
 
         {/* RIGHT CAROUSEL */}
-        <div className="lg:col-span-2 relative translate-y-0 lg:translate-y-2/5 mt-[-150px]">
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="lg:col-span-2 relative translate-y-0 lg:translate-y-2/5 mt-[-150px]"
+        >
 
           <div className="bg-white shadow-[8px_8px_30px_2px_#00000026] p-2 sm:p-6">
 
@@ -136,7 +157,7 @@ export default function Team({ data }) {
             ›
           </button>
 
-        </div>
+        </motion.div>
 
       </div>
 

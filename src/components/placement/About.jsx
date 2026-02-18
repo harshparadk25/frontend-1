@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import mentoringIcon from "../../assets/Images/mentoring.svg";
 import skyscrapersIcon from "../../assets/Images/skyscrapers.svg";
 import consultingIcon from "../../assets/Images/consulting.svg";
@@ -16,6 +17,19 @@ const defaultFeatures = [
   { title: "Industry-Linked Certifications", img: certificateIcon },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+  }),
+};
+
 export default function About({ data }) {
   const title = data?.title || "Where Opportunities Find You";
   const content =
@@ -31,7 +45,13 @@ export default function About({ data }) {
     <section className="py-10 sm:py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-2">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start"
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl md:text-6xl font-medium text-[#002147] leading-tight">
             {firstPart}
             <br />
@@ -43,12 +63,17 @@ export default function About({ data }) {
           <p className="text-gray-700 text-sm sm:text-base md:text-base leading-relaxed">
             {content}
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
           {defaultFeatures.map((f, i) => (
-            <div
+            <motion.div
               key={i}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              custom={i}
+              viewport={{ once: true, amount: 0.1 }}
               className="border p-4 sm:p-5 md:p-6 hover:shadow-lg transition rounded bg-white text-center sm:text-left"
             >
               <img
@@ -58,7 +83,7 @@ export default function About({ data }) {
               <h3 className="text-lg sm:text-xl font-medium text-[#002147]">
                 {f.title}
               </h3>
-            </div>
+            </motion.div>
           ))}
         </div>
 

@@ -1,5 +1,6 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { motion } from "framer-motion";
 import achalImg from "../../assets/Images/achal.png";
 import kumudiniImg from "../../assets/Images/Mrs. Kumudini.jpg";
 import yogendraJainImg from "../../assets/Images/Mr. Yogendra Jain.png";
@@ -31,15 +32,34 @@ const faculty = [
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+  }),
+};
+
 export default function Faculty() {
   return (
     <section id="faculty" className="bg-gradient-to-br from-[#0b1c39] to-[#112a52] text-white py-12 sm:py-14 md:py-16">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left"
+        >
           Faculty
-        </h2>
+        </motion.h2>
 
         <div className="w-24 sm:w-32 h-[2px] bg-white mt-3 mb-4 mx-auto md:mx-0"></div>
 
@@ -56,8 +76,13 @@ export default function Faculty() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
 
           {faculty.map((f, i) => (
-            <div
+            <motion.div
               key={i}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              custom={i}
+              viewport={{ once: true, amount: 0.1 }}
               className="bg-white/10 backdrop-blur rounded overflow-hidden hover:translate-y-[-6px] transition"
             >
               <LazyLoadImage src={f.img} effect="blur" className="w-full h-56 sm:h-60 md:h-64 object-cover" wrapperClassName="w-full" />
@@ -67,7 +92,7 @@ export default function Faculty() {
                 <span className="text-yellow-400 text-xs sm:text-sm">{f.degree}</span>
                 <p className="text-gray-300 text-xs sm:text-sm mt-2">{f.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
 
         </div>

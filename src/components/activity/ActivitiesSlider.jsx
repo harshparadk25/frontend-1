@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 const slides = [
   [
@@ -43,7 +49,13 @@ const EventSlider = () => {
     <div className="py-12 md:py-20 px-4 sm:px-5">
 
       {/* Heading */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-4 items-start">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-4 items-start"
+      >
 
         <div>
           <h2 className="text-2xl md:text-4xl sm:text-3xl font-semibold leading-tight">
@@ -58,7 +70,7 @@ const EventSlider = () => {
           your experience on campus.
         </p>
 
-      </div>
+      </motion.div>
 
       {/* Carousel */}
       <div className="max-w-6xl mx-auto mt-10 sm:mt-8 relative">

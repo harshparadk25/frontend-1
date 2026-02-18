@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import facility from "../../assets/Images/facilities.jpg";
 
 export default function Hero() {
@@ -20,7 +21,10 @@ export default function Hero() {
       />
 
       {/* Bottom-left overlay box */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
         className="absolute bottom-0 left-0
         translate-y-0 lg:translate-y-1/7
         bg-[#E9E9E9]
@@ -59,7 +63,7 @@ export default function Hero() {
           Explore Now
         </button>
 
-      </div>
+      </motion.div>
 
     </section>
   );

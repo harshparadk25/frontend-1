@@ -7,10 +7,24 @@ import {
   faBuildingColumns,
   faSitemap
 } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 import { resolveImageUrl } from "../../services/api";
 
 // Fallback icon mapping by index
 const fallbackIcons = [faBriefcase, faChartLine, faBookOpen, faUsers, faBuildingColumns, faSitemap];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+  }),
+};
 
 export default function Advantage({ data }) {
   const title = data?.title || "Experience, Learn, Lead";
@@ -20,16 +34,27 @@ export default function Advantage({ data }) {
     <section className="bg-[#002147] py-12 sm:py-14 md:pb-16 text-white mt-[-40px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-2 text-center md:text-left">
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-2xl sm:text-3xl md:text-5xl font-medium mb-2 text-center md:text-left"
+        >
           {title}
-        </h2>
+        </motion.h2>
 
         <div className="w-24 sm:w-32 h-[2px] bg-red-500 mb-8 sm:mb-10 mx-auto md:mx-0"></div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {cards.map((card, idx) => (
-            <div
+            <motion.div
               key={idx}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              custom={idx}
+              viewport={{ once: true, amount: 0.1 }}
               className="
                 border border-white/20 rounded-xl 
                 p-6 bg-white/[0.02]
@@ -58,7 +83,7 @@ export default function Advantage({ data }) {
                 {card.description}
               </p>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 

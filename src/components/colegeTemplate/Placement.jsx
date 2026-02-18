@@ -1,7 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { motion, AnimatePresence } from "framer-motion";
 import { resolveImageUrl } from "../../services/api";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
 
 export default function Placement({ placement, testimonials }) {
 
@@ -17,6 +33,15 @@ export default function Placement({ placement, testimonials }) {
   const next = () =>
     setIndex((index + 1) % testimonialItems.length);
 
+  // Auto-slide testimonials every 3 seconds
+  useEffect(() => {
+    if (testimonialItems.length <= 1) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % testimonialItems.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [testimonialItems.length]);
+
   const first = testimonialItems[index];
   const second = testimonialItems[(index + 1) % testimonialItems.length];
 
@@ -29,7 +54,13 @@ export default function Placement({ placement, testimonials }) {
         {placementData.title && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 items-center mb-12 sm:mb-16">
 
-            <div className={`text-center lg:text-left ${placementData.image_position === "left" ? "order-2" : ""}`}>
+            <motion.div
+              variants={placementData.image_position === "left" ? slideRight : slideLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              className={`text-center lg:text-left ${placementData.image_position === "left" ? "order-2" : ""}`}
+            >
               {placementData.tag && (
                 <span className="text-yellow-600 tracking-widest font-medium text-sm sm:text-base">
                   {placementData.tag}
@@ -54,10 +85,16 @@ export default function Placement({ placement, testimonials }) {
                   ))}
                 </ul>
               )}
-            </div>
+            </motion.div>
 
             {placementData.image && (
-              <div className={`text-center ${placementData.image_position === "left" ? "order-1" : ""}`}>
+              <motion.div
+                variants={placementData.image_position === "left" ? slideLeft : slideRight}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                className={`text-center ${placementData.image_position === "left" ? "order-1" : ""}`}
+              >
                 <LazyLoadImage
                   src={resolveImageUrl(placementData.image)}
                   alt={placementData.title}
@@ -65,7 +102,7 @@ export default function Placement({ placement, testimonials }) {
                   className="rounded shadow-lg mx-auto w-full max-w-md lg:max-w-full"
                   wrapperClassName="w-full"
                 />
-              </div>
+              </motion.div>
             )}
 
           </div>
@@ -74,9 +111,15 @@ export default function Placement({ placement, testimonials }) {
         {/* TESTIMONIALS */}
         {testimonialItems.length > 0 && (
           <>
-            <h2 className="text-[#002147] text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
+            <motion.h2
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              className="text-[#002147] text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left"
+            >
               {testimonialsData.title || "Testimonials"}
-            </h2>
+            </motion.h2>
 
             <div className="w-24 sm:w-32 h-[2px] bg-[#002147] mt-3 mb-8 sm:mb-10 mx-auto md:mx-0"></div>
 

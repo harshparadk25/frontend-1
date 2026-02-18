@@ -1,4 +1,5 @@
 // src/components/Activities/Hero.jsx
+import { motion } from "framer-motion";
 import activitiesImg from "../../assets/Images/activities.jpg";
 
 const Hero = () => {
@@ -14,7 +15,11 @@ const Hero = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="absolute bottom-0 left-0 
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+        className="absolute bottom-0 left-0 
                 bg-[#E9E9E9] 
                 w-full sm:w-[80%] lg:w-[70%] 
                 max-w-2xl 
@@ -42,7 +47,7 @@ const Hero = () => {
           Explore Now
         </button>
 
-      </div>
+      </motion.div>
 
     </div>
   );

@@ -1,3 +1,15 @@
+import { motion } from "framer-motion";
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
 export default function ApplyForm() {
   return (
     <section id="apply-form" className="bg-gradient-to-br from-[#060e22] to-[#0f2b5b] py-12 sm:py-14 md:py-16 text-white">
@@ -5,7 +17,13 @@ export default function ApplyForm() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
 
         {/* LEFT */}
-        <div className="text-center lg:text-left">
+        <motion.div
+          variants={slideLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-center lg:text-left"
+        >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium">
             Apply for Admission 2026
             <br />
@@ -30,10 +48,16 @@ export default function ApplyForm() {
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
 
         {/* FORM */}
-        <div className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5 sm:p-6 md:p-8">
+        <motion.div
+          variants={slideRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5 sm:p-6 md:p-8"
+        >
 
           <h4 className="font-bold text-lg sm:text-xl mb-5 text-center lg:text-left">Apply Now</h4>
 
@@ -65,7 +89,7 @@ export default function ApplyForm() {
 
           </form>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

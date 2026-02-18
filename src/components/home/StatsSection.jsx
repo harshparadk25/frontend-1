@@ -1,5 +1,16 @@
+import { motion } from "framer-motion";
 import Logo from "../../assets/Images/static.jpg";
 import nirf from "../../assets/Images/nirf-logo.png";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
 
 export default function StatsSection({ statsData, excellenceData }) {
   const stats = statsData?.stats || [];
@@ -16,7 +27,11 @@ export default function StatsSection({ statsData, excellenceData }) {
         style={{ backgroundImage: `url(${Logo})` }}
       >
         {/* Stats Box */}
-        <div
+        <motion.div
+          variants={slideLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
           className="absolute left-[3%] top-1/2 -translate-y-1/2 bg-[#0CC2FE] p-[50px] max-w-[503px] text-white grid grid-cols-2 gap-10
             max-[576px]:relative max-[576px]:left-0 max-[576px]:top-0 max-[576px]:translate-y-0 max-[576px]:mx-auto max-[576px]:max-w-full max-[576px]:grid-cols-1 max-[576px]:gap-6 max-[576px]:p-[30px] max-[576px]:text-center"
         >
@@ -36,14 +51,20 @@ export default function StatsSection({ statsData, excellenceData }) {
               </p>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Rankings & Accreditations */}
       <div className="max-w-[1140px] mx-auto px-4 text-white">
-        <h2 className="text-left text-[54px] font-medium mb-4 max-[991px]:text-[48px] max-[576px]:text-[30px] max-[576px]:text-center max-[576px]:pt-[30px]">
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-left text-[54px] font-medium mb-4 max-[991px]:text-[48px] max-[576px]:text-[30px] max-[576px]:text-center max-[576px]:pt-[30px]"
+        >
           {excellenceTitle}
-        </h2>
+        </motion.h2>
         <div className="w-[384px] h-[2px] bg-[#FF7373] max-[576px]:w-[200px] max-[576px]:mx-auto max-[576px]:mb-5" />
 
         <div

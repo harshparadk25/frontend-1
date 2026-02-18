@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import achalImg from "../../assets/Images/achal.png";
 import yogendraJainImg from "../../assets/Images/Mr. Yogendra Jain.png";
 import kumudiniImg from "../../assets/Images/Mrs. Kumudini.jpg";
@@ -41,16 +42,28 @@ export default function Governing() {
       <div className="max-w-6xl mx-auto px-3">
 
         {/* Heading */}
-        <h3 className="text-4xl md:text-[60px] font-medium text-[#002147]">
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-4xl md:text-[60px] font-medium text-[#002147]"
+        >
           Governing Body
-        </h3>
+        </motion.h3>
 
         <div className="h-[2px] w-60 bg-[#FF7373] my-3 mb-8" />
 
         {/* Governing Members */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 ">
           {leaders.map((m, i) => (
-            <div key={i}>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: i * 0.06, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.1 }}
+            >
               <img
                 src={m.img}
                 alt={m.name}
@@ -62,7 +75,7 @@ export default function Governing() {
               <div className="text-sm text-gray-600">
                 {m.role}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

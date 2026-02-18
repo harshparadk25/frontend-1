@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import aboutFallback from "../../assets/Images/about.png";
 import { resolveImageUrl } from "../../services/api";
 
@@ -25,7 +26,11 @@ export default function Hero({ data }) {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="absolute left-0 -bottom-12
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+        className="absolute left-0 -bottom-12
                         bg-[#E9E9E9]
                         max-w-[637px]
                         px-8 py-8
@@ -50,7 +55,7 @@ export default function Hero({ data }) {
           {ctaText}
         </a>
 
-      </div>
+      </motion.div>
 
     </section>
   );

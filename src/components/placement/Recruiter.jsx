@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import fairmontLogo from "../../assets/logos/Fairmont_Logo.svg.png";
 import oberoiLogo from "../../assets/logos/oberoi-hotelspng.png";
 import marriottLogo from "../../assets/logos/Marriott.png";
@@ -32,15 +33,34 @@ export default function Recruiters() {
     { num: 17, name: "Consulting" },
   ];
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 15 },
+    visible: (i) => ({
+      opacity: 1, y: 0,
+      transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+    }),
+  };
+
   return (
     <section className="bg-[#F0EEEF] pt-16 sm:pt-20 md:pt-38 pb-16 sm:pb-20 md:pb-24">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* TITLE */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-[#002147] leading-tight">
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-[#002147] leading-tight"
+        >
           Proven Placement Record with <br /> 500+ Recruiters
-        </h2>
+        </motion.h2>
 
         <div className="h-[2px] w-40 sm:w-56 md:w-64 bg-[#FF7373] mt-3 sm:mt-4 mb-8 sm:mb-10" />
 
@@ -48,20 +68,34 @@ export default function Recruiters() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
 
           {logos.map((logo, i) => (
-            <div key={i} className="bg-white p-2 sm:p-3 border border-[#F0EEEF] flex items-center justify-center">
+            <motion.div
+              key={i}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              custom={i}
+              viewport={{ once: true, amount: 0.1 }}
+              className="bg-white p-2 sm:p-3 border border-[#F0EEEF] flex items-center justify-center"
+            >
               <img
                 src={logo}
                 alt="Recruiter"
                 className="h-[48px] sm:h-[60px] md:h-[72px] w-full object-contain"
               />
-            </div>
+            </motion.div>
           ))}
 
         </div>
 
 
         {/* PLACEMENT HIGHLIGHTS */}
-        <div className="bg-[#FFCC4D] mt-10 sm:mt-12 md:mt-14 p-6 sm:p-8 md:p-12">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="bg-[#FFCC4D] mt-10 sm:mt-12 md:mt-14 p-6 sm:p-8 md:p-12"
+        >
 
           {/* TOP ROW */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start lg:items-center">
@@ -127,7 +161,7 @@ export default function Recruiters() {
 
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
 

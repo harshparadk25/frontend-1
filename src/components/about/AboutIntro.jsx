@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import onlineTeachingIcon from "../../assets/Images/online-teaching 1.svg";
 import computerIcon from "../../assets/Images/computer 1.svg";
 import globalIcon from "../../assets/Images/global 1.svg";
@@ -7,6 +8,21 @@ import { resolveImageUrl } from "../../services/api";
 
 // Map icons by index (matches the order returned by the API)
 const iconMap = [onlineTeachingIcon, computerIcon, globalIcon, opportunitiesIcon];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: (i = 0) => ({ opacity: 1, x: 0, transition: { duration: 0.4, delay: i * 0.07, ease: "easeOut" } }),
+};
 
 const defaultFeatures = [
   {
@@ -57,7 +73,13 @@ export default function AboutIntro({ aboutData, ecosystemData, growthImage }) {
       <div className="max-w-6xl mx-auto px-3">
 
         {/* title */}
-        <div className="grid md:grid-cols-2 gap-8 pb-5">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid md:grid-cols-2 gap-8 pb-5"
+        >
           <div>
           <h2 className="text-[60px] font-medium text-[#002147]">{title}</h2>
           <div class="h-[2px] w-60 bg-[#FF7373] "></div>
@@ -66,12 +88,16 @@ export default function AboutIntro({ aboutData, ecosystemData, growthImage }) {
           <p className="text-gray-700">
             {content}
           </p>
-        </div>
+        </motion.div>
 
         {/* feature section */}
         <div className="grid md:grid-cols-2 gap-14 mt-10 items-start">
 
-          <img
+          <motion.img
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
             src={growthImg}
             alt={title}
             className="w-full object-cover"
@@ -81,6 +107,15 @@ export default function AboutIntro({ aboutData, ecosystemData, growthImage }) {
             {features.map((f, i) => (
               <div key={i} className="flex gap-6 py-6 border-b last:border-0">
 
+                <motion.div
+                  variants={slideRight}
+                  initial="hidden"
+                  whileInView="visible"
+                  custom={i}
+                  viewport={{ once: true, amount: 0.1 }}
+                  className="flex gap-6 w-full"
+                >
+
                 <img src={f.icon} className="w-10 h-10 mt-1" alt={f.title} />
 
                 <div>
@@ -88,6 +123,7 @@ export default function AboutIntro({ aboutData, ecosystemData, growthImage }) {
                   <p className="text-gray-600 mt-1">{f.text}</p>
                 </div>
 
+                </motion.div>
               </div>
             ))}
           </div>

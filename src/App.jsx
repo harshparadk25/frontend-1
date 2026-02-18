@@ -1,6 +1,6 @@
 
-import { lazy, Suspense } from "react"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { lazy, Suspense, useEffect } from "react"
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
 import Footer from "./components/common/Footer"
 import Navbar from "./components/common/Header"
 
@@ -12,6 +12,12 @@ const Placements = lazy(() => import("./pages/Placement"))
 const AboutPage = lazy(() => import("./pages/About"))
 const CollegeTemp = lazy(() => import("./pages/CollegeTemp"))
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 const PageLoader = () => (
   <div className="flex items-center justify-center h-screen">
     <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#002147] border-t-transparent" />
@@ -21,6 +27,7 @@ const PageLoader = () => (
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
 
       <Suspense fallback={<PageLoader />}>

@@ -1,3 +1,10 @@
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
 export default function Programs({ data }) {
   const title = data?.title || "Programmes Offered";
   const programs = data?.programs || [];
@@ -6,13 +13,25 @@ export default function Programs({ data }) {
     <section id="courses" className="py-12 sm:py-14 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h2 className="text-[#002147] text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-[#002147] text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left"
+        >
           {title}
-        </h2>
+        </motion.h2>
 
         <div className="w-24 sm:w-32 h-[2px] bg-[#002147] mt-3 mb-8 sm:mb-10 mx-auto md:mx-0"></div>
 
-        <div className="overflow-x-auto">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="overflow-x-auto"
+        >
 
           <table className="min-w-full border border-gray-300 text-sm sm:text-base">
 
@@ -54,7 +73,7 @@ export default function Programs({ data }) {
 
           </table>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

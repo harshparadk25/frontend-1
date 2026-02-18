@@ -1,5 +1,19 @@
+import { motion } from "framer-motion";
 import trophy from "../../assets/Images/trophy 2.svg";
 import sportsHero from "../../assets/Images/268A2441.jpg";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+  }),
+};
 
 export default function Sports() {
   return (
@@ -8,7 +22,13 @@ export default function Sports() {
       <div className="max-w-7xl mx-auto px-4 sm:px-5">
 
         {/* ---------- INTRO SECTION ---------- */}
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-start mb-8">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid md:grid-cols-2 gap-6 sm:gap-8 items-start mb-8"
+        >
 
           {/* LEFT */}
           <div>
@@ -32,7 +52,7 @@ export default function Sports() {
             Find your passion, build new skills and imbibe new life lessons on the playing field.
           </p>
 
-        </div>
+        </motion.div>
 
         {/* HERO IMAGE */}
         <div className="pt-8 sm:pt-4">
@@ -63,8 +83,11 @@ export default function Sports() {
         {/* ATHLETES */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 mt-6">
 
+          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={0} viewport={{ once: true, amount: 0.1 }}>
           <Athlete name="Varun Bais" desc="International Football Player" />
+          </motion.div>
 
+          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={1} viewport={{ once: true, amount: 0.1 }}>
           <Athlete
             name="Deepu Munim"
             desc={
@@ -74,12 +97,16 @@ export default function Sports() {
               </ul>
             }
           />
+          </motion.div>
 
+          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={2} viewport={{ once: true, amount: 0.1 }}>
           <Athlete
             name="Rishita Manas"
             desc="DAVV Inter-collegiate Lawn Tennis Tournament"
           />
+          </motion.div>
 
+          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={3} viewport={{ once: true, amount: 0.1 }}>
           <Athlete
             name="Modi Dhakad"
             desc={
@@ -90,6 +117,7 @@ export default function Sports() {
               </ul>
             }
           />
+          </motion.div>
 
         </div>
 

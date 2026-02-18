@@ -1,4 +1,18 @@
 import { MapPin, Phone, Mail, BookOpen } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 15 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+  }),
+};
 
 export default function Contact() {
   return (
@@ -8,12 +22,18 @@ export default function Contact() {
         <div className="max-w-6xl mx-auto">
 
           {/* TITLE */}
-          <div className="mb-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="mb-6"
+          >
             <h2 className="text-2xl sm:text-3xl font-semibold text-[#002147]">
               Contact Us
             </h2>
             <div className="w-16 h-[2px] bg-[#002147] mt-2"></div>
-          </div>
+          </motion.div>
 
           {/* CONTACT INFO */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 py-6">
@@ -43,7 +63,13 @@ export default function Contact() {
           </div>
 
           {/* CONTACT CARD */}
-          <div className="bg-[#F0EEEF] p-5 sm:p-10">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="bg-[#F0EEEF] p-5 sm:p-10"
+          >
 
             <h5 className="text-[28px] sm:text-[40px] font-normal text-[#002147] mb-4">
               Get in Touch
@@ -111,7 +137,7 @@ export default function Contact() {
 
             </form>
 
-          </div>
+          </motion.div>
         </div>
       </section>
 

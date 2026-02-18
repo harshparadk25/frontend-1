@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import icon1 from "../../assets/Images/icon1.svg";
 import icon2 from "../../assets/Images/icon2.svg";
 import icon3 from "../../assets/Images/icon3.svg";
@@ -39,13 +40,32 @@ export default function Incubation() {
     }
   ];
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1, y: 0,
+      transition: { duration: 0.35, delay: i * 0.06, ease: "easeOut" },
+    }),
+  };
+
   return (
     <section className="bg-[#F0EEEF] py-12 sm:py-16 md:py-20">
 
       <div className="max-w-7xl mx-auto px-6 sm:px-6">
 
         {/* TOP TEXT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start"
+        >
 
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl md:text-6xl font-medium text-[#002147] leading-tight">
@@ -64,13 +84,20 @@ export default function Incubation() {
             to build solutions that matter.
           </p>
 
-        </div>
+        </motion.div>
 
 
         {/* FEATURE CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-10">
 
-          <div className="bg-[#0CC2FE] text-[#002147] p-6 sm:p-8 md:p-10">
+          <motion.div
+            variants={cardVariant}
+            initial="hidden"
+            whileInView="visible"
+            custom={0}
+            viewport={{ once: true, amount: 0.1 }}
+            className="bg-[#0CC2FE] text-[#002147] p-6 sm:p-8 md:p-10"
+          >
             <h3 className="text-xl sm:text-2xl md:text-[32px] font-medium mb-3 leading-tight">
               Vibrant Entrepreneurial Ecosystem
             </h3>
@@ -78,9 +105,16 @@ export default function Incubation() {
               The Incubation Centre reflects IPS Academy’s commitment to holistic, future-oriented
               education - shaping graduates who think boldly, act responsibly and create meaningful impact.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="bg-[#FF7373] text-[#002147] p-6 sm:p-8 md:p-10">
+          <motion.div
+            variants={cardVariant}
+            initial="hidden"
+            whileInView="visible"
+            custom={1}
+            viewport={{ once: true, amount: 0.1 }}
+            className="bg-[#FF7373] text-[#002147] p-6 sm:p-8 md:p-10"
+          >
             <h3 className="text-xl sm:text-2xl md:text-[32px] font-medium mb-3 leading-tight">
               A Collaboration Across Disciplines
             </h3>
@@ -88,7 +122,7 @@ export default function Incubation() {
               Diverse minds from multiple disciplines and skillsets come together to build bold,
               relevant and real-world-ready ventures at the IPSA Incubation Centre.
             </p>
-          </div>
+          </motion.div>
 
         </div>
 
@@ -97,7 +131,15 @@ export default function Incubation() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 mt-10 sm:mt-12 md:mt-14">
 
           {features.map((f, i) => (
-            <div key={i} className="mt-2">
+            <motion.div
+              key={i}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              custom={i}
+              viewport={{ once: true, amount: 0.1 }}
+              className="mt-2"
+            >
 
               <img
                 src={f.icon}
@@ -114,7 +156,7 @@ export default function Incubation() {
                 {f.desc}
               </span>
 
-            </div>
+            </motion.div>
           ))}
 
         </div>
