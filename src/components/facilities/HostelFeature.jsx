@@ -23,21 +23,21 @@ export default function HostelFeatures() {
   return (
     <section className="py-12 sm:py-10 xs:py-8 mt-10">
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5">
 
         {/* heading */}
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
 
           <div>
-            <div className="bg-[#0CC2FE] text-[#002147] px-4 py-1 text-2xl sm:text-xl text-lg w-fit mb-2">
+            <div className="bg-[#0CC2FE] font-medium text-[#002147] px-4 py-1 text-3xl sm:text-xl text-lg w-fit mb-2">
               Hostel
             </div>
 
-            <h2 className="text-4xl sm:text-3xl text-2xl font-semibold text-[#002147] leading-snug">
+            <h2 className="text-4xl sm:text-6xl text-2xl font-medium text-[#002147] ">
               Discover a Home Away from Home
             </h2>
 
-            <div className="w-24 h-[2px] bg-[#002147] mt-2"></div>
+            <div className="w-44 h-[2px] bg-[#bb3d02] mt-2"></div>
           </div>
 
           <p className="text-[#3A3A3A] text-base sm:text-[15px] leading-relaxed">

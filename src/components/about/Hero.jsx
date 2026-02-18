@@ -11,7 +11,10 @@ export default function Hero({ data }) {
   const ctaLink = data?.cta_link || "#";
 
   return (
-    <section className="relative mb-20 w-full h-[60vh] min-h-[1020px] sm:min-h-[520px] xs:min-h-[480px]">
+    <section className="relative w-full h-[100vh] 
+                          max-[991px]:h-[60vh] 
+                          max-[576px]:h-[65vh] 
+                          pb-28 overflow-visible px-2">
 
       <img
         src={heroImage}
@@ -19,16 +22,27 @@ export default function Hero({ data }) {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="absolute bottom-0 left-0 transform translate-y-1/4 bg-[#E9E9E9] w-[50%] sm:w-[92%] xs:w-full max-w-2xl px-10 sm:px-6 xs:px-4 py-12 sm:py-8 xs:py-6">
+      <div className="absolute left-0 -bottom-12
+                        bg-[#E9E9E9]
+                        max-w-[637px]
+                        px-8 py-8
+                        shadow-lg
+                        max-[991px]:w-[75%] max-[991px]:px-6 max-[991px]:py-6 max-[991px]:-bottom-10
+                        max-[576px]:w-[90%] max-[576px]:px-5 max-[576px]:py-5 max-[576px]:-bottom-8">
 
-        <h1 className="text-[#0B2C4D] text-4xl md:text-5xl sm:text-3xl xs:text-2xl leading-tight font-medium max-w-3xl">
+        <h1 className="text-[#0B2C4D]
+                         text-[4rem]
+                         leading-tight md:leading-[60px] 
+                         font-medium
+                         max-[991px]:text-[2.2rem]
+                         max-[576px]:text-[1.3rem]">
           {description}
         </h1>
 
         {/* CTA button */}
         <a
           href={ctaLink}
-          className="mt-6 sm:mt-5 inline-flex items-center gap-3 border border-[#0B2C4D] text-[#0B2C4D] px-7 sm:px-5 py-3 sm:py-2.5 hover:bg-[#0B2C4D] hover:text-white transition text-base sm:text-sm"
+          className="mt-6 inline-flex items-center gap-3 border border-[#0B2C4D] text-[#0B2C4D] px-7 py-3 hover:bg-[#0B2C4D] hover:text-white transition"
         >
           {ctaText}
         </a>

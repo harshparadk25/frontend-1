@@ -29,10 +29,10 @@ export default function Programs() {
             </thead>
 
             {/* BODY */}
-            <tbody className="text-gray-700">
+            <tbody className="text-gray-700 bg-gray-100">
 
               <tr className="border-t">
-                <td className="p-3 sm:p-4 font-medium text-[#002147] whitespace-nowrap">
+                <td className="p-3 sm:p-4 font-medium   text-[#002147] whitespace-nowrap">
                   MBA (Core)
                 </td>
 

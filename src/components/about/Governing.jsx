@@ -36,30 +36,30 @@ export default function Governing() {
   ];
 
   return (
-    <section className="bg-[#F0EEEF] py-16 sm:py-12">
+    <section className="bg-[#F0EEEF] py-16">
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-4">
+      <div className="max-w-6xl mx-auto px-3">
 
         {/* Heading */}
-        <h3 className="text-4xl md:text-5xl sm:text-3xl font-semibold text-[#002147] leading-tight">
+        <h3 className="text-4xl md:text-[60px] font-medium text-[#002147]">
           Governing Body
         </h3>
 
-        <div className="h-[2px] w-48 sm:w-36 bg-[#FF7373] my-6 sm:my-5" />
+        <div className="h-[2px] w-60 bg-[#FF7373] my-3 mb-8" />
 
         {/* Governing Members */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 ">
           {leaders.map((m, i) => (
             <div key={i}>
               <img
                 src={m.img}
                 alt={m.name}
-                className="w-full h-[300px] sm:h-[260px] object-cover mb-3 rounded"
+                className="w-full h-[300px] object-cover mb-3"
               />
-              <div className="text-xl sm:text-lg font-medium text-[#002147]">
+              <div className="text-xl font-medium text-[#002147]">
                 {m.name}
               </div>
-              <div className="text-sm sm:text-xs text-gray-600">
+              <div className="text-sm text-gray-600">
                 {m.role}
               </div>
             </div>
@@ -67,14 +67,14 @@ export default function Governing() {
         </div>
 
         {/* Executive Members */}
-        <div className="pt-16 sm:pt-12">
-          <h5 className="text-3xl sm:text-2xl font-medium text-[#002147] mb-6 sm:mb-5">
+        <div className="pt-16">
+          <h5 className="text-3xl font-medium text-[#002147] mb-6">
             Executive Members
           </h5>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-[#3A3A3A] gap-y-3 sm:gap-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-[#3A3A3A]">
             {executiveMembers.map((name, i) => (
-              <div key={i} className="border-b border-[#D7D7D7] pb-3 text-xl sm:text-lg font-medium">
+              <div key={i} className="border-b border-[#D7D7D7] pb-3 text-xl font-medium">
                 {name}
               </div>
             ))}
@@ -82,18 +82,18 @@ export default function Governing() {
         </div>
 
         {/* Advisory Board */}
-        <div className="pt-16 sm:pt-12">
-          <h5 className="text-3xl sm:text-2xl font-medium text-[#002147] mb-6 sm:mb-5">
+        <div className="pt-16">
+          <h5 className="text-3xl font-medium text-[#002147] mb-6">
             Advisory Board
           </h5>
 
-          <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 sm:gap-5">
+          <div className="grid md:grid-cols-3 gap-6">
             {advisoryBoard.map((member, i) => (
               <div key={i} className="border-b border-[#D7D7D7] pb-3">
-                <div className="text-xl sm:text-lg font-medium text-[#3A3A3A]">
+                <div className="text-xl font-medium text-[#3A3A3A]">
                   {member.name}
                 </div>
-                <p className="text-base sm:text-sm font-medium text-[#3A3A3A]">
+                <p className="text-base font-medium text-[#3A3A3A]">
                   {member.desc}
                 </p>
               </div>

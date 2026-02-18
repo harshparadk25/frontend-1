@@ -25,7 +25,9 @@ export default function Placement() {
   const next = () =>
     setIndex((index + 1) % testimonials.length);
 
-  const t = testimonials[index];
+  const first = testimonials[index];
+const second = testimonials[(index + 1) % testimonials.length];
+
 
   return (
     <section id="placement" className="bg-[#f7f9fc] py-12 sm:py-14 md:py-16">
@@ -79,41 +81,48 @@ export default function Placement() {
 
         <div className="w-24 sm:w-32 h-[2px] bg-[#002147] mt-3 mb-8 sm:mb-10 mx-auto md:mx-0"></div>
 
-        <div className="relative max-w-2xl mx-auto px-6 sm:px-0">
+        <div className="relative max-w-5xl mx-auto px-6 sm:px-0">
 
-          <div className="bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow border">
+  {/* GRID: 1 on mobile, 2 on desktop */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <div className="flex items-center gap-3 sm:gap-4 mb-4">
-              <img
-                src={t.img}
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-[#002147]"
-              />
-              <div>
-                <h6 className="font-bold text-[#002147] text-sm sm:text-base">{t.name}</h6>
-                <span className="text-gray-500 text-xs sm:text-sm">{t.role}</span>
-              </div>
-            </div>
+    {[first, second].map((t, i) => (
+      <div key={i} className="bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow border">
 
-            <p className="text-gray-600 text-sm sm:text-base">{t.text}</p>
-
+        <div className="flex items-center gap-3 sm:gap-4 mb-4">
+          <img
+            src={t.img}
+            className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-[#002147]"
+          />
+          <div>
+            <h6 className="font-bold text-[#002147] text-sm sm:text-base">{t.name}</h6>
+            <span className="text-gray-500 text-xs sm:text-sm">{t.role}</span>
           </div>
-
-          {/* NAV BUTTONS */}
-          <button
-            onClick={prev}
-            className="absolute left-0 sm:-left-4 top-1/2 -translate-y-1/2 bg-[#002147] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full"
-          >
-            ‹
-          </button>
-
-          <button
-            onClick={next}
-            className="absolute right-0 sm:-right-4 top-1/2 -translate-y-1/2 bg-[#002147] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full"
-          >
-            ›
-          </button>
-
         </div>
+
+        <p className="text-gray-600 text-sm sm:text-base">{t.text}</p>
+
+      </div>
+    ))}
+
+  </div>
+
+  {/* NAV BUTTONS */}
+  <button
+    onClick={prev}
+    className="absolute left-0 sm:-left-4 top-1/2 -translate-y-1/2 bg-[#002147] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full z-10"
+  >
+    ‹
+  </button>
+
+  <button
+    onClick={next}
+    className="absolute right-0 sm:-right-4 top-1/2 -translate-y-1/2 bg-[#002147] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full z-10"
+  >
+    ›
+  </button>
+
+</div>
 
       </div>
     </section>

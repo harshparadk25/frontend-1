@@ -1,4 +1,9 @@
 import logo from "../../assets/logos/logo-white.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Footer() {
 
@@ -35,16 +40,16 @@ export default function Footer() {
 
   return (
 
-<footer className="bg-[#002147] text-white pt-14 pb-10 text-[14px]">
+<footer className="bg-[#002147] text-white pt-14 pb-10 ">
 
-  <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-10">
+  <div className="max-w-6xl mx-auto px-3 ">
 
     {/* ================= TOP COLLEGE GRID ================= */}
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-x-8 gap-y-10">
 
       {sections.map((sec,i)=>(
         <div key={i}>
-          <h6 className="text-[#00BFFF] font-semibold mb-3">
+          <h6 className="text-[#00BFFF] font-medium mb-3">
             {sec.title}
           </h6>
 
@@ -67,17 +72,19 @@ export default function Footer() {
 <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between mt-12 gap-10">
 
   {/* LOGO */}
+  <div className="w-[40%]">
   <img
     src={logo}
-    className="h-[80px] lg:h-[90px] object-contain mx-auto lg:mx-0"
+    className="h-[80px] lg:h-[96px] object-contain mx-auto lg:mx-0"
     alt="IPS Logo"
   />
+  </div>
 
   {/* RIGHT SIDE */}
-  <div className="flex-1 flex flex-col items-center lg:items-end w-full">
+  <div className=" flex flex-col items-center lg:items-start w-full">
 
     {/* NAV */}
-    <ul className="flex flex-wrap justify-center lg:justify-end gap-6 sm:gap-8 md:gap-10 text-[15px] sm:text-[16px]">
+    <ul className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-8 md:gap-[55px] text-[15px] sm:text-[16px]">
       {navLinks.map((n,i)=>(
         <li key={i}>
           <a href="#" className="hover:text-[#00BFFF] transition">
@@ -93,24 +100,24 @@ export default function Footer() {
     {/* CONTACT */}
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center lg:text-right">
 
-      <div className="flex gap-3 justify-center lg:justify-end">
-        <span className="text-[#FF6B6B]">📍</span>
-        <p>
+      <div className="flex gap-3 justify-center lg:justify-start">
+        <span className="text-[#ff7373] text-[20px]"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>
+        <p className="text-left">
           IPS Academy, AB Road,<br/>
           Rajendra Nagar, Indore (M.P)
         </p>
       </div>
 
-      <div className="flex gap-3 justify-center lg:justify-end">
-        <span className="text-[#FF6B6B]">📞</span>
-        <p>
+      <div className="flex gap-3 justify-center lg:justify-start">
+        <span className="text-[#ff7373] text-[20px]"><FontAwesomeIcon icon={faPhone} /></span>
+        <p className="text-left">
           +91 92294 98055<br/>
           +91 99778 35161
         </p>
       </div>
 
-      <div className="flex gap-3 justify-center lg:justify-end">
-        <span className="text-[#FF6B6B]">✉️</span>
+      <div className="flex gap-3 justify-center lg:justify-start">
+        <span className="text-[#ff7373] text-[20px]"><FontAwesomeIcon icon={faEnvelope} /></span>
         <a href="mailto:info@ipsacademy.org" className="hover:underline">
           info@ipsacademy.org
         </a>

@@ -4,7 +4,7 @@ export default function Directors(){
     <div className="bg-[#f7f4f4] h-full">
 
       {/* Header */}
-      <div className={`px-6 sm:px-4 py-2 font-medium text-[#002147] text-[18px] sm:text-[16px] ${color}`}>
+      <div className={`px-6 py-2 font-medium text-[#002147] text-[18px] ${color}`}>
         {title}
       </div>
 
@@ -12,9 +12,9 @@ export default function Directors(){
       {items.map((t,i)=>(
         <div
           key={i}
-          className="bg-[#F0EEEF] px-6 sm:px-4 py-5 sm:py-4 mb-[3px]"
+          className="bg-[#F0EEEF] px-6 py-5 mb-[3px]"
         >
-          <p className="text-[#3A3A3A] text-[18px] sm:text-[15px] leading-[22px] sm:leading-[20px] font-normal whitespace-pre-line">
+          <p className="text-[#3A3A3A] text-[18px] leading-[22px] font-normal whitespace-pre-line">
             {t}
           </p>
         </div>
@@ -24,19 +24,19 @@ export default function Directors(){
   )
 
   return(
-    <section className="py-16 sm:py-12">
+    <section className="py-16">
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-4">
+      <div className="max-w-6xl mx-auto px-3">
 
         {/* Heading */}
-        <h3 className="text-4xl md:text-5xl sm:text-3xl font-semibold text-[#002147] leading-tight">
+        <h3 className="text-4xl md:text-[60px] font-medium text-[#002147]">
           Institute Directors
         </h3>
 
-        <div className="h-[2px] w-56 sm:w-40 bg-[#FF7373] my-6 sm:my-5"/>
+        <div className="h-[2px] w-60 bg-[#FF7373] my-3 mb-8"/>
 
         {/* Cards */}
-        <div className="grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-8 sm:gap-5">
+        <div className="grid lg:grid-cols-3 gap-8">
 
           {card(
             "College / Institute",

@@ -14,16 +14,13 @@ export default function Hero({ data }) {
   const videoUrl = data?.cta_link || "";
 
   return (
-    <div className="w-full">
+    <div className="w-full px-2">
 
       {/* HERO */}
-      <section className="relative w-full h-[960px] 
-                          max-[1400px]:h-[820px]
-                          max-[1200px]:h-[720px]
+      <section className="relative w-full h-[100vh] 
                           max-[991px]:h-[60vh] 
-                          max-[768px]:h-[68vh]
                           max-[576px]:h-[65vh] 
-                          pb-28 max-[768px]:pb-24 max-[576px]:pb-20 overflow-visible">
+                          pb-28 overflow-visible">
 
         {/* Background */}
         <img
@@ -35,21 +32,17 @@ export default function Hero({ data }) {
         {/* SMALLER OVERLAY BOX */}
         <div className="absolute left-0 -bottom-12
                         bg-[#E9E9E9]
-                        w-[60%] max-w-lg
+                        max-w-[637px]
                         px-8 py-8
                         shadow-lg
-                        max-[1200px]:w-[65%]
                         max-[991px]:w-[75%] max-[991px]:px-6 max-[991px]:py-6 max-[991px]:-bottom-10
-                        max-[768px]:w-[85%] max-[768px]:left-4 max-[768px]:-bottom-9
-                        max-[576px]:w-[90%] max-[576px]:px-5 max-[576px]:py-5 max-[576px]:left-1/2 max-[576px]:-translate-x-1/2 max-[576px]:-bottom-8">
+                        max-[576px]:w-[90%] max-[576px]:px-5 max-[576px]:py-5 max-[576px]:-bottom-8">
 
           <h1 className="text-[#0B2C4D]
-                         text-[3rem]
-                         leading-tight
+                         text-[4rem]
+                         leading-tight md:leading-[60px] 
                          font-medium
-                         max-[1200px]:text-[2.6rem]
                          max-[991px]:text-[2.2rem]
-                         max-[768px]:text-[1.8rem]
                          max-[576px]:text-[1.3rem]">
             {description}
           </h1>
@@ -59,8 +52,7 @@ export default function Hero({ data }) {
             className="mt-5 flex items-center gap-3
                        border border-[#0B2C4D]
                        text-[#0B2C4D]
-                       px-6 py-2.5
-                       max-[576px]:px-5 max-[576px]:py-2
+                       px-5 py-2 bg-[#fff]
                        transition-all duration-300
                        hover:-translate-y-1 hover:scale-105
                        hover:shadow-[0_10px_25px_rgba(0,0,0,0.25)]">
@@ -73,19 +65,18 @@ export default function Hero({ data }) {
         {/* VIDEO MODAL */}
         {showVideo && videoUrl && (
           <div
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-[999] px-4"
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-[999]"
             onClick={() => setShowVideo(false)}
           >
             <div
-              className="w-[90%] max-w-[900px] relative max-[576px]:w-full"
+              className="w-[90%] max-w-[900px] relative"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setShowVideo(false)}
                 className="absolute -top-3 -right-3 bg-[#002147] text-white
                            rounded-full w-[32px] h-[32px]
-                           flex items-center justify-center shadow-lg
-                           max-[576px]:w-[28px] max-[576px]:h-[28px]">
+                           flex items-center justify-center shadow-lg z-[99]">
                 ✕
               </button>
 

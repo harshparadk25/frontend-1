@@ -39,7 +39,7 @@ export default function FuturePlan() {
   return (
     <section className="bg-[#F0EEEF] py-12 sm:py-10 xs:py-8">
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-5">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-5">
 
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 items-start">
 
@@ -47,12 +47,12 @@ export default function FuturePlan() {
           <div>
 
             {/* badge */}
-            <div className="bg-[#0CC2FE] text-[#002147] px-4 py-1 text-2xl sm:text-xl text-lg w-fit mb-2">
+            <div className="bg-[#0CC2FE] text-[#002147] px-4 py-1 text-2xl sm:text-xl text-lg w-fit mb-2 text-medium">
               NCC
             </div>
 
             {/* title */}
-            <h2 className="text-3xl sm:text-2xl text-xl font-semibold text-[#002147]">
+            <h2 className="text-2xl sm:text-6xl text-xl font-medium text-[#002147]">
               Empower Your Future
             </h2>
 

@@ -42,13 +42,13 @@ export default function Incubation() {
   return (
     <section className="bg-[#F0EEEF] py-12 sm:py-16 md:py-20">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6">
 
         {/* TOP TEXT */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
 
           <div>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl md:text-6xl font-semibold text-[#002147] leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl md:text-6xl font-medium text-[#002147] leading-tight">
               An infrastructure designed to make
               <br />
               <span className="inline-block border-b-2 border-[#FF7373] pb-1">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/logos/logo.png";
 
 export default function Navbar(){
@@ -8,57 +8,83 @@ export default function Navbar(){
   const [collegesOpen,setCollegesOpen]=useState(false);
   const [studentOpen,setStudentOpen]=useState(false);
 
+  const location = useLocation();
+  const pathParts = location.pathname.split("/");
+
+  const activeCollege =
+    pathParts[1] && !["about","contact","placements","facilities"].includes(pathParts[1])
+      ? pathParts[1]
+      : "ipsa";
+
   const closeAll=()=>{
     setMenuOpen(false);
     setCollegesOpen(false);
     setStudentOpen(false);
   }
 
-  const linkClass=({isActive}) =>
-    `relative py-2 transition-colors
-     ${isActive?"text-red-500":"text-gray-900"}
-     hover:text-red-500`;
+  /* ✅ ACTIVE LINK STYLE WITH ORANGE UNDERLINE */
+  const linkClass = ({ isActive }) =>
+  `relative py-2 transition-colors
+   ${isActive ? "text-red-500" : "text-gray-900"}
+   hover:text-red-500
+   after:absolute after:left-0 after:-bottom-1 after:h-[3px] after:w-full
+   after:bg-orange-500 after:transition-transform after:duration-300
+   ${isActive ? "after:scale-x-100" : "after:scale-x-0"}
+   after:origin-left`;
+
+
+  const dropdownLink=({isActive}) =>
+    `px-4 py-2 transition-colors
+     ${isActive?"text-red-500":"text-gray-800"}
+     hover:bg-red-500 hover:text-white`;
+
+  const studentLinks = [
+    ["Cultural Activities","activities"],
+    ["Event Celebration","events"],
+    ["Workshops","workshop"]
+  ];
 
   return(
 
 <header className="bg-white sticky top-0 z-50 shadow-sm">
 
-  <div className="w-full px-8 lg:px-14 py-4 flex items-center">
+  <div className="max-w-[1440px] mx-auto h-[96px] px-6 lg:px-14 flex items-center justify-between">
 
     {/* LOGO */}
-    <div className="flex-shrink-0">
-      <img src={logo} className="h-[60px] lg:h-[72px] object-contain"/>
+    <div className="flex-shrink-0 ml-[-66px]">
+      <img src={logo} className="h-[60px] lg:h-[72px] object-contain" alt="logo"/>
     </div>
 
-    {/* RIGHT SIDE */}
-    <div className="flex-1 flex justify-end">
+    {/* HAMBURGER */}
+    <button
+      className="lg:hidden flex flex-col gap-1"
+      onClick={()=>setMenuOpen(!menuOpen)}
+    >
+      <span className="w-6 h-[2px] bg-gray-800"/>
+      <span className="w-6 h-[2px] bg-gray-800"/>
+      <span className="w-6 h-[2px] bg-gray-800"/>
+    </button>
 
-      {/* HAMBURGER */}
-      <button
-        className="lg:hidden flex flex-col gap-1 ml-auto"
-        onClick={()=>setMenuOpen(!menuOpen)}
-      >
-        <span className="w-6 h-[2px] bg-gray-800"/>
-        <span className="w-6 h-[2px] bg-gray-800"/>
-        <span className="w-6 h-[2px] bg-gray-800"/>
-      </button>
+    {/* MENU */}
+    <nav className={`absolute lg:static top-full left-0 w-full lg:w-auto
+        bg-white lg:bg-transparent
+        flex flex-col lg:flex-row
+        lg:items-center gap-5 lg:gap-8
+        px-6 lg:px-0 py-6 lg:py-0
+        border-t lg:border-none
+        ${menuOpen?"flex":"hidden lg:flex"}`}>
 
-      {/* MENU */}
-      <nav className={`absolute lg:static top-full left-0 w-full lg:w-auto
-          bg-white lg:bg-transparent
-          flex flex-col lg:flex-row
-          lg:items-center gap-5 lg:gap-8
-          px-6 lg:px-0 py-6 lg:py-0
-          border-t lg:border-none
-          ${menuOpen?"flex":"hidden lg:flex"}`}>
+      {/* HOME */}
+      <NavLink to="/" className={linkClass} onClick={closeAll}>
+        Home
+      </NavLink>
 
-      <NavLink to="/" className={linkClass} onClick={closeAll}>Home</NavLink>
-
+      {/* ABOUT */}
       <NavLink to="/about" className={linkClass} onClick={closeAll}>
         About Us
       </NavLink>
 
-      {/* COLLEGES DROPDOWN */}
+      {/* COLLEGES */}
       <div
         className="relative"
         onMouseEnter={()=>setCollegesOpen(true)}
@@ -66,7 +92,7 @@ export default function Navbar(){
       >
         <button
           onClick={()=>setCollegesOpen(!collegesOpen)}
-          className="py-2 text-gray-900 hover:text-red-500"
+          className="py-2 font-medium text-gray-900 hover:text-red-500"
         >
           Colleges ▾
         </button>
@@ -77,21 +103,21 @@ export default function Navbar(){
           ${collegesOpen?"block":"hidden"}`}>
 
           {[
-            ["IBMR","/ibmr"],
-            ["ISR","/isr"],
-            ["COC","/coc"],
-            ["COL","/col"],
-            ["SOC","/soc"],
-            ["IFT","/ift"],
-            ["IOHM","/iohm"],
-            ["COE","/coe"],
-            ["DOSS","/doss"],
+            ["IBMR","college/ibmr"],
+            ["ISR","college/isr"],
+            ["COC","college/coc"],
+            ["COL","college/col"],
+            ["SOC","college/soc"],
+            ["IFT","college/ift"],
+            ["IOHM","college/iohm"],
+            ["COE","college/coe"],
+            ["DOSS","college/doss"],
           ].map(([name,path])=>(
             <NavLink
               key={path}
-              to={path}
+              to={`/${path}`}
               onClick={closeAll}
-              className="px-4 py-2 hover:bg-red-500 hover:text-white"
+              className={dropdownLink}
             >
               {name}
             </NavLink>
@@ -100,11 +126,12 @@ export default function Navbar(){
         </div>
       </div>
 
+      {/* PLACEMENTS */}
       <NavLink to="/placements" className={linkClass} onClick={closeAll}>
         Placements
       </NavLink>
 
-      {/* STUDENT LIFE DROPDOWN (NEW) */}
+      {/* STUDENT LIFE */}
       <div
         className="relative"
         onMouseEnter={()=>setStudentOpen(true)}
@@ -112,7 +139,7 @@ export default function Navbar(){
       >
         <button
           onClick={()=>setStudentOpen(!studentOpen)}
-          className="py-2 text-gray-900 hover:text-red-500"
+          className="py-2 font-medium text-gray-900 hover:text-red-500"
         >
           Student Life ▾
         </button>
@@ -122,34 +149,31 @@ export default function Navbar(){
           flex flex-col
           ${studentOpen?"block":"hidden"}`}>
 
-          <NavLink to="/activities" onClick={closeAll}
-            className="px-4 py-2 hover:bg-red-500 hover:text-white">
-            Cultural Activities
-          </NavLink>
-
-          <NavLink to="/events" onClick={closeAll}
-            className="px-4 py-2 hover:bg-red-500 hover:text-white">
-            Event Celebration
-          </NavLink>
-
-          <NavLink to="/workshop" onClick={closeAll}
-            className="px-4 py-2 hover:bg-red-500 hover:text-white">
-            Workshops
-          </NavLink>
+          {studentLinks.map(([name,slug])=>(
+            <NavLink
+              key={slug}
+              to={`/${activeCollege}/studentlife/${slug}`}
+              onClick={closeAll}
+              className={dropdownLink}
+            >
+              {name}
+            </NavLink>
+          ))}
 
         </div>
       </div>
 
+      {/* FACILITIES */}
       <NavLink to="/facilities" className={linkClass} onClick={closeAll}>
         Facilities
       </NavLink>
 
+      {/* CONTACT */}
       <NavLink to="/contact" className={linkClass} onClick={closeAll}>
         Contact Us
       </NavLink>
 
     </nav>
-    </div>
 
   </div>
 

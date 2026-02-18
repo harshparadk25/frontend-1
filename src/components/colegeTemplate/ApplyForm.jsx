@@ -7,7 +7,7 @@ export default function ApplyForm() {
         {/* LEFT */}
         <div className="text-center lg:text-left">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium">
-            Apply for <span className="text-yellow-400">Admission 2026</span>
+            Apply for Admission 2026
             <br />
             and Shape Your Future
           </h2>

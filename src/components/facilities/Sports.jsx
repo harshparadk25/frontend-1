@@ -5,7 +5,7 @@ export default function Sports() {
   return (
     <section className="py-10 mt-20 sm:mt-14 mt-10">
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5">
 
         {/* ---------- INTRO SECTION ---------- */}
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-start mb-8">
@@ -17,11 +17,11 @@ export default function Sports() {
               Hostel
             </div>
 
-            <h2 className="text-[34px] md:text-[42px] sm:text-[30px] text-[26px] font-medium text-[#002147] leading-snug">
+            <h2 className="text-[44px] md:text-[52px] sm:text-[40px] text-[26px] font-medium text-[#002147] leading-snug">
               Your Playground for Success
             </h2>
 
-            <div className="w-[120px] h-[3px] bg-[#FFC73E] mt-2"></div>
+            <div className="w-[120px] h-[3px] bg-[#e99503] mt-2"></div>
 
           </div>
 
@@ -35,10 +35,10 @@ export default function Sports() {
         </div>
 
         {/* HERO IMAGE */}
-        <div className="pt-10 sm:pt-8">
+        <div className="pt-8 sm:pt-4">
           <img
             src={sportsHero}
-            className="w-full min-h-[480px] max-h-[480px] md:min-h-[420px] md:max-h-[420px] sm:min-h-[320px] sm:max-h-[320px] min-h-[260px] max-h-[260px] object-cover"
+            className="w-full min-h-[500px] max-h-[500px] md:min-h-[420px] md:max-h-[420px] sm:min-h-[320px] sm:max-h-[320px] min-h-[260px] max-h-[260px] object-cover"
           />
 
           {/* CAPTION BOX */}
@@ -56,7 +56,7 @@ export default function Sports() {
         </div>
 
         {/* TITLE */}
-        <h5 className="text-[32px] md:text-[30px] sm:text-[26px] text-[24px] text-[#002147] font-medium mt-6">
+        <h5 className="text-[32px] md:text-[30px] sm:text-[26px] text-[24px] text-[#002147] font-medium mt-14">
           The Sportstars of IPS
         </h5>
 

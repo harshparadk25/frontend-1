@@ -41,37 +41,27 @@ export default function Leadership({ data }) {
     : defaultLeaders;
 
   return (
-    <section className="py-16 sm:py-12">
+    <section className="py-16">
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-4">
+      <div className="max-w-6xl mx-auto px-3">
 
-        <h3 className="text-4xl md:text-5xl sm:text-3xl font-semibold text-[#002147] leading-tight">
+        <h3 className="text-4xl md:text-[60px] font-medium text-[#002147]">
           {title}
         </h3>
 
-        <div className="h-[2px] w-60 sm:w-40 bg-[#FF7373] my-6 sm:my-5" />
+        <div className="h-[2px] w-60 bg-[#FF7373] my-3 mb-7" />
 
         {leaders.map((l, i) => (
-          <div key={i} className="bg-[#F0EEEF] p-8 sm:p-5 mb-8 sm:mb-6">
+          <div key={i} className="bg-[#F0EEEF] p-12 mb-8 mt-10">
 
-            <div className={`grid md:grid-cols-2 gap-8 sm:gap-6 items-center ${i === 1 ? 'md:[&>*:first-child]:order-2' : ''}`}>
+            <div className={`grid md:grid-cols-2 gap-8 items-center ${i === 1 ? 'md:[&>*:first-child]:order-2' : ''}`}>
 
-              <img
-                src={l.img}
-                alt={l.name}
-                className="w-full max-w-[400px] sm:max-w-[320px] mx-auto"
-              />
+              <img src={l.img} alt={l.name} className="w-full max-w-[400px] " />
 
-              <div className="text-center md:text-left">
-                <p className="text-gray-700 text-base sm:text-[15px]">
-                  {l.text}
-                </p>
-                <div className="mt-4 font-semibold text-[#002147] text-lg sm:text-base">
-                  {l.name}
-                </div>
-                <div className="text-gray-500 text-sm sm:text-xs">
-                  {l.role}
-                </div>
+              <div>
+                <p className="text-gray-700">{l.text}</p>
+                <div className="mt-4 font-semibold text-[#002147]">{l.name}</div>
+                <div className="text-gray-500">{l.role}</div>
               </div>
 
             </div>

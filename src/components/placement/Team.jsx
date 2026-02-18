@@ -61,9 +61,9 @@ export default function Team({ data }) {
   const expert = experts[index];
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-white">
+    <section className="py-12 sm:py-16 md:pt-10 bg-white">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
+      <div className="max-w-7xl mx-auto pt-4 sm:px-6 grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
 
         {/* LEFT TITLE */}
         <div>
@@ -71,8 +71,10 @@ export default function Team({ data }) {
             {sectionTitle}
           </p>
 
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-[#002147] mt-2 leading-tight">
-            With You at Every Step
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium text-[#002147] mt-2 leading-tight">
+            With You at 
+            <br />
+            Every Step
           </h2>
 
           <div className="h-[2px] w-32 sm:w-40 bg-[#FF7373] mt-3 sm:mt-4"/>
@@ -80,11 +82,11 @@ export default function Team({ data }) {
 
 
         {/* RIGHT CAROUSEL */}
-        <div className="lg:col-span-2 relative">
+        <div className="lg:col-span-2 relative translate-y-0 lg:translate-y-2/5 mt-[-150px]">
 
-          <div className="bg-white shadow-[8px_8px_30px_2px_#00000026] p-4 sm:p-6">
+          <div className="bg-white shadow-[8px_8px_30px_2px_#00000026] p-2 sm:p-6">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 items-center">
 
               <img
                 src={expert.img}

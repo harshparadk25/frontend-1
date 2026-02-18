@@ -45,7 +45,7 @@ your heart while delighting your tastebuds.`,
 export default function FacilityBlocks() {
   return (
     <section className="py-[80px] sm:py-[60px] xs:py-[40px]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 py-4">
 
         {blocks.map((b, i) => (
           <div
@@ -63,11 +63,11 @@ export default function FacilityBlocks() {
                 {b.badge}
               </div>
 
-              <h2 className="text-3xl sm:text-2xl text-xl text-[#002147] font-semibold whitespace-pre-line leading-snug">
+              <h2 className="text-3xl sm:text-6xl text-xl text-[#002147] font-medium whitespace-pre-line leading-snug">
                 {b.title}
               </h2>
 
-              <div className="w-24 h-[2px] bg-[#002147] mt-2"></div>
+              <div className="w-44 h-[2px] bg-[#fcb001] mt-2"></div>
 
               <p className="text-[#3A3A3A] mt-5 mb-2 text-base sm:text-[15px] leading-relaxed">
                 {b.text}

@@ -60,8 +60,7 @@ export default function Facilities() {
           </h5>
 
           <p className="text-gray-400 text-sm sm:text-base">
-            IBMR is more than a campus. It is a thriving community to explore,
-            learn and grow with like-minded peers.
+            IBMR is more than a campus. It is a thriving community to explore, learn and grow with like-minded peers. Our vibrant campus offers you the space to discover and unleash your true potential.
           </p>
         </div>
 

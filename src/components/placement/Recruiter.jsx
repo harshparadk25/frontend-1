@@ -33,12 +33,12 @@ export default function Recruiters() {
   ];
 
   return (
-    <section className="bg-[#F0EEEF] pt-16 sm:pt-20 md:pt-28 pb-16 sm:pb-20 md:pb-24">
+    <section className="bg-[#F0EEEF] pt-16 sm:pt-20 md:pt-38 pb-16 sm:pb-20 md:pb-24">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* TITLE */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[#002147] leading-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-[#002147] leading-tight">
           Proven Placement Record with <br /> 500+ Recruiters
         </h2>
 
@@ -74,7 +74,7 @@ export default function Recruiters() {
             <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-6 sm:gap-8">
 
               <div className="flex items-center gap-3">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#002147]">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-medium text-[#002147]">
                   1904
                 </div>
                 <div className="text-[#002147] font-medium text-sm sm:text-base">
@@ -85,7 +85,7 @@ export default function Recruiters() {
               <div className="hidden md:block w-[1px] h-14 bg-white" />
 
               <div className="flex items-center gap-3">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#002147]">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-medium text-[#002147]">
                   563
                 </div>
                 <div className="text-[#002147] font-medium leading-tight text-sm sm:text-base">
