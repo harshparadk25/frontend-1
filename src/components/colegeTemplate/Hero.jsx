@@ -1,6 +1,11 @@
-import activitiesImg from "../../assets/Images/activities.jpg";
+import { resolveImageUrl } from "../../services/api";
 
-export default function Hero() {
+export default function Hero({ data }) {
+  const heroImage = data.images?.[0] ? resolveImageUrl(data.images[0]) : "";
+  const description = data.description || "";
+  const ctaText = data.cta_text || "Explore Now";
+  const ctaLink = data.cta_link || "#";
+
   return (
     <section className="
           relative mb-12 sm:mb-16 lg:mb-20
@@ -11,7 +16,7 @@ export default function Hero() {
     
           {/* Background image */}
           <img
-            src={activitiesImg}
+            src={heroImage}
             alt="Hero"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -32,29 +37,32 @@ export default function Hero() {
               text-[#0B2C4D]
               text-xl sm:text-2xl md:text-3xl lg:text-6xl
               leading-tight font-medium
+              whitespace-pre-line
             ">
-              Big career goals?
-              <br />
-               Make them real at 
-               <br />
-               IBMR
+              {description}
             </h1>
     
             {/* CTA button */}
-            <button
-              className="mt-4 sm:mt-5 md:mt-6
-                   flex items-center gap-3
-                   border border-[#0B2C4D]
-                   text-[#0B2C4D]
-                   px-4 sm:px-5 md:px-6
-                   py-2 sm:py-2.5 md:py-3
-                   text-sm sm:text-base
-                   font-medium
-                   hover:bg-[#0B2C4D] hover:text-white
-                   transition duration-300"
+            <a
+              href={ctaLink}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Explore Now
-            </button>
+              <button
+                className="mt-4 sm:mt-5 md:mt-6
+                     flex items-center gap-3
+                     border border-[#0B2C4D]
+                     text-[#0B2C4D]
+                     px-4 sm:px-5 md:px-6
+                     py-2 sm:py-2.5 md:py-3
+                     text-sm sm:text-base
+                     font-medium
+                     hover:bg-[#0B2C4D] hover:text-white
+                     transition duration-300"
+              >
+                {ctaText}
+              </button>
+            </a>
     
           </div>
     

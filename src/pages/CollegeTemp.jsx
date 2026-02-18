@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchCollegePageData } from "../services/api";
 import Hero from "../components/colegeTemplate/Hero";
 import About from "../components/colegeTemplate/About";
 import Advantage from "../components/colegeTemplate/Advantage";
@@ -10,18 +13,68 @@ import ApplyForm from "../components/colegeTemplate/ApplyForm";
 import Recruiters from "../components/colegeTemplate/Recruiters";
 
 export default function IbmrPage() {
+  const { collegeSlug } = useParams();
+  const [sections, setSections] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+
+    fetchCollegePageData(collegeSlug, "home")
+      .then((data) => {
+        if (!cancelled) {
+          setSections(data.sections || {});
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err.message || "Failed to load data");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => { cancelled = true; };
+  }, [collegeSlug]);
+
+  if (loading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#002147]"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center text-red-500">
+        {error}
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
-      <Hero />
-      <About />
-      <Advantage />
-      <Programs />
-      <Facilities />
-      <Placement />
+      {sections.hero && <Hero data={sections.hero} />}
+      {sections.about_ibmr && (
+        <About
+          about={sections.about_ibmr}
+          features={sections.campus_to_business_boardroom}
+        />
+      )}
+      {sections.experience_learn && <Advantage data={sections.experience_learn} />}
+      {sections.programmed_offered && <Programs data={sections.programmed_offered} />}
+      {sections.facilities && <Facilities data={sections.facilities} />}
+      <Placement
+        placement={sections.placement}
+        testimonials={sections.testimonials}
+      />
       <Faculty />
       <Admission />
       <ApplyForm />
-      <Recruiters />
+      {sections.recruiter && <Recruiters data={sections.recruiter} />}
     </div>
   );
 }

@@ -1,10 +1,13 @@
-export default function Programs() {
+export default function Programs({ data }) {
+  const title = data?.title || "Programmes Offered";
+  const programs = data?.programs || [];
+
   return (
     <section id="courses" className="py-12 sm:py-14 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         <h2 className="text-[#002147] text-2xl sm:text-3xl md:text-5xl font-medium text-center md:text-left">
-          Programmes Offered
+          {title}
         </h2>
 
         <div className="w-24 sm:w-32 h-[2px] bg-[#002147] mt-3 mb-8 sm:mb-10 mx-auto md:mx-0"></div>
@@ -31,62 +34,21 @@ export default function Programs() {
             {/* BODY */}
             <tbody className="text-gray-700 bg-gray-100">
 
-              <tr className="border-t">
-                <td className="p-3 sm:p-4 font-medium   text-[#002147] whitespace-nowrap">
-                  MBA (Core)
-                </td>
+              {programs.map((program, idx) => (
+                <tr key={idx} className="border-t">
+                  <td className="p-3 sm:p-4 font-medium text-[#002147] whitespace-nowrap align-top">
+                    {program.name}
+                  </td>
 
-                <td className="p-3 sm:p-4 bg-gray-100">
-                  Build a strong foundation in business leadership with IBMR’s MBA (Core).
-                  Master fundamentals, practical skills and critical thinking.
+                  <td className="p-3 sm:p-4 bg-gray-100 whitespace-pre-line">
+                    {program.details}
+                  </td>
 
-                  <br /><br />
-
-                  <strong>Program Highlights:</strong>
-                  <ul className="list-disc ml-6 mt-2">
-                    <li>Interactive problem-solving classes</li>
-                    <li>Training in analytics & leadership</li>
-                    <li>Dual specialization options</li>
-                  </ul>
-
-                  <br />
-
-                  <strong>Career Pathways:</strong> Leadership roles & entrepreneurship.
-                </td>
-
-                <td className="p-3 sm:p-4 bg-gray-100">
-                  Graduation with minimum 50% marks and CMAT score.
-                </td>
-              </tr>
-
-              <tr className="border-t">
-                <td className="p-3 sm:p-4 font-medium text-[#002147] whitespace-nowrap">
-                  MBA (International Business)
-                </td>
-
-                <td className="p-3 sm:p-4 bg-gray-100">
-                  Expertise in international sales, trade, logistics and global markets.
-
-                  <br /><br />
-
-                  <strong>Program Highlights:</strong>
-                  <ul className="list-disc ml-6 mt-2">
-                    <li>Global trade policies</li>
-                    <li>Cross-cultural management</li>
-                    <li>Real-world projects</li>
-                  </ul>
-
-                  <br />
-
-                  <strong>Career Pathways:</strong> Global trade, MNC roles, supply chain.
-                </td>
-
-                <td className="p-3 sm:p-4 bg-gray-100">
-                  Graduation with minimum 50% marks and CMAT score.
-                </td>
-              </tr>
-
-              {/* ADD remaining programs same way */}
+                  <td className="p-3 sm:p-4 bg-gray-100 whitespace-pre-line">
+                    {program.eligibility}
+                  </td>
+                </tr>
+              ))}
 
             </tbody>
 

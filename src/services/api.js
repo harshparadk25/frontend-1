@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_BASE = "http://165.22.223.163:7777/api/ipsa";
+const SERVER_BASE = "http://165.22.223.163:7777/api";
 const MEDIA_BASE = "http://165.22.223.163:7777";
 
 const api = axios.create({
@@ -13,6 +14,17 @@ const api = axios.create({
  */
 export async function fetchPageData(pageName) {
     const { data } = await api.get(`/pages/${pageName}`);
+    return data;
+}
+
+/**
+ * Fetch page data for a specific college by slug and page name.
+ * e.g. fetchCollegePageData("ibmr", "home")
+ */
+export async function fetchCollegePageData(collegeSlug, pageName) {
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/pages/${pageName}`, {
+        headers: { accept: "application/json" },
+    });
     return data;
 }
 
