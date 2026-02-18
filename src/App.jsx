@@ -1,21 +1,29 @@
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { lazy, Suspense } from "react"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Footer from "./components/common/Footer"
-import Home from "./pages/Home"
-import Contact from "./pages/Contact"
 import Navbar from "./components/common/Header"
-import FacilitiesPage from "./pages/Facilities"
-import StudentLife from "./pages/StudentLife"
-import Placements from "./pages/Placement"
-import AboutPage from "./pages/About"
-import CollegeTemp from "./pages/CollegeTemp"
-import { Navigate } from "react-router-dom"
+
+const Home = lazy(() => import("./pages/Home"))
+const Contact = lazy(() => import("./pages/Contact"))
+const FacilitiesPage = lazy(() => import("./pages/Facilities"))
+const StudentLife = lazy(() => import("./pages/StudentLife"))
+const Placements = lazy(() => import("./pages/Placement"))
+const AboutPage = lazy(() => import("./pages/About"))
+const CollegeTemp = lazy(() => import("./pages/CollegeTemp"))
+
+const PageLoader = () => (
+  <div className="flex items-center justify-center h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#002147] border-t-transparent" />
+  </div>
+)
 
 function App() {
   return (
     <Router>
       <Navbar />
 
+      <Suspense fallback={<PageLoader />}>
       <Routes>
 
         {/* DEFAULT REDIRECT */}
@@ -31,6 +39,7 @@ function App() {
         <Route path="/:collegeSlug" element={<CollegeTemp />} />
 
       </Routes>
+      </Suspense>
 
       <Footer />
     </Router>

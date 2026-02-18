@@ -62,7 +62,8 @@ export default function Navbar(){
   <div className="max-w-[1440px] mx-auto h-[96px] px-6 lg:px-14 flex items-center justify-between">
 
     {/* LOGO */}
-    <div className="flex-shrink-0 ml-[-66px]">
+    <div className="flex-shrink-0 ml-2 sm:ml-0 lg:ml-[-66px]">
+
       <img src={logo} className="h-[60px] lg:h-[72px] object-contain" alt="logo"/>
     </div>
 

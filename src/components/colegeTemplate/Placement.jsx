@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { resolveImageUrl } from "../../services/api";
 
 export default function Placement({ placement, testimonials }) {
@@ -56,10 +58,12 @@ export default function Placement({ placement, testimonials }) {
 
             {placementData.image && (
               <div className={`text-center ${placementData.image_position === "left" ? "order-1" : ""}`}>
-                <img
+                <LazyLoadImage
                   src={resolveImageUrl(placementData.image)}
                   alt={placementData.title}
+                  effect="blur"
                   className="rounded shadow-lg mx-auto w-full max-w-md lg:max-w-full"
+                  wrapperClassName="w-full"
                 />
               </div>
             )}
@@ -86,10 +90,12 @@ export default function Placement({ placement, testimonials }) {
 
                     <div className="flex items-center gap-3 sm:gap-4 mb-4">
                       {t.image && (
-                        <img
+                        <LazyLoadImage
                           src={resolveImageUrl(t.image)}
                           alt={t.name}
+                          effect="blur"
                           className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-[#002147] object-cover"
+                          wrapperClassName="w-12 h-12 sm:w-14 sm:h-14 rounded-full"
                         />
                       )}
                       <div>

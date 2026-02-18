@@ -8,6 +8,9 @@ const Hero = () => {
       <img
         src={activitiesImg}
         alt="Hero"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover"
       />
 

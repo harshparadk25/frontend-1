@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { resolveImageUrl } from "../../services/api";
 
 export default function Recruiters({ data }) {
@@ -21,9 +23,10 @@ export default function Recruiters({ data }) {
                 key={i}
                 className="bg-white rounded-xl p-4 sm:p-5 md:p-6 flex items-center justify-center shadow hover:-translate-y-1 transition"
               >
-                <img
+                <LazyLoadImage
                   src={resolveImageUrl(img)}
                   alt={`Recruiter ${i + 1}`}
+                  effect="blur"
                   className="max-h-8 sm:max-h-9 md:max-h-10 w-auto grayscale hover:grayscale-0 transition"
                 />
               </div>

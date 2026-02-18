@@ -26,6 +26,9 @@ export default function Hero({ data }) {
         <img
           src={heroImage}
           alt="Hero Background"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
         />
 

@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const slides = [
   [
@@ -81,9 +83,10 @@ const EventSlider = () => {
 
           {slides[index].map((img, i) => (
             <div key={i} className="cursor-pointer">
-              <img
+              <LazyLoadImage
                 src={img}
                 alt={`event-${i}`}
+                effect="blur"
                 className="
                   w-full h-[320px] sm:h-[260px] xs:h-[220px] object-cover
                   border-2 border-[#ff7373]
@@ -91,6 +94,7 @@ const EventSlider = () => {
                   transition duration-300
                   hover:-translate-y-2 hover:scale-105 hover:shadow-xl
                 "
+                wrapperClassName="w-full"
               />
             </div>
           ))}

@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import achalImg from "../../assets/Images/achal.png";
 import kumudiniImg from "../../assets/Images/Mrs. Kumudini.jpg";
 import yogendraJainImg from "../../assets/Images/Mr. Yogendra Jain.png";
@@ -58,7 +60,7 @@ export default function Faculty() {
               key={i}
               className="bg-white/10 backdrop-blur rounded overflow-hidden hover:translate-y-[-6px] transition"
             >
-              <img src={f.img} className="w-full h-56 sm:h-60 md:h-64 object-cover" />
+              <LazyLoadImage src={f.img} effect="blur" className="w-full h-56 sm:h-60 md:h-64 object-cover" wrapperClassName="w-full" />
 
               <div className="p-4 sm:p-5 text-center sm:text-left">
                 <h5 className="font-medium text-base sm:text-lg">{f.name}</h5>

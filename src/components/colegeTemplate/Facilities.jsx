@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { resolveImageUrl } from "../../services/api";
 
 export default function Facilities({ data }) {
@@ -37,10 +39,12 @@ export default function Facilities({ data }) {
                 {f.name}
               </div>
 
-              <img
+              <LazyLoadImage
                 src={resolveImageUrl(f.image)}
                 alt={f.name}
+                effect="blur"
                 className="w-full h-48 sm:h-52 md:h-56 object-cover"
+                wrapperClassName="w-full"
               />
 
               <div className="p-4 text-xs sm:text-sm font-medium text-center">
