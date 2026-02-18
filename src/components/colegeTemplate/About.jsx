@@ -23,6 +23,50 @@ export default function About() {
         </div>
 
       </div>
+      <div className="bg-[#F0EEEF] mt-20 py-12 sm:py-14 md:py-16">
+
+  <div className="max-w-6xl mx-auto px-4">
+
+    {/* TITLE */}
+    <h2 className="text-[#0B2C4D] text-3xl md:text-4xl font-semibold">
+      Campus To Business Boardrooms
+    </h2>
+
+    {/* UNDERLINE */}
+    <div className="w-40 h-[3px] bg-red-400 mt-3 mb-6"></div>
+
+    {/* SUBTITLE */}
+    <h3 className="text-[#0B2C4D] text-xl md:text-2xl mb-6">
+      Make it happen at IBMR
+    </h3>
+
+    {/* LIST */}
+    <ul className="space-y-5 text-gray-800">
+
+      {[
+        "Legacy of 30 years",
+        "58-acre Lush Green Campus",
+        "500+ Faculty Members",
+        "500+ Eminent Recruiters",
+        "100000+ Alumni Network",
+        "Ranked among Top 50 Management Institutes",
+        "NAAC A++ Accredited & NIRF Ranked (76–100 band)",
+        "Approved Management & Economics Ph.D Research Centre of DAVV",
+        "10,000+ Changemakers Community",
+        "Harvard Case Studies & Real-time Simulations Based Learning"
+      ].map((item, i) => (
+        <li key={i} className="border-b border-gray-300 pb-4 flex gap-3">
+          <span className="mt-2 w-2 h-2 bg-gray-700 rounded-full"></span>
+          <span>{item}</span>
+        </li>
+      ))}
+
+    </ul>
+
+  </div>
+
+</div>
+
     </section>
   );
 }

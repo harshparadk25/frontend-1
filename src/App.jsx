@@ -28,6 +28,7 @@ function App() {
         <Route path="/:collegeSlug/facilities" element={<FacilitiesPage />} />
         <Route path="/:collegeSlug/placements" element={<Placements />} />
         <Route path="/:collegeSlug/activities/:subSlug" element={<StudentLife />} />
+        <Route path="/:collegeSlug" element={<CollegeTemp />} />
 
       </Routes>
 

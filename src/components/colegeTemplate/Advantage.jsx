@@ -19,7 +19,7 @@ const items = [
 
 export default function Advantage() {
   return (
-    <section className="bg-[#002147] py-12 sm:py-14 md:py-16 text-white">
+    <section className="bg-[#002147] py-12 sm:py-14 md:pb-16 text-white mt-[-40px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-2 text-center md:text-left">

@@ -116,7 +116,7 @@ export default function Navbar(){
           {colleges.map(([name,slug])=>(
             <NavLink
               key={slug}
-              to={`/${slug}/home`}
+              to={`/${slug}`}
               onClick={closeAll}
               className={dropdownLink}
             >
