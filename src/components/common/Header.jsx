@@ -22,7 +22,7 @@ export default function Navbar(){
     setStudentOpen(false);
   }
 
-  /* ✅ ACTIVE LINK STYLE WITH ORANGE UNDERLINE */
+  /* ACTIVE LINK STYLE */
   const linkClass = ({ isActive }) =>
   `relative py-2 transition-colors
    ${isActive ? "text-red-500" : "text-gray-900"}
@@ -32,16 +32,27 @@ export default function Navbar(){
    ${isActive ? "after:scale-x-100" : "after:scale-x-0"}
    after:origin-left`;
 
-
   const dropdownLink=({isActive}) =>
     `px-4 py-2 transition-colors
      ${isActive?"text-red-500":"text-gray-800"}
      hover:bg-red-500 hover:text-white`;
 
   const studentLinks = [
-    ["Cultural Activities","activities"],
+    ["Cultural Activities","cultural"],
     ["Event Celebration","events"],
     ["Workshops","workshop"]
+  ];
+
+  const colleges = [
+    ["IBMR","ibmr"],
+    ["ISR","isr"],
+    ["COC","coc"],
+    ["COL","col"],
+    ["SOC","soc"],
+    ["IFT","ift"],
+    ["IOHM","iohm"],
+    ["COE","coe"],
+    ["DOSS","doss"],
   ];
 
   return(
@@ -75,12 +86,12 @@ export default function Navbar(){
         ${menuOpen?"flex":"hidden lg:flex"}`}>
 
       {/* HOME */}
-      <NavLink to="/" className={linkClass} onClick={closeAll}>
+      <NavLink to={`/${activeCollege}/home`} className={linkClass} onClick={closeAll}>
         Home
       </NavLink>
 
       {/* ABOUT */}
-      <NavLink to="/about" className={linkClass} onClick={closeAll}>
+      <NavLink to={`/${activeCollege}/about`} className={linkClass} onClick={closeAll}>
         About Us
       </NavLink>
 
@@ -102,20 +113,10 @@ export default function Navbar(){
           flex flex-col
           ${collegesOpen?"block":"hidden"}`}>
 
-          {[
-            ["IBMR","college/ibmr"],
-            ["ISR","college/isr"],
-            ["COC","college/coc"],
-            ["COL","college/col"],
-            ["SOC","college/soc"],
-            ["IFT","college/ift"],
-            ["IOHM","college/iohm"],
-            ["COE","college/coe"],
-            ["DOSS","college/doss"],
-          ].map(([name,path])=>(
+          {colleges.map(([name,slug])=>(
             <NavLink
-              key={path}
-              to={`/${path}`}
+              key={slug}
+              to={`/${slug}/home`}
               onClick={closeAll}
               className={dropdownLink}
             >
@@ -127,7 +128,7 @@ export default function Navbar(){
       </div>
 
       {/* PLACEMENTS */}
-      <NavLink to="/placements" className={linkClass} onClick={closeAll}>
+      <NavLink to={`/${activeCollege}/placements`} className={linkClass} onClick={closeAll}>
         Placements
       </NavLink>
 
@@ -141,7 +142,7 @@ export default function Navbar(){
           onClick={()=>setStudentOpen(!studentOpen)}
           className="py-2 font-medium text-gray-900 hover:text-red-500"
         >
-          Student Life ▾
+          Activities ▾
         </button>
 
         <div className={`lg:absolute lg:top-full lg:left-0
@@ -152,7 +153,7 @@ export default function Navbar(){
           {studentLinks.map(([name,slug])=>(
             <NavLink
               key={slug}
-              to={`/${activeCollege}/studentlife/${slug}`}
+              to={`/${activeCollege}/activities/${slug}`}
               onClick={closeAll}
               className={dropdownLink}
             >
@@ -164,12 +165,12 @@ export default function Navbar(){
       </div>
 
       {/* FACILITIES */}
-      <NavLink to="/facilities" className={linkClass} onClick={closeAll}>
+      <NavLink to={`/${activeCollege}/facilities`} className={linkClass} onClick={closeAll}>
         Facilities
       </NavLink>
 
       {/* CONTACT */}
-      <NavLink to="/contact" className={linkClass} onClick={closeAll}>
+      <NavLink to={`/${activeCollege}/contact`} className={linkClass} onClick={closeAll}>
         Contact Us
       </NavLink>
 

@@ -3,9 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-
+import { Link, useLocation } from "react-router-dom";
 
 export default function Footer() {
+
+  const location = useLocation();
+  const pathParts = location.pathname.split("/");
+
+  const activeCollege =
+    pathParts[1] && !["about","contact","placements","facilities"].includes(pathParts[1])
+      ? pathParts[1]
+      : "ipsa";
 
   const sections = [
     { title:"IBMR", links:["BBA","MBA","Ph.D"] },
@@ -34,8 +42,13 @@ export default function Footer() {
   ];
 
   const navLinks=[
-    "Home","About Us","Colleges","Placements",
-    "Activities","Facilities","Contact Us"
+    {label:"Home", path:`/${activeCollege}/home`},
+    {label:"About Us", path:`/${activeCollege}/about`},
+    {label:"Colleges", path:`/${activeCollege}/home`}, 
+    {label:"Placements", path:`/${activeCollege}/placements`},
+    {label:"Activities", path:`/${activeCollege}/studentlife/activities`},
+    {label:"Facilities", path:`/${activeCollege}/facilities`},
+    {label:"Contact Us", path:`/${activeCollege}/contact`}
   ];
 
   return (
@@ -56,6 +69,7 @@ export default function Footer() {
           <ul className="space-y-1 leading-relaxed">
             {sec.links.map((l,idx)=>(
               <li key={idx}>
+                {/* kept non-routing course links unchanged */}
                 <a href="#" className="hover:text-[#00BFFF] transition">
                   {l}
                 </a>
@@ -87,9 +101,9 @@ export default function Footer() {
     <ul className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-8 md:gap-[55px] text-[15px] sm:text-[16px]">
       {navLinks.map((n,i)=>(
         <li key={i}>
-          <a href="#" className="hover:text-[#00BFFF] transition">
-            {n}
-          </a>
+          <Link to={n.path} className="hover:text-[#00BFFF] transition">
+            {n.label}
+          </Link>
         </li>
       ))}
     </ul>
@@ -128,7 +142,6 @@ export default function Footer() {
   </div>
 
 </div>
-
 
   </div>
 
