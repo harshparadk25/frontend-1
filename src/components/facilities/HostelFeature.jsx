@@ -1,24 +1,6 @@
 import React from 'react'
 import { motion } from "framer-motion";
-import ups from "../../assets/Images/ups.svg";
-import cabinet from "../../assets/Images/cabinet.svg";
-import tableTennis from "../../assets/Images/table-tennis.svg";
-import biometricAttendance from "../../assets/Images/biometric-attendance.svg";
-import securityCamera from "../../assets/Images/security-camera.svg";
-import queenBed from "../../assets/Images/queen-bed.svg";
-import restaurant from "../../assets/Images/restaurant.svg";
-import park from "../../assets/Images/park.svg";
-
-const features = [
-  { icon: ups, title: "Power backup" },
-  { icon: cabinet, title: "TV lounge" },
-  { icon: tableTennis, title: "Indoor and outdoor games" },
-  { icon: biometricAttendance, title: "Biometric attendance" },
-  { icon: securityCamera, title: "CCTV surveillance" },
-  { icon: queenBed, title: "Guest accommodation" },
-  { icon: restaurant, title: "Wholesome, hygienic meals" },
-  { icon: park, title: "Lush greenery" },
-];
+import { resolveImageUrl } from "../../services/api";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -33,7 +15,14 @@ const cardVariant = {
   }),
 };
 
-export default function HostelFeatures() {
+export default function HostelFeatures({ intro, services }) {
+  if (!intro && !services) return null;
+
+  const features = (services?.items || []).map((item) => ({
+    icon: resolveImageUrl(item.logo),
+    title: item.name,
+  }));
+
   return (
     <section className="py-12 sm:py-10 xs:py-8 mt-10">
 
@@ -54,14 +43,14 @@ export default function HostelFeatures() {
             </div>
 
             <h2 className="text-4xl sm:text-6xl text-2xl font-medium text-[#002147] ">
-              Discover a Home Away from Home
+              {intro?.title || "Discover a Home Away from Home"}
             </h2>
 
             <div className="w-44 h-[2px] bg-[#bb3d02] mt-2"></div>
           </div>
 
           <p className="text-[#3A3A3A] text-base sm:text-[15px] leading-relaxed">
-            A diverse community and a vibrant life on campus make learning truly transformational at IPS. Make new friends, find a new family and explore an unparalleled life. Our safe, welcoming and well-furnished hostel invites you to a world of comfort amidst state-of-the art facilities to grow more every day.
+            {intro?.content || ""}
           </p>
 
         </motion.div>

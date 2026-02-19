@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import facility from "../../assets/Images/facilities.jpg";
+import { resolveImageUrl } from "../../services/api";
 
-export default function Hero() {
+export default function Hero({ data }) {
+  if (!data) return null;
+
+  const heroImage = data.images?.[0] ? resolveImageUrl(data.images[0]) : "";
+  const descriptionLines = (data.description || "").split("\n");
+
   return (
     <section className="
       relative mb-12 sm:mb-16 lg:mb-20
@@ -12,7 +17,7 @@ export default function Hero() {
 
       {/* Background image */}
       <img
-        src={facility}
+        src={heroImage}
         alt="Hero"
         loading="eager"
         fetchpriority="high"
@@ -40,11 +45,12 @@ export default function Hero() {
           text-xl sm:text-2xl md:text-3xl lg:text-5xl
           leading-tight font-medium
         ">
-          Your Community
-          <br />
-          Your Campus
-          <br />
-          Your Vibe
+          {descriptionLines.map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < descriptionLines.length - 1 && <br />}
+            </span>
+          ))}
         </h1>
 
         {/* CTA button */}
@@ -60,7 +66,7 @@ export default function Hero() {
                hover:bg-[#0B2C4D] hover:text-white
                transition duration-300"
         >
-          Explore Now
+          {data.cta_text || "Explore Now"}
         </button>
 
       </motion.div>

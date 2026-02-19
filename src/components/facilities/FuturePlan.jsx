@@ -1,29 +1,16 @@
 import { motion } from "framer-motion";
-import img4 from "../../assets/Images/img4.png";
-import developmentIcon from "../../assets/Images/development.svg";
-import soldierIcon from "../../assets/Images/soldier.svg";
-import valuePropositionIcon from "../../assets/Images/value-proposition.svg";
-import confidenceIcon from "../../assets/Images/confidence.svg";
-import hikingIcon from "../../assets/Images/hiking.svg";
-import citizenIcon from "../../assets/Images/citizen.svg";
-import supportIcon from "../../assets/Images/support.svg";
-import adaptiveIcon from "../../assets/Images/adaptive.svg";
-import teamLeaderIcon from "../../assets/Images/team-leader.svg";
-import goalIcon from "../../assets/Images/goal.svg";
+import { resolveImageUrl } from "../../services/api";
 
-export default function FuturePlan() {
-  const icons = [
-    { img: developmentIcon, text: "Character-building" },
-    { img: soldierIcon, text: "Army exposure" },
-    { img: valuePropositionIcon, text: "Values" },
-    { img: confidenceIcon, text: "Self-confidence" },
-    { img: hikingIcon, text: "Adventure" },
-    { img: citizenIcon, text: "Nation-building" },
-    { img: supportIcon, text: "Community service" },
-    { img: adaptiveIcon, text: "Life skills" },
-    { img: teamLeaderIcon, text: "Leadership development" },
-    { img: goalIcon, text: "Vision and purpose" },
-  ];
+export default function FuturePlan({ data }) {
+  if (!data) return null;
+
+  const nccImage = resolveImageUrl(data.image);
+
+  // First 10 items are icon-based features, rest are initiatives
+  const allItems = data.items || [];
+  const iconItems = allItems.slice(0, 10).map((text) => ({ text }));
+  const initiatives = allItems.slice(11); // skip "Lead Change..." heading item
+  const leadChangeHeading = allItems[10] || "Lead Change – One Initiative At a Time";
 
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -48,18 +35,6 @@ export default function FuturePlan() {
     }),
   };
 
-  const initiatives = [
-    "Adult Education",
-    "Tree Plantation",
-    "Blood Donation",
-    "Anti-Dowry Rally",
-    "AIDS Awareness",
-    "Visit to old age homes and orphanage homes",
-    "Disaster prevention, protection & relief",
-    "Mission Indradhanush (Awareness about immunization)",
-    "Campaign for saving water and cleanliness and many more activities",
-  ];
-
   return (
     <section className="bg-[#F0EEEF] py-12 sm:py-10 xs:py-8">
 
@@ -77,19 +52,19 @@ export default function FuturePlan() {
 
             {/* badge */}
             <div className="bg-[#0CC2FE] text-[#002147] px-4 py-1 text-2xl sm:text-xl text-lg w-fit mb-2 text-medium">
-              NCC
+              {data.tag || "NCC"}
             </div>
 
             {/* title */}
             <h2 className="text-2xl sm:text-6xl text-xl font-medium text-[#002147]">
-              Empower Your Future
+              {data.title}
             </h2>
 
             <div className="w-24 h-[2px] bg-[#002147] mt-2"></div>
 
             {/* image */}
             <img
-              src={img4}
+              src={nccImage}
               className="pt-12 sm:pt-8 w-full"
             />
 
@@ -105,16 +80,13 @@ export default function FuturePlan() {
           >
 
             <p className="text-[#3A3A3A] mb-4 text-base sm:text-[15px] leading-relaxed">
-              NCC is more than an extracurricular opportunity. It is your pathway to an empowered and
-                        inspiring future. As a unique platform for self-transformation, NCC offers you rigor, dynamism
-                        and challenges to grow as a leader, nation-builder and changemaker. Become a cadet and prepare
-                        for a future that you truly deserve.
+              {data.description}
             </p>
 
             {/* ICON GRID */}
             <div className="grid md:grid-cols-2 grid-cols-1 gap-y-6 gap-x-6 my-6">
 
-              {icons.map((item, i) => (
+              {iconItems.map((item, i) => (
                 <motion.div
                   key={i}
                   variants={cardVariant}
@@ -124,7 +96,7 @@ export default function FuturePlan() {
                   viewport={{ once: true, amount: 0.1 }}
                   className="flex gap-3 items-center"
                 >
-                  <img src={item.img} className="shrink-0" />
+                  <img src={resolveImageUrl(item.img)} className="shrink-0" />
                   <span className="text-[#3A3A3A] text-[16px] sm:text-[15px] font-medium">
                     {item.text}
                   </span>
@@ -135,7 +107,7 @@ export default function FuturePlan() {
 
             {/* subtitle */}
             <h3 className="text-[32px] sm:text-[26px] text-[22px] text-[#002147] font-medium mb-6 sm:mb-4">
-              Lead Change – One Initiative At a Time
+              {leadChangeHeading}
             </h3>
 
             {/* list */}

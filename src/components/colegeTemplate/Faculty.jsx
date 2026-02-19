@@ -97,6 +97,7 @@ export default function Faculty({ collegeSlug }) {
                   <h5 className="font-medium text-base sm:text-lg">{f.name}</h5>
                   <span className="text-yellow-400 text-xs sm:text-sm">{f.designation}</span>
                   <p className="text-gray-300 text-xs sm:text-sm mt-2">{f.department}</p>
+                  <p className="text-gray-300 text-xs sm:text-sm mt-1 line-clamp-3">{f.description}</p>
                 </div>
               </motion.div>
             ))}

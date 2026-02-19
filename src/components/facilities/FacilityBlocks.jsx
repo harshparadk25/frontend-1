@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import wellness from "../../assets/Images/image 22.png";
-import transport from "../../assets/Images/image 23.png";
+import { resolveImageUrl } from "../../services/api";
 
 const slideFromSide = (fromLeft) => ({
   hidden: { opacity: 0, x: fromLeft ? -30 : 30 },
@@ -12,48 +11,22 @@ const scaleUp = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
+const badgeColors = ["#FFC73E", "#FF7373", "#0CC2FE", "#FFC73E"];
 
-const blocks = [
-  {
-    badge: "Wellness Centre",
-    color: "#FFC73E",
-    title: "Build Your Strength.\nFind Your Balance.",
-    text: `Academic success truly thrives when all aspects of health - mental,
-physical, and emotional well-being are in harmony. The Wellness Centre
-on campus is your safe space to find this balance and experience a wholesome life.`,
-    img: wellness,
-    reverse: false,
-  },
-  {
-    badge: "Transport",
-    color: "#FF7373",
-    title: "Safe transport at your service",
-    text: `Live your dream life with our well-managed fleet of buses
-connecting key locations across Indore city and Mhow.`,
-    img: transport,
-    reverse: true,
-  },
-  {
-    badge: "Canteen",
-    color: "#0CC2FE",
-    title: "Wholesome meals\nJoyful flavours",
-    text: `Your favourite hangout zone, the IPS canteen offers hygienic,
-nutritious, and wholesome flavours that help you power through the day.`,
-    img: null,
-    reverse: false,
-  },
-  {
-    badge: "Mess",
-    color: "#FFC73E",
-    title: "Taste of Home on Your Plate",
-    text: `The hostel mess serves healthy, flavourful meals that comfort
-your heart while delighting your tastebuds.`,
-    img: null,
-    reverse: true,
-  },
-];
+export default function FacilityBlocks({ wellnessCenter, transport, canteen, mess }) {
+  const sections = [wellnessCenter, transport, canteen, mess].filter(Boolean);
 
-export default function FacilityBlocks() {
+  const blocks = sections.map((section, i) => ({
+    badge: section.tag || section.title,
+    color: badgeColors[i % badgeColors.length],
+    title: section.title,
+    text: section.description,
+    img: resolveImageUrl(section.image) || null,
+    reverse: section.image_position === "right" || i % 2 !== 0,
+  }));
+
+  if (blocks.length === 0) return null;
+
   return (
     <section className="py-[80px] sm:py-[60px] xs:py-[40px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-5 py-4">

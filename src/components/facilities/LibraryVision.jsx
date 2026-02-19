@@ -1,14 +1,21 @@
 import { motion } from "framer-motion";
-import library from "../../assets/Images/library.jpg";
+import { resolveImageUrl } from "../../services/api";
 
-import wifi from "../../assets/Images/wifi-signal.svg";
-import dvd from "../../assets/Images/dvd-player.svg";
-import member from "../../assets/Images/member-card.svg";
-import exam from "../../assets/Images/exam.svg";
-import classmate from "../../assets/Images/classmate.svg";
-import book from "../../assets/Images/book.svg";
+export default function LibraryVision({ library, yourService, facilitiesForYou }) {
+  if (!library) return null;
 
-export default function LibraryVision() {
+  const libraryImage = resolveImageUrl(library.image);
+  const serviceItems = yourService?.items || [];
+  const facilityItems = (facilitiesForYou?.items || []).map((item) => ({
+    img: resolveImageUrl(item.logo),
+    text: item.name,
+  }));
+
+  // Split service items into two columns
+  const mid = Math.ceil(serviceItems.length / 2);
+  const serviceCol1 = serviceItems.slice(0, mid);
+  const serviceCol2 = serviceItems.slice(mid);
+
   return (
     <section className="bg-[#f7f7f7] lg:pt-[160px] md:pt-[120px] pt-[40px] pb-[40px]">
 
@@ -36,7 +43,7 @@ export default function LibraryVision() {
       <div className="grid lg:grid-cols-2 gap-8 sm:gap-6 items-center">
 
         <img
-          src={library}
+          src={libraryImage}
           alt="Library"
           className="w-full aspect-square object-cover min-h-[260px]"
         />
@@ -44,18 +51,17 @@ export default function LibraryVision() {
         <div>
 
           <span className="text-[#002147] text-xl md:text-2xl font-medium">
-            Library
+            {library.tag || "Library"}
           </span>
 
           <h5 className="text-[26px] sm:text-[30px] md:text-[48px] lg:text-[60px] leading-none text-[#002147] font-medium mb-3">
-            Fuel Your Mind Create Your Future
+            {library.title}
           </h5>
 
           <div className="w-[168px] h-[2px] bg-[#FF7373] my-4"></div>
 
           <p className="text-[#3A3A3A] leading-snug text-base sm:text-[15px]">
-            The IPSA Knowledge hub, with 6 libraries, advanced digital access and a strong academic resource network ensures that learning never stops.
-            It is located at the heart of the academic complex and provides seamless access with the vision to serve right information to the right user at the right time.
+            {library.description}
           </p>
 
           <h6 className="text-[22px] md:text-[28px] lg:text-[32px] mt-4 font-medium text-[#002147]">
@@ -63,13 +69,9 @@ export default function LibraryVision() {
           </h6>
 
           <ul className="list-disc pl-5 text-sm mt-2 space-y-1">
-            <li>More than 1,00,000 books, 155 journals, 46 magazines, 1906 Bound Periodicals and 1955 CDs</li>
-            <li>8 access points</li>
-            <li>Information Literacy Programs (ILP)</li>
-            <li>Theses, dissertations and research support</li>
-            <li>OPAC – Online Public Access Catalogue for easy search</li>
-            <li>E-library</li>
-            <li>Plagiarism software Turnitin</li>
+            {(library.items || []).map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
           </ul>
 
         </div>
@@ -84,36 +86,34 @@ export default function LibraryVision() {
       <div className="max-w-6xl mx-auto ml-60 px-4 sm:px-5">        
 
         {/* SERVICES */}
+        {serviceItems.length > 0 && (
         <div className="mt-12 lg:mt-14 sm:mt-10">
 
           <h3 className="text-[26px] md:text-[30px] lg:text-[32px] sm:text-[24px] text-[#002147] font-medium mb-6 sm:mb-4">
-            Your Service
+            {yourService?.title || "Your Service"}
           </h3>
 
           <div className="grid md:grid-cols-2 gap-8 sm:gap-6">
 
             <ul className="text-[#3A3A3A] space-y-3 md:space-y-4 text-base sm:text-[15px]">
-              <li>Circulation Service</li>
-              <li>Reference Service</li>
-              <li>Xerox Service</li>
-              <li>Access to Full-text Online Journals</li>
-              <li>Access to Back Issues of Journals</li>
-              <li>Current Contents (Monthly) - a compilation of selected journals</li>
+              {serviceCol1.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
 
             <ul className="text-[#3A3A3A] space-y-3 md:space-y-4 text-base sm:text-[15px]">
-              <li>Article Repository Service with indexed articles</li>
-              <li>Research Reference Library for doctoral students</li>
-              <li>Book Bank Service for physics and biotechnology</li>
-              <li>Need-based Newspaper Clipping Service</li>
-              <li>Online News Paper clipping Service</li>
+              {serviceCol2.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
 
           </div>
         </div>
+        )}
 
 
         {/* FACILITIES */}
+        {facilityItems.length > 0 && (
         <div className="mt-12 sm:mt-10">
 
           <div className="text-[26px] md:text-[30px] lg:text-[32px] sm:text-[24px] text-[#002147] font-medium mb-6 sm:mb-4">
@@ -122,14 +122,7 @@ export default function LibraryVision() {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-5">
 
-            {[
-              { img: wifi, text: "Cyber space for free internet access" },
-              { img: dvd, text: "Dedicated sections for CD-ROMS and Classic DVDs" },
-              { img: member, text: "DELNET Membership" },
-              { img: exam, text: "Requisition Form for recommended books" },
-              { img: classmate, text: "Library Orientation Program for students and faculty" },
-              { img: book, text: "Journals and online resource" },
-            ].map((item, i) => (
+            {facilityItems.map((item, i) => (
               <div key={i} className="flex items-center gap-4">
                 <img src={item.img} alt="" className="w-6 h-6 shrink-0" />
                 <span className="font-medium text-[#3A3A3A] text-base sm:text-[15px] leading-snug">
@@ -140,6 +133,7 @@ export default function LibraryVision() {
 
           </div>
         </div>
+        )}
 
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import trophy from "../../assets/Images/trophy 2.svg";
-import sportsHero from "../../assets/Images/268A2441.jpg";
+import { resolveImageUrl } from "../../services/api";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -15,7 +15,20 @@ const cardVariant = {
   }),
 };
 
-export default function Sports() {
+export default function Sports({ playground, joinCommunity, sportstars, facilitiesFeature }) {
+  if (!playground) return null;
+
+  const playgroundImage = resolveImageUrl(playground.image);
+  const athletes = sportstars?.members || [];
+  // Clean bullet prefix from items
+  const allFacilities = (facilitiesFeature?.items || []).map((item) =>
+    item.replace(/^•\s*/, "")
+  );
+  const colSize = Math.ceil(allFacilities.length / 3);
+  const col1 = allFacilities.slice(0, colSize);
+  const col2 = allFacilities.slice(colSize, colSize * 2);
+  const col3 = allFacilities.slice(colSize * 2);
+
   return (
     <section className="py-10 mt-20 sm:mt-14 mt-10">
 
@@ -38,7 +51,7 @@ export default function Sports() {
             </div>
 
             <h2 className="text-[44px] md:text-[52px] sm:text-[40px] text-[26px] font-medium text-[#002147] leading-snug">
-              Your Playground for Success
+              {playground.title}
             </h2>
 
             <div className="w-[120px] h-[3px] bg-[#e99503] mt-2"></div>
@@ -47,9 +60,7 @@ export default function Sports() {
 
           {/* RIGHT */}
           <p className="text-[#3A3A3A] text-base sm:text-[15px] leading-relaxed">
-            At IPS, sports is a way of life. Our state-of-the-art sports facilities encourage you to step
-            out of your comfort zone and uncover new dimensions to your personality.
-            Find your passion, build new skills and imbibe new life lessons on the playing field.
+            {playground.content}
           </p>
 
         </motion.div>
@@ -57,67 +68,48 @@ export default function Sports() {
         {/* HERO IMAGE */}
         <div className="pt-8 sm:pt-4">
           <img
-            src={sportsHero}
+            src={playgroundImage}
             className="w-full min-h-[500px] max-h-[500px] md:min-h-[420px] md:max-h-[420px] sm:min-h-[320px] sm:max-h-[320px] min-h-[260px] max-h-[260px] object-cover"
           />
 
           {/* CAPTION BOX */}
           <div className="bg-[#F0EEEF] p-[28px] sm:p-[22px] grid md:grid-cols-2 gap-4 items-center">
             <p className="text-[32px] md:text-[28px] sm:text-[24px] text-[22px] font-medium text-[#002147] leading-snug">
-              Join a Community of Athletes
+              {joinCommunity?.title}
             </p>
 
             <span className="text-[#3A3A3A] text-[16px] sm:text-[15px] leading-relaxed">
-              Whether you are a star athlete or someone who plays for fun,
-              IPS offers indoor and outdoor opportunities to pursue a wide
-              range of sports.
+              {joinCommunity?.content}
             </span>
           </div>
         </div>
 
         {/* TITLE */}
         <h5 className="text-[32px] md:text-[30px] sm:text-[26px] text-[24px] text-[#002147] font-medium mt-14">
-          The Sportstars of IPS
+          {sportstars?.title}
         </h5>
 
         {/* ATHLETES */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 mt-6">
 
-          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={0} viewport={{ once: true, amount: 0.1 }}>
-          <Athlete name="Varun Bais" desc="International Football Player" />
-          </motion.div>
-
-          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={1} viewport={{ once: true, amount: 0.1 }}>
-          <Athlete
-            name="Deepu Munim"
-            desc={
-              <ul className="list-disc pl-5">
-                <li>MP State Ranking in Doubles Category</li>
-                <li>DAVV Inter-collegiate Lawn Tennis Tournament</li>
-              </ul>
-            }
-          />
-          </motion.div>
-
-          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={2} viewport={{ once: true, amount: 0.1 }}>
-          <Athlete
-            name="Rishita Manas"
-            desc="DAVV Inter-collegiate Lawn Tennis Tournament"
-          />
-          </motion.div>
-
-          <motion.div variants={cardVariant} initial="hidden" whileInView="visible" custom={3} viewport={{ once: true, amount: 0.1 }}>
-          <Athlete
-            name="Modi Dhakad"
-            desc={
-              <ul className="list-disc pl-5">
-                <li>Gold Medal in DAVV 10m Pistol Shooting</li>
-                <li>Best Shooter of DAVV University Since 2021</li>
-                <li>Only Player to Win 5 Gold Medals</li>
-              </ul>
-            }
-          />
-          </motion.div>
+          {athletes.map((member, i) => (
+            <motion.div key={i} variants={cardVariant} initial="hidden" whileInView="visible" custom={i} viewport={{ once: true, amount: 0.1 }}>
+              <Athlete
+                name={member.name}
+                desc={
+                  member.description.includes("\n") ? (
+                    <ul className="list-disc pl-5">
+                      {member.description.split("\n").map((line, j) => (
+                        <li key={j}>{line}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    member.description
+                  )
+                }
+              />
+            </motion.div>
+          ))}
 
         </div>
 
@@ -127,35 +119,9 @@ export default function Sports() {
         {/* SPORTS LISTS */}
         <div className="grid md:grid-cols-3 gap-6 sm:gap-5">
 
-          <SportsList items={[
-            "400 M Athletic track",
-            "2 Huge Grounds for Cricket and Football",
-            "26 Indoor and Outdoor sports",
-            "Karate Hall",
-            "Yoga Room",
-            "Volleyball Courts",
-            "Kabaddi Grounds"
-          ]} />
-
-          <SportsList items={[
-            "KHO-KHO Grounds",
-            "400 Meter Athletic Track",
-            "Horse Riding Arena",
-            "Skating",
-            "Chess Room",
-            "Basketball Courts",
-            "Lawn Tennis Courts"
-          ]} />
-
-          <SportsList items={[
-            "Football Ground",
-            "Cricket Ground",
-            "Shooting Range",
-            "Swimming Pool",
-            "Table Tennis Hall",
-            "Judo Hall",
-            "Gymnastic Hall"
-          ]} />
+          <SportsList items={col1} />
+          <SportsList items={col2} />
+          <SportsList items={col3} />
 
         </div>
 

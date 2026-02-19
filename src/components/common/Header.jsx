@@ -60,7 +60,7 @@ const activeCollege =
     ["COL","col"],
     ["SOC","soc"],
     ["IFT","ift"],
-    ["IOHM","iohm"],
+    ["IOHM","hospital"],
     ["COE","coe"],
     ["DOSS","doss"],
   ];
