@@ -46,7 +46,7 @@ export default function Footer() {
     {label:"About Us", path:`/${activeCollege}/about`},
     {label:"Colleges", path:`/${activeCollege}/home`}, 
     {label:"Placements", path:`/${activeCollege}/placements`},
-    {label:"Activities", path:`/${activeCollege}/studentlife/activities`},
+    {label:"Activities", path:`/${activeCollege}/actvities/cultural`},
     {label:"Facilities", path:`/${activeCollege}/facilities`},
     {label:"Contact Us", path:`/${activeCollege}/contact`}
   ];

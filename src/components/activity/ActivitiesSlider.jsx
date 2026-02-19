@@ -58,10 +58,10 @@ const EventSlider = () => {
       >
 
         <div>
-          <h2 className="text-2xl md:text-4xl sm:text-3xl font-semibold leading-tight">
+          <h2 className="text-2xl md:text-5xl sm:text-3xl font-medium leading-tight">
             A calendar full of celebrations
           </h2>
-          <div className="w-20 h-[3px] bg-red-400 mt-3"></div>
+          <div className="w-40 h-[2px] bg-red-400 mt-3"></div>
         </div>
 
         <p className="text-gray-600 text-base sm:text-[15px]">
@@ -75,23 +75,25 @@ const EventSlider = () => {
       {/* Carousel */}
       <div className="max-w-6xl mx-auto mt-10 sm:mt-8 relative">
 
-        {/* Controls */}
-        <button
-          onClick={prev}
-          className="absolute right-14 sm:right-12 xs:right-10 -top-10 sm:-top-8 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
-        >
-          ‹
-        </button>
+        <div className="absolute right-4 -top-10 sm:-top-8 flex gap-3">
+  <button
+    onClick={prev}
+    className="border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
+  >
+    ‹
+  </button>
 
-        <button
-          onClick={next}
-          className="absolute right-4 -top-10 sm:-top-8 border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
-        >
-          ›
-        </button>
+  <button
+    onClick={next}
+    className="border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
+  >
+    ›
+  </button>
+</div>
+
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-4 pt-4">
 
           {slides[index].map((img, i) => (
             <div key={i} className="cursor-pointer">
