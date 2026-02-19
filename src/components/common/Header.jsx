@@ -17,6 +17,15 @@ const activeCollege =
     ? pathParts[1]
     : "ipsa";
 
+    const isCollegeHome =
+  activeCollege !== "ipsa" &&
+  (
+    pathParts.length === 2 ||      // /ibmr
+    pathParts[2] === "home"        // /ibmr/home
+  );
+
+
+
   const closeAll=()=>{
     setMenuOpen(false);
     setCollegesOpen(false);
@@ -55,6 +64,21 @@ const activeCollege =
     ["COE","coe"],
     ["DOSS","doss"],
   ];
+
+
+  const collegeSections = [
+  ["Banner","banner"],
+  ["About","about"],
+  ["Courses","courses"],
+  ["Facility","facilities"],
+  ["Placement","placement"],
+  ["Faculty","faculties"],
+  ["Admission","admission"],
+  ["ApplyNow","applyform"],
+  ["Recruiter","recruiters"],
+];
+
+
 
   return(
 
@@ -115,16 +139,29 @@ const activeCollege =
           flex flex-col
           ${collegesOpen?"block":"hidden"}`}>
 
-          {colleges.map(([name,slug])=>(
-            <NavLink
-              key={slug}
-              to={`/${slug}`}
-              onClick={closeAll}
-              className={dropdownLink}
-            >
-              {name}
-            </NavLink>
-          ))}
+          {isCollegeHome
+  ? collegeSections.map(([name,id])=>(
+      <a
+        key={id}
+        href={`#${id}`}
+        onClick={closeAll}
+        className="px-4 py-2 transition-colors text-gray-800 hover:bg-red-500 hover:text-white"
+      >
+        {name}
+      </a>
+    ))
+  : colleges.map(([name,slug])=>(
+      <NavLink
+        key={slug}
+        to={`/${slug}`}
+        onClick={closeAll}
+        className={dropdownLink}
+      >
+        {name}
+      </NavLink>
+    ))
+}
+
 
         </div>
       </div>
