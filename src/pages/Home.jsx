@@ -8,12 +8,13 @@ import ExperienceSection from "../components/home/ExperienceSection";
 import CoursesAccordion from "../components/home/CoursesAccordion";
 
 export default function Home() {
+  const collegeSlug = "ipsa"; // Default college slug for home page
   const [sections, setSections] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchPageData("home")
+    fetchPageData(collegeSlug, "home")
       .then((data) => {
         setSections(data.sections);
       })
@@ -22,7 +23,7 @@ export default function Home() {
         setError("Failed to load page data.");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [collegeSlug]);
 
   if (loading) {
     return (

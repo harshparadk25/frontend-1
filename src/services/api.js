@@ -15,10 +15,12 @@ const api = axios.create({
 /**
  * Fetch page data by page name (e.g. "home", "about", etc.)
  */
-export async function fetchPageData(pageName) {
-    const cacheKey = `ipsa/${pageName}`;
+export async function fetchPageData(collegeSlug, pageName) {
+    const cacheKey = `${collegeSlug}/${pageName}`;
     if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
-    const { data } = await api.get(`/pages/${pageName}`);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/pages/${pageName}`, {
+        headers: { accept: "application/json" },
+    });
     pageCache.set(cacheKey, data);
     return data;
 }

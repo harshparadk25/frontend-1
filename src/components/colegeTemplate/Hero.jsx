@@ -6,6 +6,8 @@ export default function Hero({ data }) {
   const description = data.description || "";
   const ctaText = data.cta_text || "Explore Now";
   const ctaLink = data.cta_link || "#";
+  const [title, subtitle] = description.split("\n");
+
 
   return (
     <section className="
@@ -40,14 +42,18 @@ export default function Hero({ data }) {
             z-10"
           >
     
-            <h1 className="
-              text-[#0B2C4D]
-              text-xl sm:text-2xl md:text-3xl lg:text-6xl
-              leading-tight font-medium
-              whitespace-pre-line
-            ">
-              {description}
-            </h1>
+            <div className="text-[#0B2C4D] whitespace-pre-line">
+  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-6xl  font-medium">
+    {title}
+  </h1>
+
+  {subtitle && (
+    <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-[#0B2C4D]/80">
+      {subtitle}
+    </p>
+  )}
+</div>
+
     
             {/* CTA button */}
             <a

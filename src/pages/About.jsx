@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchPageData } from "../services/api";
+import { useParams } from "react-router-dom";
 
 import Hero from "../components/about/Hero";
 import AboutIntro from "../components/about/AboutIntro";
@@ -9,12 +10,17 @@ import Governing from "../components/about/Governing";
 import Directors from "../components/about/Directors";
 
 export default function AboutPage() {
+   const { collegeSlug } = useParams();
   const [sections, setSections] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchPageData("about-us")
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+
+    fetchPageData(collegeSlug,"about-us")
       .then((data) => {
         setSections(data.sections);
       })
@@ -23,7 +29,7 @@ export default function AboutPage() {
         setError("Failed to load page data.");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [collegeSlug]);
 
   if (loading) {
     return (

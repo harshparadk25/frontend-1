@@ -17,6 +17,7 @@ export default function IbmrPage() {
   const [sections, setSections] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  console.log("Fetching data for college slug:", collegeSlug);
 
   useEffect(() => {
     let cancelled = false;
