@@ -67,7 +67,6 @@ const activeCollege =
 
 
   const collegeSections = [
-  ["Banner","banner"],
   ["About","about"],
   ["Courses","courses"],
   ["Facility","facilities"],
