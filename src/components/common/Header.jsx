@@ -130,7 +130,7 @@ const activeCollege =
           onClick={()=>setCollegesOpen(!collegesOpen)}
           className="py-2 font-medium text-gray-900 hover:text-red-500"
         >
-          Colleges ▾
+          {isCollegeHome ? "College Sections" : "Colleges"} ▾
         </button>
 
         <div className={`lg:absolute lg:top-full lg:left-0
