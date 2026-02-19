@@ -10,7 +10,7 @@ export default function Hero({ data }) {
 
 
   return (
-    <section className="
+    <section id="banner" className="
           relative mb-12 sm:mb-16 lg:mb-20
           w-full max-w-[1492px]
           h-[420px] sm:h-[520px] md:h-[620px] lg:h-[736px]

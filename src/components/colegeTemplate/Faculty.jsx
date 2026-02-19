@@ -47,7 +47,7 @@ const cardVariant = {
 
 export default function Faculty() {
   return (
-    <section id="faculty" className="bg-gradient-to-br from-[#0b1c39] to-[#112a52] text-white py-12 sm:py-14 md:py-16">
+    <section id="faculties" className="bg-gradient-to-br from-[#0b1c39] to-[#112a52] text-white py-12 sm:py-14 md:py-16">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 

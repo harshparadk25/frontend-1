@@ -11,10 +11,11 @@ export default function Navbar(){
   const location = useLocation();
   const pathParts = location.pathname.split("/");
 
-  const activeCollege =
-    pathParts[1] && !["about","contact","placements","facilities"].includes(pathParts[1])
-      ? pathParts[1]
-      : "ipsa";
+  // ✅ Fix — exclude IPSA-level pages where pathParts[1] IS the page name
+const activeCollege =
+  pathParts[1] && !["about","contact","placements","facilities"].includes(pathParts[1])
+    ? pathParts[1]
+    : "ipsa";
 
   const closeAll=()=>{
     setMenuOpen(false);
@@ -87,7 +88,7 @@ export default function Navbar(){
         ${menuOpen?"flex":"hidden lg:flex"}`}>
 
       {/* HOME */}
-      <NavLink to={`/${activeCollege}/home`} className={linkClass} onClick={closeAll}>
+      <NavLink to={`/`} className={linkClass} onClick={closeAll}>
         Home
       </NavLink>
 

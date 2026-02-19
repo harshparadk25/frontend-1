@@ -12,7 +12,7 @@ const slideRight = {
 
 export default function ApplyForm() {
   return (
-    <section id="apply-form" className="bg-gradient-to-br from-[#060e22] to-[#0f2b5b] py-12 sm:py-14 md:py-16 text-white">
+    <section id="applyform" className="bg-gradient-to-br from-[#060e22] to-[#0f2b5b] py-12 sm:py-14 md:py-16 text-white">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
 
