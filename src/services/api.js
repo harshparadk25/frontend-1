@@ -40,6 +40,34 @@ export async function fetchCollegePageData(collegeSlug, pageName) {
 }
 
 /**
+ * Fetch courses for a specific college by slug.
+ * e.g. fetchCollegeCourses("ibmr")
+ */
+export async function fetchCollegeCourses(collegeSlug) {
+    const cacheKey = `${collegeSlug}/courses`;
+    if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/courses`, {
+        headers: { accept: "application/json" },
+    });
+    pageCache.set(cacheKey, data);
+    return data;
+}
+
+/**
+ * Fetch faculties for a specific college by slug.
+ * e.g. fetchCollegeFaculties("ibmr")
+ */
+export async function fetchCollegeFaculties(collegeSlug) {
+    const cacheKey = `${collegeSlug}/faculties`;
+    if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/faculties`, {
+        headers: { accept: "application/json" },
+    });
+    pageCache.set(cacheKey, data);
+    return data;
+}
+
+/**
  * Resolve an image path from the API to a full URL.
  * External URLs (http/https) are returned as-is.
  * Relative paths like "/uploads/..." are prefixed with the media server base.

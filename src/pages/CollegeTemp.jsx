@@ -59,20 +59,20 @@ export default function IbmrPage() {
   return (
     <div className="w-full">
       {sections.hero && <Hero data={sections.hero} />}
-      {sections.about_ibmr && (
+      {sections.about && (
         <About
-          about={sections.about_ibmr}
+          about={sections.about}
           features={sections.campus_to_business_boardroom}
         />
       )}
       {sections.experience_learn && <Advantage data={sections.experience_learn} />}
-      {sections.programmed_offered && <Programs data={sections.programmed_offered} />}
+      <Programs data={sections.programmed_offered} collegeSlug={collegeSlug} />
       {sections.facilities && <Facilities data={sections.facilities} />}
       <Placement
         placement={sections.placement}
         testimonials={sections.testimonials}
       />
-      <Faculty />
+      <Faculty collegeSlug={collegeSlug} />
       <Admission />
       <ApplyForm />
       {sections.recruiter && <Recruiters data={sections.recruiter} />}
