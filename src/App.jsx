@@ -3,7 +3,7 @@ import { lazy, Suspense, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
 import Footer from "./components/common/Footer"
 import Navbar from "./components/common/Header"
-import Hospital from "./pages/Hospital"
+import Hotel from "./pages/Hotel"
 
 const Home = lazy(() => import("./pages/Home"))
 const Contact = lazy(() => import("./pages/Contact"))
@@ -45,7 +45,7 @@ function App() {
         <Route path="/:collegeSlug/placements" element={<Placements />} />
         <Route path="/:collegeSlug/activities/:subSlug" element={<StudentLife />} />
         <Route path="/:collegeSlug" element={<CollegeTemp />} />
-        <Route path="/hospital" element={<Hospital />} />
+        <Route path="/iohm" element={<Hotel />} />
 
         
 

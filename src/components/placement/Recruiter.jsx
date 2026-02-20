@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import fairmontLogo from "../../assets/logos/Fairmont_Logo.svg.png";
-import oberoiLogo from "../../assets/logos/oberoi-hotelspng.png";
+import oberoiLogo from "../../assets/logos/oberoi.png";
 import marriottLogo from "../../assets/logos/Marriott.png";
 import hyattLogo from "../../assets/logos/Hyatt.png";
-import tajLogo from "../../assets/logos/Taj_Hotels_logo.svg.png";
-import itcLogo from "../../assets/logos/ITC_Hotels_logo.svg.png";
+import tajLogo from "../../assets/logos/taj.png";
+import itcLogo from "../../assets/logos/itc.png";
 
 export default function Recruiters() {
 

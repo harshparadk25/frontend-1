@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,6 +24,8 @@ export default function Placement({ placement, testimonials }) {
   const placementData = placement || {};
   const testimonialsData = testimonials || {};
   const testimonialItems = testimonialsData.items || [];
+  const [selectedTestimonial, setSelectedTestimonial] = useState(null);
+  const videoRef = useRef(null);
 
   const [index, setIndex] = useState(0);
 
@@ -41,6 +43,13 @@ export default function Placement({ placement, testimonials }) {
     }, 3000);
     return () => clearInterval(timer);
   }, [testimonialItems.length]);
+
+  useEffect(() => {
+    if (selectedTestimonial?.video && videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => { });
+    }
+  }, [selectedTestimonial]);
 
   const first = testimonialItems[index];
   const second = testimonialItems[(index + 1) % testimonialItems.length];
@@ -129,7 +138,11 @@ export default function Placement({ placement, testimonials }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {[first, second].filter(Boolean).map((t, i) => (
-                  <div key={i} className="bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow border">
+                  <div
+                    key={i}
+                    onClick={() => setSelectedTestimonial(t)}
+                    className="bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow border cursor-pointer"
+                  >
 
                     <div className="flex items-center gap-3 sm:gap-4 mb-4">
                       {t.image && (
@@ -174,6 +187,64 @@ export default function Placement({ placement, testimonials }) {
         )}
 
       </div>
+
+      <AnimatePresence>
+  {selectedTestimonial && (
+    <motion.div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, y: 40 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.85, y: 20 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="bg-white max-w-xl w-full rounded-xl shadow-lg p-6 relative"
+      >
+
+        <button
+          onClick={() => setSelectedTestimonial(null)}
+          className="absolute top-3 right-3 text-gray-500 hover:text-black text-xl"
+        >
+          ✕
+        </button>
+
+        <div className="flex items-center gap-4 mb-4">
+          {selectedTestimonial.image && (
+            <LazyLoadImage
+              src={resolveImageUrl(selectedTestimonial.image)}
+              alt={selectedTestimonial.name}
+              className="w-14 h-14 rounded-full border-2 border-[#002147] object-cover"
+            />
+          )}
+          <div>
+            <h6 className="font-bold text-[#002147]">
+              {selectedTestimonial.name}
+            </h6>
+            <span className="text-gray-500 text-sm">
+              {selectedTestimonial.designation}
+            </span>
+          </div>
+        </div>
+
+        <p className="text-gray-600 mb-4">{selectedTestimonial.story}</p>
+
+        {selectedTestimonial.video && (
+          <video
+            ref={videoRef}
+            src={resolveImageUrl(selectedTestimonial.video)}
+            controls
+            autoPlay
+            className="w-full rounded-lg"
+          />
+        )}
+
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </section>
   );
 }

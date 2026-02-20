@@ -1,0 +1,45 @@
+import { useEffect, useState } from "react";
+import { fetchPageData } from "../services/api";
+import Hero from "../components/hotel/Hero";
+import About from "../components/hotel/About";
+import Program from "../components/hotel/Program";
+import Facility from "../components/hotel/Facility";
+import Skills from "../components/hotel/Skills";
+import Faculties from "../components/hotel/Faculties";
+import Placement from "../components/hotel/Placement";
+import SuccessStories from "../components/hotel/SuccessStories";
+
+const Hotel = () => {
+  const [sections, setSections] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPageData("iohm", "home")
+      .then((res) => setSections(res.sections))
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#002147] border-t-transparent" />
+      </div>
+    );
+  }
+
+  return (
+    <div className='w-full'>
+      <Hero data={sections?.hero} />
+      <About aboutData={sections?.about_college} whyData={sections?.why_college_of_education} />
+      <Program />
+      <Facility facilitiesData={sections?.facilities} skillsData={sections?.skills_iohm} />
+      <Skills data={sections?.skills_iohm} />
+      <Faculties data={sections?.train_with_tech_tools} />
+      <Placement data={sections?.placement} />
+      {sections?.success_stories && <SuccessStories data={sections.success_stories} />}
+    </div>
+  );
+};
+
+export default Hotel
