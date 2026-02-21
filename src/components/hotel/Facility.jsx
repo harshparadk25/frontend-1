@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-import kitchenImg from "../../assets/Images/kitchen.png";
+import kitchen from "../../assets/Images/kitchen.png";
 import team from "../../assets/Images/team.png";
 import chief from "../../assets/Images/chief.png";
 
