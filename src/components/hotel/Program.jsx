@@ -9,7 +9,29 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-const Program = () => {
+const Program = ({ data }) => {
+
+  // If API provides scratch HTML, render it dynamically
+  if (data?.html) {
+    return (
+      <section className="bg-[#ffffff] py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16">
+        {/* Heading */}
+        <div className="max-w-7xl mx-auto mb-10 md:mb-14">
+          <h2 className="text-[#002147] text-2xl sm:text-3xl md:text-4xl font-semibold">
+            Programmes
+          </h2>
+          <div className="w-24 sm:w-28 md:w-32 h-[2px] bg-red-400 mt-3"></div>
+        </div>
+
+        <div
+          className="max-w-7xl mx-auto programmes-scratch"
+          dangerouslySetInnerHTML={{ __html: data.html }}
+        />
+      </section>
+    );
+  }
+
+  // Fallback: hardcoded content
   return (
     <section className="bg-[#ffffff] py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16">
       

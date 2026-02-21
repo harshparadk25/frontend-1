@@ -32,7 +32,7 @@ const Hotel = () => {
     <div className='w-full'>
       <Hero data={sections?.hero} />
       <About aboutData={sections?.about_college} whyData={sections?.why_college_of_education} />
-      <Program />
+      <Program data={sections?.programmes} />
       <Facility facilitiesData={sections?.facilities} skillsData={sections?.skills_iohm} />
       <Skills data={sections?.skills_iohm} />
       <Faculties data={sections?.train_with_tech_tools} />
