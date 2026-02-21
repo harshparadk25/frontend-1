@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-import kitchenImg from "../../assets/Images/kitchen.jpg";
+import kitchenImg from "../../assets/Images/kitchen.png";
 import team from "../../assets/Images/team.png";
 import chief from "../../assets/Images/chief.png";
 
 const Facilities = ({ facilitiesData, skillsData }) => {
 
   const [open, setOpen] = useState(0);
+
 
   // Split facilities into kitchens (with images) and bakeries (without images)
   const allFacilities = facilitiesData?.facilities || [];
