@@ -50,7 +50,11 @@ const activeCollege =
   const studentLinks = [
     ["Cultural Activities","cultural"],
     ["Event Celebration","events"],
-    ["Workshops","workshop"]
+    ["Workshops","workshop"],
+    ["Student Clubs","clubs"],
+    ["Social Activities","social"],
+    ["Alumni Testimonials","alumni"],
+    ["News & Media","news"],
   ];
 
   const colleges = [
@@ -116,7 +120,7 @@ const activeCollege =
       </NavLink>
 
       {/* ABOUT */}
-      <NavLink to={`/${activeCollege}/about`} className={linkClass} onClick={closeAll}>
+      <NavLink to={`/${activeCollege}/about`}  className={linkClass} onClick={closeAll}>
         About Us
       </NavLink>
 
@@ -155,6 +159,7 @@ const activeCollege =
         to={`/${slug}`}
         onClick={closeAll}
         className={dropdownLink}
+        target="_blank"
       >
         {name}
       </NavLink>

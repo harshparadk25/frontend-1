@@ -12,6 +12,10 @@ const StudentLife = lazy(() => import("./pages/StudentLife"))
 const Placements = lazy(() => import("./pages/Placement"))
 const AboutPage = lazy(() => import("./pages/About"))
 const CollegeTemp = lazy(() => import("./pages/CollegeTemp"))
+const Student = lazy(() => import("./pages/Student"))
+const SocialAct = lazy(() => import("./pages/SocialAct"))
+const AlumniPage = lazy(() => import("./pages/Alumni"))
+const NewsPage = lazy(() => import("./pages/News"))
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -46,9 +50,10 @@ function App() {
         <Route path="/:collegeSlug/activities/:subSlug" element={<StudentLife />} />
         <Route path="/:collegeSlug" element={<CollegeTemp />} />
         <Route path="/iohm" element={<Hotel />} />
-
-        
-
+        <Route path="/:collegeSlug/activities/clubs" element={<Student />} />
+        <Route path="/:collegeSlug/activities/social" element={<SocialAct />} />
+        <Route path="/:collegeSlug/activities/alumni" element={<AlumniPage />} />
+        <Route path="/:collegeSlug/activities/news" element={<NewsPage />} />
       </Routes>
       </Suspense>
 
