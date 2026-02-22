@@ -1,0 +1,113 @@
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import Hero from '../components/others/Hero'
+import { fetchCollegeNewsDetail, fetchPageData } from '../services/api'
+
+const NewsDetail = () => {
+  const { collegeSlug, newsId } = useParams()
+  const [news, setNews] = useState(null)
+  const [heroData, setHeroData] = useState({})
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true)
+        const [detail, pageData] = await Promise.all([
+          fetchCollegeNewsDetail(collegeSlug, newsId),
+          fetchPageData(collegeSlug, 'activities/news')
+        ])
+        setNews(detail)
+        setHeroData(pageData?.sections?.hero || {})
+      } catch (err) {
+        console.error('Failed to fetch news detail:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [collegeSlug, newsId])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#002147] border-t-transparent" />
+      </div>
+    )
+  }
+
+  if (!news) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-gray-500 text-lg">News not found.</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      {/* HERO */}
+      <Hero
+        heroImage={heroData.images?.[0]}
+        description={news.title}
+        ctaText={heroData.cta_text}
+        ctaLink={heroData.cta_link}
+      />
+
+      {/* NEWS DETAIL CONTENT */}
+      <section className="bg-gray-50 py-10 md:py-14">
+        <div className="max-w-4xl mx-auto px-4">
+
+          <motion.h1
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-[#002147] mb-2"
+          >
+            {news.title}
+          </motion.h1>
+
+          {news.subtitle && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="text-gray-600 text-sm md:text-base mb-4"
+            >
+              {news.subtitle}
+            </motion.p>
+          )}
+
+          {news.published_at && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.15 }}
+              className="text-gray-400 text-xs md:text-sm mb-8"
+            >
+              {new Date(news.published_at).toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </motion.p>
+          )}
+
+          {/* HTML Content from API */}
+          {news.content_html && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: news.content_html }}
+            />
+          )}
+
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export default NewsDetail

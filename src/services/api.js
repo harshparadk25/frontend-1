@@ -78,4 +78,32 @@ export function resolveImageUrl(path) {
     return `${MEDIA_BASE}${path}`;
 }
 
+/**
+ * Fetch news list for a specific college by slug.
+ * e.g. fetchCollegeNews("coc")
+ */
+export async function fetchCollegeNews(collegeSlug) {
+    const cacheKey = `${collegeSlug}/news-list`;
+    if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/news`, {
+        headers: { accept: "application/json" },
+    });
+    pageCache.set(cacheKey, data);
+    return data;
+}
+
+/**
+ * Fetch a single news detail for a specific college by slug and news id.
+ * e.g. fetchCollegeNewsDetail("coc", 3)
+ */
+export async function fetchCollegeNewsDetail(collegeSlug, newsId) {
+    const cacheKey = `${collegeSlug}/news/${newsId}`;
+    if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/news/${newsId}`, {
+        headers: { accept: "application/json" },
+    });
+    pageCache.set(cacheKey, data);
+    return data;
+}
+
 export default api;
