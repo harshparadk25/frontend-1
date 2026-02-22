@@ -12,7 +12,7 @@ export default function Hero({ data }) {
   const ctaLink = data?.cta_link || "#";
 
   return (
-    <section className="relative w-full h-[100vh] 
+    <section className="relative w-full h-[88vh] 
                           max-[991px]:h-[60vh] 
                           max-[576px]:h-[65vh] 
                           pb-28 overflow-visible px-2">

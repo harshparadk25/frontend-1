@@ -18,7 +18,7 @@ export default function Hero({ data }) {
     <div className="w-full px-2">
 
       {/* HERO */}
-      <section className="relative w-full h-[100vh] 
+      <section className="relative w-full h-[90vh] 
                           max-[991px]:h-[60vh] 
                           max-[576px]:h-[65vh] 
                           pb-28 overflow-visible">

@@ -14,7 +14,7 @@ export default function Hero({ data }) {
   const descLines = description.split("\n");
 
   return (
-    <section className="relative mb-10 w-full h-[320px] sm:h-[420px] md:h-[700px] lg:h-[820px] mx-3">
+    <section className="relative mb-10 w-full h-[320px] sm:h-[420px] md:h-[700px] lg:h-[750px] mx-3">
 
       <img
         src={heroImage}

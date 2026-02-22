@@ -14,8 +14,8 @@ const AboutPage = lazy(() => import("./pages/About"))
 const CollegeTemp = lazy(() => import("./pages/CollegeTemp"))
 const Student = lazy(() => import("./pages/Student"))
 const SocialAct = lazy(() => import("./pages/SocialAct"))
-const AlumniPage = lazy(() => import("./pages/Alumni"))
-const NewsPage = lazy(() => import("./pages/News"))
+const AlumniPage = lazy(() => import("./pages/AlumniPage"))
+const NewsPage = lazy(() => import("./pages/NewsPage"))
 
 function ScrollToTop() {
   const { pathname } = useLocation();

@@ -11,7 +11,7 @@ export default function Hero({ data }) {
     <section className="
       relative mb-12 sm:mb-16 lg:mb-20
       w-full max-w-[1492px]
-      h-[420px] sm:h-[520px] md:h-[620px] lg:h-[736px]
+      h-[420px] sm:h-[520px] md:h-[620px] lg:h-[740px]
       mx-auto px-4
     ">
 
