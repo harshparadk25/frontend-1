@@ -74,7 +74,7 @@ export default function IbmrPage() {
       />
       <Faculty collegeSlug={collegeSlug} />
       <Admission />
-      <ApplyForm />
+      <ApplyForm collegeSlug={collegeSlug} />
       {sections.recruiter && <Recruiters data={sections.recruiter} />}
     </div>
   );

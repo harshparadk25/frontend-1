@@ -134,4 +134,29 @@ export async function fetchCollegeEventDetail(collegeSlug, eventId) {
     return data;
 }
 
+/**
+ * Submit an inquiry for a specific college.
+ * e.g. submitInquiry("coc", { name, email, phone_number, course_interested, message })
+ */
+export async function submitInquiry(collegeSlug, formData) {
+    const { data } = await axios.post(`${SERVER_BASE}/${collegeSlug}/inquiry`, formData, {
+        headers: { accept: "application/json", "Content-Type": "application/json" },
+    });
+    return data;
+}
+
+/**
+ * Fetch course names for a specific college.
+ * e.g. fetchCollegeCourseNames("coc") => ["MBA (Core)", "MBA (International Business)", ...]
+ */
+export async function fetchCollegeCourseNames(collegeSlug) {
+    const cacheKey = `${collegeSlug}/courses/names`;
+    if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/courses/names`, {
+        headers: { accept: "application/json" },
+    });
+    pageCache.set(cacheKey, data);
+    return data;
+}
+
 export default api;
