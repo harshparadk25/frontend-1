@@ -17,6 +17,7 @@ const SocialAct = lazy(() => import("./pages/SocialAct"))
 const AlumniPage = lazy(() => import("./pages/AlumniPage"))
 const NewsPage = lazy(() => import("./pages/NewsPage"))
 const NewsDetail = lazy(() => import("./pages/NewsDetail"))
+const EventDetail = lazy(() => import("./pages/EventDetail"))
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -56,6 +57,7 @@ function App() {
         <Route path="/:collegeSlug/activities/alumni" element={<AlumniPage />} />
         <Route path="/:collegeSlug/activities/news" element={<NewsPage />} />
         <Route path="/:collegeSlug/activities/news/:newsId" element={<NewsDetail />} />
+        <Route path="/:collegeSlug/activities/events/:eventId" element={<EventDetail />} />
       </Routes>
       </Suspense>
 

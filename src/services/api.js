@@ -106,4 +106,32 @@ export async function fetchCollegeNewsDetail(collegeSlug, newsId) {
     return data;
 }
 
+/**
+ * Fetch events list for a specific college by slug.
+ * e.g. fetchCollegeEvents("coc")
+ */
+export async function fetchCollegeEvents(collegeSlug) {
+    const cacheKey = `${collegeSlug}/events-list`;
+    if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/events`, {
+        headers: { accept: "application/json" },
+    });
+    pageCache.set(cacheKey, data);
+    return data;
+}
+
+/**
+ * Fetch a single event detail for a specific college by slug and event id.
+ * e.g. fetchCollegeEventDetail("coc", 3)
+ */
+export async function fetchCollegeEventDetail(collegeSlug, eventId) {
+    const cacheKey = `${collegeSlug}/events/${eventId}`;
+    if (pageCache.has(cacheKey)) return pageCache.get(cacheKey);
+    const { data } = await axios.get(`${SERVER_BASE}/${collegeSlug}/events/${eventId}`, {
+        headers: { accept: "application/json" },
+    });
+    pageCache.set(cacheKey, data);
+    return data;
+}
+
 export default api;

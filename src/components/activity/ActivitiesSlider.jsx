@@ -2,32 +2,24 @@ import { useState, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-const slides = [
-  [
-    "https://ipsacademy.edu.in/media/2025/04/9-3-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/10-1-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/14-2-1-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/3-6-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
-  ],
-  [
-    "https://ipsacademy.edu.in/media/2025/04/9-3-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/10-1-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/14-2-1-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/3-6-768x454.jpg",
-    "https://ipsacademy.edu.in/media/2025/04/11-4-768x454.jpg",
-  ],
-];
+const EventSlider = ({ title, content, events = [], collegeSlug }) => {
 
-const EventSlider = () => {
+  // Chunk events into groups of 6 for carousel slides
+  const chunkSize = 6;
+  const slides = [];
+  for (let i = 0; i < events.length; i += chunkSize) {
+    slides.push(events.slice(i, i + chunkSize));
+  }
+
+  // Fallback if no events
+  if (slides.length === 0) slides.push([]);
 
   const [index, setIndex] = useState(0);
 
@@ -38,12 +30,13 @@ const EventSlider = () => {
     setIndex(prev => (prev === slides.length - 1 ? 0 : prev + 1));
 
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setIndex(prev => (prev === slides.length - 1 ? 0 : prev + 1));
     }, 3000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="py-12 md:py-20 px-4 sm:px-5">
@@ -59,15 +52,13 @@ const EventSlider = () => {
 
         <div>
           <h2 className="text-2xl md:text-5xl sm:text-3xl font-medium leading-tight">
-            A calendar full of celebrations
+            {title || "A calendar full of celebrations"}
           </h2>
           <div className="w-40 h-[2px] bg-red-400 mt-3"></div>
         </div>
 
         <p className="text-gray-600 text-base sm:text-[15px]">
-          Life at IPS Academy is a melting pot of diverse cultures, a plethora
-          of events, learning opportunities and peer activities that enhance
-          your experience on campus.
+          {content || "Life at IPS Academy is a melting pot of diverse cultures, a plethora of events, learning opportunities and peer activities that enhance your experience on campus."}
         </p>
 
       </motion.div>
@@ -75,42 +66,72 @@ const EventSlider = () => {
       {/* Carousel */}
       <div className="max-w-6xl mx-auto mt-10 sm:mt-8 relative">
 
-        <div className="absolute right-4 -top-10 sm:-top-8 flex gap-3">
-  <button
-    onClick={prev}
-    className="border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
-  >
-    ‹
-  </button>
+        {slides.length > 1 && (
+          <div className="absolute right-4 -top-10 sm:-top-8 flex gap-3">
+            <button
+              onClick={prev}
+              className="border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
+            >
+              ‹
+            </button>
 
-  <button
-    onClick={next}
-    className="border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
-  >
-    ›
-  </button>
-</div>
-
+            <button
+              onClick={next}
+              className="border border-red-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-50 bg-white"
+            >
+              ›
+            </button>
+          </div>
+        )}
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-4 pt-4">
 
-          {slides[index].map((img, i) => (
-            <div key={i} className="cursor-pointer">
-              <LazyLoadImage
-                src={img}
-                alt={`event-${i}`}
-                effect="blur"
-                className="
-                  w-full h-[320px] sm:h-[260px] xs:h-[220px] object-cover
+          {slides[index].map((event, i) => (
+            <Link
+              to={`/${collegeSlug}/activities/events/${event.id}`}
+              key={event.id || i}
+              className="cursor-pointer block"
+            >
+              {event.thumbnail_image ? (
+                <LazyLoadImage
+                  src={event.thumbnail_image}
+                  alt={event.title || `event-${i}`}
+                  effect="blur"
+                  className="
+                    w-full h-[320px] sm:h-[260px] xs:h-[220px] object-cover
+                    border-2 border-[#ff7373]
+                    shadow-md
+                    transition duration-300
+                    hover:-translate-y-2 hover:scale-105 hover:shadow-xl
+                  "
+                  wrapperClassName="w-full"
+                />
+              ) : (
+                <div className="
+                  w-full h-[320px] sm:h-[260px] xs:h-[220px]
                   border-2 border-[#ff7373]
-                  shadow-md
+                  shadow-md bg-white
+                  flex flex-col items-center justify-center p-6
                   transition duration-300
                   hover:-translate-y-2 hover:scale-105 hover:shadow-xl
-                "
-                wrapperClassName="w-full"
-              />
-            </div>
+                ">
+                  <h3 className="text-[#002147] font-semibold text-lg text-center mb-2">
+                    {event.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm text-center line-clamp-3">
+                    {event.subtitle}
+                  </p>
+                  {event.start_date && (
+                    <p className="text-gray-400 text-xs mt-3">
+                      {new Date(event.start_date).toLocaleDateString('en-IN', {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                      })}
+                    </p>
+                  )}
+                </div>
+              )}
+            </Link>
           ))}
 
         </div>

@@ -2,7 +2,12 @@
 import { motion } from "framer-motion";
 import activitiesImg from "../../assets/Images/activities.jpg";
 
-const Hero = () => {
+const Hero = ({ heroImage, description, ctaText, ctaLink }) => {
+  const bgImage = heroImage || activitiesImg;
+
+  // Parse description like "Events\n365 days of celebration"
+  const descParts = description ? description.split("\n") : ["Events", "365 days of celebration"];
+
   return (
     <section className="w-full relative overflow-visible pb-40 sm:pb-48 lg:pb-26">
 
@@ -10,7 +15,7 @@ const Hero = () => {
       <div className="relative h-[60vh] sm:h-[55vh] md:h-[90vh] min-h-[420px]">
 
         <img
-          src={activitiesImg}
+          src={bgImage}
           alt="Activities Hero"
           loading="eager"
           fetchpriority="high"
@@ -44,10 +49,16 @@ const Hero = () => {
             text-xl sm:text-3xl md:text-4xl lg:text-5xl
             leading-tight font-medium
           ">
-            Events <br /> 365 days of celebration
+            {descParts.map((part, i) => (
+              <span key={i}>
+                {part}
+                {i < descParts.length - 1 && <br />}
+              </span>
+            ))}
           </h1>
 
           <button
+            onClick={() => ctaLink && window.open(ctaLink, "_blank")}
             className="
               mt-6 flex items-center gap-3
               border border-[#0B2C4D]
@@ -58,7 +69,7 @@ const Hero = () => {
               transition duration-300
             "
           >
-            Explore Now
+            {ctaText || "Explore Now"}
           </button>
 
         </motion.div>
