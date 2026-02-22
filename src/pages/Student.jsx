@@ -1,14 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import StudentClub from '../components/others/StudentClub'
 import StudentTestimonials from '../components/others/StudentTestimonials'
-import ActivitiesHero from '../components/activity/ActivitiesHero'
+import Hero from '../components/others/Hero'
+import { fetchPageData } from '../services/api'
 
 const Student = () => {
+  const { collegeSlug } = useParams()
+  const [sections, setSections] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true)
+        const data = await fetchPageData(collegeSlug || 'coc', 'activities/clubs')
+        setSections(data.sections || {})
+      } catch (err) {
+        console.error('Failed to fetch activities/clubs data:', err)
+        setSections({})
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [collegeSlug])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#002147] border-t-transparent" />
+      </div>
+    )
+  }
+
+  const hero = sections?.hero
+  const clubSection = sections?.students_activity_club
+  const testimonialSection = sections?.placement_student_testimonial
+  const videoSection = sections?.alumni_video_testimonials
+
   return (
     <div>
-      <ActivitiesHero/>
-      <StudentClub />
-      <StudentTestimonials />
+      <Hero
+        heroImage={hero?.images?.[0]}
+        description={hero?.description}
+        ctaText={hero?.cta_text}
+        ctaLink={hero?.cta_link}
+      />
+      <StudentClub html={clubSection?.html} />
+      <StudentTestimonials
+        title={testimonialSection?.title}
+        testimonials={testimonialSection?.items}
+        videoTitle={videoSection?.title}
+        videos={videoSection?.images}
+      />
     </div>
   )
 }

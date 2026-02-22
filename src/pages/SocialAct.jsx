@@ -1,19 +1,58 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import AnnualEvent from '../components/others/AnnualEvent'
 import IndustryPartner from '../components/others/IndustryPartner'
 import FacultyPublication from '../components/others/FacultyPublication'
 import AwardandAchievement from '../components/others/AwardandAchievement'
-import ActivitiesHero from '../components/activity/ActivitiesHero'
+import Hero from '../components/others/Hero'
+import { fetchPageData } from '../services/api'
 
 const SocialAct = () => {
+  const { collegeSlug } = useParams()
+  const [sections, setSections] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true)
+        const data = await fetchPageData(collegeSlug || 'coc', 'activities/social')
+        setSections(data.sections || {})
+      } catch (err) {
+        console.error('Failed to fetch activities/social data:', err)
+        setSections({})
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [collegeSlug])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#002147] border-t-transparent" />
+      </div>
+    )
+  }
+
+  const hero = sections?.hero
+
   return (
     <div>
-      <ActivitiesHero/>
-      <AnnualEvent />
-      <IndustryPartner />
-      <FacultyPublication />
-      <AwardandAchievement />
-
+      <Hero
+        heroImage={hero?.images?.[0]}
+        description={hero?.description}
+        ctaText={hero?.cta_text}
+        ctaLink={hero?.cta_link}
+      />
+      <AnnualEvent html={sections?.annual_events_list?.html} />
+      <IndustryPartner html={sections?.mou?.html} />
+      <FacultyPublication html={sections?.summary_of_faculty_contributions?.html} />
+      <AwardandAchievement
+        achievementsHtml={sections?.achievements?.html}
+        coCurricularHtml={sections?.co_curricular?.html}
+      />
     </div>
   )
 }
